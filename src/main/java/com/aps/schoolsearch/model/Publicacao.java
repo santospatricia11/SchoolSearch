@@ -1,20 +1,23 @@
 package com.aps.schoolsearch.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import lombok.EqualsAndHashCode;
 
 @Entity
 @EqualsAndHashCode
-public class Publicacao {
+public class Publicacao implements Serializable{
+	
+	private static Long serialVersionUID = 1L;
 	
 	@Id
-	@Pattern(regexp=" ")
 	private LocalDate dataPublicacao;
 	
 	@NotNull
@@ -24,11 +27,13 @@ public class Publicacao {
 	private String conteudo;
 	
 	@Id
-	@Pattern(regexp=" ")
+	@OneToOne
+	@JoinColumn(name="usuario_id")
 	private Usuario publicadoPorUsuario;
 	
 	@Id
-	@Pattern(regexp=" ")
+	@OneToOne
+	@JoinColumn(name="escola_id")
 	private Escola escola;
 
 	public LocalDate getDataPublicacao() {

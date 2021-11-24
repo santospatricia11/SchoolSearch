@@ -3,7 +3,12 @@ package com.aps.schoolsearch.model;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -33,13 +38,18 @@ public class Escola {
 
 	@NotNull
 	private ClassificacaoEnsino classificacaoEnsino;
-
+	
+	@ElementCollection(targetClass=NivelEnsino.class)
+	@Enumerated(EnumType.STRING)
+	@CollectionTable(name="nivel_ensino")
+	@Column(name="nivel_ensino")
 	@NotNull
 	private Set<NivelEnsino> nivelEnsino;
 
 	@NotNull
 	private MetodoEnsino metodoEnsino;
-
+	
+	@ElementCollection
 	@NotNull
 	private List<String> linguas;
 
