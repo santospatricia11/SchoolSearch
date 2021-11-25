@@ -76,7 +76,7 @@
   text-transform: uppercase;
   font-weight: bold;
 
-  border: 5px solid var(--greenish-blue);
+  border: 2px solid var(--greenish-blue);
   border-radius: 5px;
   padding: 5px;
 }
