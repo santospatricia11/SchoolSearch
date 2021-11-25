@@ -5,14 +5,15 @@ import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-import lombok.EqualsAndHashCode;
+import com.aps.schoolsearch.model.identificacao.PublicacaoId;
 
 @Entity
-@EqualsAndHashCode
+@IdClass(PublicacaoId.class)
 public class Publicacao implements Serializable{
 	
 	private static Long serialVersionUID = 1L;
@@ -29,7 +30,7 @@ public class Publicacao implements Serializable{
 	@Id
 	@OneToOne
 	@JoinColumn(name="usuario_id")
-	private Usuario publicadoPorUsuario;
+	private Usuario publicadoPor;
 	
 	@Id
 	@OneToOne
@@ -61,11 +62,11 @@ public class Publicacao implements Serializable{
 	}
 
 	public Usuario getPublicadoPorUsuario() {
-		return publicadoPorUsuario;
+		return publicadoPor;
 	}
 
-	public void setPublicadoPorUsuario(Usuario publicadoPorUsuario) {
-		this.publicadoPorUsuario = publicadoPorUsuario;
+	public void setPublicadoPorUsuario(Usuario publicadoPor) {
+		this.publicadoPor = publicadoPor;
 	}
 
 	public Escola getEscola() {
