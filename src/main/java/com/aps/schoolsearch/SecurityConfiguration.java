@@ -38,8 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.permitAll()
 			.antMatchers("/perfil").authenticated()
 			.and()
-		.formLogin();
-		/*.loginPage("/login")
+		.formLogin()
+		.loginPage("/login")
 		.permitAll();/**/
 	}
 }
