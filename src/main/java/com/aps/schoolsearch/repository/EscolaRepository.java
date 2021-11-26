@@ -21,10 +21,10 @@ public interface EscolaRepository extends JpaRepository<Escola, String>{
 	
 	@Query(nativeQuery=true, value="SELECT * FROM escola e WHERE e.metodo_ensino IN (:metodos)")
 	List<Escola> findEscolaByMetodosEnsino(@Param("metodos") List<MetodoEnsino> metodos);
-	@Query(nativeQuery=true, value="SELECT escola.* FROM escola e WHERE escola.cpnj = nivel_ensino.escola_cnpj AND nivel_ensino.nivel_ensino IN (:niveis)")
+	@Query(nativeQuery=true, value="SELECT e.* FROM escola e JOIN nivel_ensino ne ON e.cpnj = ne.escola_cnpj WHERE ne.nivel_ensino IN (:niveis)")
 	List<Escola> findEscolaByNiveisEnsino(@Param("niveis") List<NivelEnsino> niveis);
 	
-	@Query(nativeQuery=true, value="SELECT * FROM escola e WHERE e.cnpj = idioma.escola_cnpj AND idiomas.idioma IN (:idiomas)")
+	@Query(nativeQuery=true, value="SELECT e.* FROM escola e JOIN idioma i ON e.cnpj = i.escola_cnpj WHERE i.idioma IN (:idiomas)")
 	List<Escola> findEscolaByIdiomas(@Param("idiomas") List<String> idiomas);
 	
 	@Query(nativeQuery=true, value="SELECT * FROM escola e WHERE e.mensalidade <= %?1% ")
