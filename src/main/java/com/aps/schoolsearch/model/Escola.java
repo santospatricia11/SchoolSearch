@@ -1,6 +1,7 @@
 package com.aps.schoolsearch.model;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -24,7 +25,7 @@ import lombok.EqualsAndHashCode;
 public class Escola {
 
 	@Id
-	@Pattern(regexp=" ")
+	@Pattern(regexp="^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$)|(^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$")
 	private String cnpj;
 
 	@NotNull
@@ -50,6 +51,8 @@ public class Escola {
 	private MetodoEnsino metodoEnsino;
 	
 	@ElementCollection
+	@CollectionTable(name="idiomas")
+	@Column(name="idioma")
 	@NotNull
 	private List<String> linguas;
 
@@ -116,7 +119,6 @@ public class Escola {
 	public void setLinguas(List<String> linguas) {
 		this.linguas = linguas;
 	}
-	
 	
 
 }

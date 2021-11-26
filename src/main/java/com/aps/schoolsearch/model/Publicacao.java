@@ -12,8 +12,11 @@ import javax.validation.constraints.NotNull;
 
 import com.aps.schoolsearch.model.identificacao.PublicacaoId;
 
+import lombok.EqualsAndHashCode;
+
 @Entity
 @IdClass(PublicacaoId.class)
+@EqualsAndHashCode
 public class Publicacao implements Serializable{
 	
 	private static Long serialVersionUID = 1L;

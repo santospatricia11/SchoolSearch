@@ -18,7 +18,7 @@ public class Usuario {
 	private String nome;
 	
 	@Id
-	@Pattern(regexp=" ")
+	@Pattern(regexp="^\\d{3}.\\d{3}.\\d{3}-\\d{2}$")
 	private String cpf;
 	
 	@NotNull

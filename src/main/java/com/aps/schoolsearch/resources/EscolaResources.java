@@ -7,12 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.aps.schoolsearch.model.Escola;
-import com.aps.schoolsearch.model.Usuario;
-import com.aps.schoolsearch.model.categorizacao.MetodoEnsino;
 import com.aps.schoolsearch.repository.EscolaRepository;
 
 @RestController
@@ -50,5 +51,12 @@ public class EscolaResources {
 			return ResponseEntity.noContent().build();
 		}
 	
-
+		@PostMapping("/pesquisarescola")
+		public ModelAndView pesquisarEscola(@RequestParam("nomepesquisa") String nomepesquisa) {
+			ModelAndView modelAndView = new ModelAndView("escola/cadastroescola");
+			modelAndView.addObject("escolas", escolaRepository.findEscolaByName("nomepesquisa"));
+			modelAndView.addObject("escolaobj", new Escola());
+			return modelAndView;
+			
+		}
 }
