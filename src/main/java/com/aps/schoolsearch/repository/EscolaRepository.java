@@ -13,21 +13,21 @@ import com.aps.schoolsearch.model.categorizacao.NivelEnsino;
 
 public interface EscolaRepository extends JpaRepository<Escola, String>{
 	
-	@Query("SELECT * FROM escola e WHERE e.nome SIMILAR TO %?1% ")
+	@Query(nativeQuery=true, value="SELECT * FROM escola e WHERE e.nome SIMILAR TO %?1% ")
 	List<Escola> findEscolaByName (String name);
 	
-	@Query("SELECT * FROM escola e WHERE e.classificacao_ensino IN (:classificacoes)")
+	@Query(nativeQuery=true, value="SELECT * FROM escola WHERE classificacao_ensino IN (:classificacoes)")
 	List<Escola> findEscolaByClassificoesEnsino(@Param("classificacoes") List<ClassificacaoEnsino> classificacoes);
 	
-	@Query("SELECT * FROM escola e WHERE e.metodo_ensino IN (:metodos)")
+	@Query(nativeQuery=true, value="SELECT * FROM escola e WHERE e.metodo_ensino IN (:metodos)")
 	List<Escola> findEscolaByMetodosEnsino(@Param("metodos") List<MetodoEnsino> metodos);
-	@Query("SELECT escola.* FROM escola e WHERE escola.cpnj = nivel_ensino.escola_cnpj AND nivel_ensino.nivel_ensino IN (:niveis)")
+	@Query(nativeQuery=true, value="SELECT escola.* FROM escola e WHERE escola.cpnj = nivel_ensino.escola_cnpj AND nivel_ensino.nivel_ensino IN (:niveis)")
 	List<Escola> findEscolaByNiveisEnsino(@Param("niveis") List<NivelEnsino> niveis);
 	
-	@Query("SELECT * FROM escola e WHERE e.cnpj = idioma.escola_cnpj AND idiomas.idioma IN (:idiomas)")
+	@Query(nativeQuery=true, value="SELECT * FROM escola e WHERE e.cnpj = idioma.escola_cnpj AND idiomas.idioma IN (:idiomas)")
 	List<Escola> findEscolaByIdiomas(@Param("idiomas") List<String> idiomas);
 	
-	@Query("SELECT * FROM escola e WHERE e.mensalidade <= %?1% ")
+	@Query(nativeQuery=true, value="SELECT * FROM escola e WHERE e.mensalidade <= %?1% ")
 	List<Escola> findEscolaByNivelEnsino(Integer maximo);
 	
 }
