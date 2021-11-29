@@ -28,8 +28,9 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/add")
-	public String empregoForm(Model model) {
-		model.addAttribute("form_name", "Formulário de Empregos em Spring Boot");
+	public String usuarioForm(Model model) {
+		setModel(model);
+		model.addAttribute("form_name", "Cadastro de Usuário no"+appName);
 		model.addAttribute("usuario", new Usuario());
 		return "usuario-form";
 	}
