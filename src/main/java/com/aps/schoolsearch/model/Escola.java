@@ -6,17 +6,21 @@ import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Converter;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import com.aps.schoolsearch.model.categorizacao.ClassificacaoEnsino;
 import com.aps.schoolsearch.model.categorizacao.MetodoEnsino;
 import com.aps.schoolsearch.model.categorizacao.NivelEnsino;
+import com.aps.schoolsearch.model.categorizacao.converter.ClassificacaoEnsinoConverter;
 
 import lombok.EqualsAndHashCode;
 
@@ -38,11 +42,12 @@ public class Escola {
 	private Float mensalidade;
 
 	@NotNull
+	@Enumerated(EnumType.STRING)
 	private ClassificacaoEnsino classificacaoEnsino;
 	
 	@ElementCollection(targetClass=NivelEnsino.class)
 	@Enumerated(EnumType.STRING)
-	@CollectionTable(name="nivel_ensino")
+	@CollectionTable(name="nivel_ensino_escola", joinColumns = @JoinColumn(name="cnpj_escola", referencedColumnName="cnpj"))
 	@Column(name="nivel_ensino")
 	@NotNull
 	private Set<NivelEnsino> nivelEnsino;

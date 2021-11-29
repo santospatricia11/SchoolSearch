@@ -8,7 +8,7 @@ body {
 .wrapper {
   padding-block: 2vh;
   background-color: var(--blue);
-  border-radius: 0 0 25px 25px;
+  border-radius: 0 0 50px 50px;
 }
 .wrapper-header{
 	position:sticky;
@@ -22,14 +22,10 @@ body {
 
 .navbar {
   padding: 0px;
-
-  background-color: var(--blue);
 }
-
-.container-fluid {
-  background-color: var(--blue);
+.navbar-transparent {
+  background-color: transparent !important;
 }
-
 .navbar-header {
   margin: 0 auto;
   display: flex;
