@@ -27,3 +27,11 @@ body{
     justify-content: center;
   }
 }
+
+.navbar-footer .nav-item{
+  padding: 0.625rem;
+}
+
+.navbar-footer .nav-link {
+  color: #ddd;
+}

@@ -17,7 +17,7 @@
                 alt=""
                 class="school-search-icon"
             /></a>
-            <a class="brand-title navbar-brand">School Search</a>
+            <a th:href="@{/}" class="brand-title navbar-brand">School Search</a>
             <button
               class="navbar-toggler"
               type="button"
@@ -30,7 +30,7 @@
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul th:replace="fragments/link.html :: links('')">
+              <ul th:replace="fragments/link.html :: links('navbar-header')">
               </ul>
               <ul class="navbar-nav">
                 <li class="nav-item dropdown">
@@ -48,7 +48,7 @@
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   	<li><a class="dropdown-item" th:href="@{/login}">Entrar</a></li>
-                    <li><a class="dropdown-item" href="#">Cadastrar-se</a></li>
+                    <li><a class="dropdown-item" th:href="@{/login}">Cadastrar-se</a></li>
                     <li>
                       <a class="dropdown-item" href="#">Mudar Perspectiva</a>
                     </li>

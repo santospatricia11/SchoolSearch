@@ -30,7 +30,7 @@ body {
   background-color: var(--blue);
 }
 
-.navbar-nav {
+.navbar-header {
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -71,11 +71,11 @@ body {
   justify-content: space-evenly;
   padding-inline: 15%;
 }
-.nav-item {
+.navbar-header .nav-item {
   width: 50%;
   border-radius: 5px;
 }
-.nav-item + .nav-item {
+.navbar-header .nav-item + .nav-item {
   margin-top: 10px;
 }
 .nav-link {
@@ -83,10 +83,11 @@ body {
   display: block;
   text-transform: uppercase;
   font-weight: bold;
-
-  border: 2px solid var(--greenish-blue);
   border-radius: 5px;
   padding: 5px;
+}
+.navbar-header .nav-link {
+  border: 2px solid var(--greenish-blue);
 }
 
 .nav-link.dropdown-toggle {
@@ -112,7 +113,7 @@ body {
   .navbar-collapse {
     padding-block: 0;
   }
-  .nav-item + .nav-item {
+  .navbar-header .nav-item + .nav-item {
     margin-top: 0px;
     margin-left: 10px;
   }
