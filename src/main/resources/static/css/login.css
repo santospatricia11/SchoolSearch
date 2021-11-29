@@ -12,12 +12,25 @@ body {
   margin: 0 auto;
 }
 
-.container {
-  padding-block: 100px;
+.container-login {
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  
+  padding: 10vh;
 }
+
+.container-login .row{
+  flex: 1 1 0;
+}
+
 .login {
   text-align: center;
   margin-block: 20px;
+}
+
+.login-card{
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 .login-body {

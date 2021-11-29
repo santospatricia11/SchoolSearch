@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Link Fragmento</title>
+</head>
+<body>
+	
+	<ul th:fragment="links(classapp)" class="navbar-nav me-auto mb-2 mb-lg-0 main" th:classappend="${classapp}">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Sobre</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Preços</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Contato</a>
+        </li>
+    </ul>
+</body>
+</html>

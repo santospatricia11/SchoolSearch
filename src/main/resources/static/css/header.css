@@ -6,9 +6,13 @@ body {
 	background: #546a76;
 }
 .wrapper {
-  padding-block: 15px;
+  padding-block: 2vh;
   background-color: var(--blue);
   border-radius: 0 0 25px 25px;
+}
+.wrapper-header{
+	position:sticky;
+	bottom: 100%;
 }
 
 .wrap {
