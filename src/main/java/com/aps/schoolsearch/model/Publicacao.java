@@ -19,7 +19,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class Publicacao implements Serializable{
 	
-	private static Long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3543708296498516142L;
 	
 	@Id
 	private LocalDate dataPublicacao;

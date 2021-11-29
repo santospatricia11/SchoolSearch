@@ -1,13 +1,10 @@
 package com.aps.schoolsearch.model;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Converter;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -20,7 +17,6 @@ import javax.validation.constraints.Pattern;
 import com.aps.schoolsearch.model.categorizacao.ClassificacaoEnsino;
 import com.aps.schoolsearch.model.categorizacao.MetodoEnsino;
 import com.aps.schoolsearch.model.categorizacao.NivelEnsino;
-import com.aps.schoolsearch.model.categorizacao.converter.ClassificacaoEnsinoConverter;
 
 import lombok.EqualsAndHashCode;
 

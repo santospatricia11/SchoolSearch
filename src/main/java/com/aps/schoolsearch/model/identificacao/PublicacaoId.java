@@ -12,6 +12,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class PublicacaoId implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3340876943398837111L;
+
 	private Escola escola;
 
 	private Usuario publicadoPor;

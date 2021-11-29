@@ -1,6 +1,7 @@
 package com.aps.schoolsearch.resources;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +33,13 @@ public class EscolaResources {
 		
 		@GetMapping(value = "/{id}")
 		public ResponseEntity<Escola> findById(@PathVariable String id) {//caminho para o id
-			Escola esc = escolaRepository.findById(id).get();
-			return ResponseEntity.ok().body(esc);
+			Optional<Escola> result = escolaRepository.findById(id);
+			
+			if(result.isPresent()) {
+				return ResponseEntity.ok().body(result.get());
+			}
+			return ResponseEntity.notFound().build();
+			
 		}	
 		
 		public Escola save(Escola escola) {
