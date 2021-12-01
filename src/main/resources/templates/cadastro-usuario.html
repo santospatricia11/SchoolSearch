@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <script th:src="@{/webjars/jquery/3.6.0/jquery.js}"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"
+    ></script>
+    
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Usuario</title>
+    <div th:replace="fragments/head.html :: heading"></div>
+    <div th:insert="fragments/header.html :: css"></div>
+    <div th:replace="fragments/footer.html :: css"></div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+      integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+      integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="css/cadastro-usuario.css" />
+  </head>
+  <body>
+    <div th:replace="fragments/header.html :: navbar"></div>
+
+    <div class="wrap">
+      <div class="container">
+        <div class="cadastro-form">
+          <div class="cadastro-wrapper">
+            <div class="cadastro-text">
+              <div class="image-wrapping">
+                <h1>Cadastro de Usuário</h1>
+                <img src="images/school-search-icon.png" alt="" class="logo" />
+              </div>
+              <p class="to-right">
+                Preencha os campos abaixo para se cadastrar no sistema.
+              </p>
+
+              <hr class="divider" />
+            </div>
+            <form class="register-form" th:action="@{/processar}" th:object="${usuario}" method="post">
+              <div class="form-group">
+                <label for="nome">Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nome"
+                  name="nome"
+                  placeholder="Nome"
+                  th:field="*{nome}"
+                />
+                <div 
+                  class="alert alert-danger error" 
+                  th:if="${#fields.hasErrors('nome')}"
+		          th:errors="*{nome}"role="alert"
+		          ></div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  th:field="*{email}"
+                />
+                <div 
+                  class="alert alert-danger error" 
+                  th:if="${#fields.hasErrors('email')}"
+		          th:errors="*{email}"role="alert"
+		          ></div>
+              </div>
+              <div class="form-group form-group-wrap">
+                <div class="form-group form-group-cpf-e-data">
+                  <div class="form-group">
+                    <label for="cpf">CPF</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="cpf"
+                      name="cpf"
+                      placeholder="CPF"
+                      th:field="*{cpf}"
+                    />
+                    <div 
+	                  class="alert alert-danger error" 
+	                  th:if="${#fields.hasErrors('cpf')}"
+			          th:errors="*{cpf}"role="alert"
+			          ></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="data">Data de Nascimento</label>
+                    <div class="input-group date data" id="datepicker">
+                      <input
+                        type="text"
+                        name="data-nascimento"
+                        id="data-nascimento"
+                        class="form-control"
+                        placeholder="dd/mm/aaaa"
+                      />
+                      <span class="input-group-append">
+                        <span class="input-group-text max-height">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </span>
+                      </span>
+                    </div>
+                    <div 
+	                  class="alert alert-danger error" 
+	                  th:if="${#fields.hasErrors('dataNascimento')}"
+			          th:errors="*{dataNascimento}"role="alert"
+			          ></div>
+                  </div>
+                </div>
+                <div class="form-group form-group-pne-e-sexo">
+                  <div class="form-group pne-selector">
+                    <label for="pne">PNE</label>
+                    <select class="pne" name="pne" id="pne" th:field="*{pne}">
+                      <option th:value="false">Não</option>
+                      <option th:value="true">Sim</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Sexo</label>
+                    <div class="form-group-sexo">
+                      <div class="form-group">
+                        <input
+                          type="radio"
+                          name="sexo"
+                          id="masculino"
+                          class="radio-button-sexo"
+                          th:field="*{sexo}"
+                          th:value="masculino"
+                        />
+                        <label for="masculino">Masculino</label>
+                      </div>
+                      <div class="form-group">
+                        <input
+                          type="radio"
+                          name="sexo"
+                          id="feminino"
+                          class="radio-button-sexo"
+                          th:field="*{sexo}"
+                          th:value="feminino"
+                          checked
+                        />
+                        <label for="feminino">Feminino</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="senha">Senha</label>
+                <div id="showPassword" class="input-group">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="senha"
+                    name="senha"
+                    placeholder="Senha"
+                  />
+                  <span class="input-group-append">
+                    <i
+                      class="input-group-text fa fa-eyes max-height eye"
+                      aria-hidden="true"
+                    ></i>
+                  </span>
+                </div>
+                <div 
+                  class="alert alert-danger error" 
+                  th:if="${#fields.hasErrors('senha')}"
+		          th:errors="*{senha}"role="alert"
+		          ></div>
+              </div>
+              <div class="form-group">
+                <label for="confirmaSenha">Confirmar Senha</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmar-senha"
+                  name="confirmar-senha"
+                  placeholder="Confirmar Senha"
+                />
+                <!--
+                <div 
+                  class="alert alert-danger error" 
+                  th:if="${#fields.hasErrors('confirmarSenha')}"
+		          th:errors="*{confirmarSenha}"role="alert"
+		          ></div>
+		          -->
+              </div>
+              <input
+                type="submit"
+                class="btn btn-primary cadastrar"
+                value="Cadastrar"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/cadastro-usuario.js"></script>
+  </body>
+</html>

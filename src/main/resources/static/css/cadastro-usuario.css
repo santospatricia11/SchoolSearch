@@ -1,0 +1,120 @@
+:root {
+  --blue: #153c65;
+  --greenish-blue: #00ffb3;
+}
+
+body {
+  background: #546a76;
+}
+
+.cadastro-form {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.cadastro-wrapper {
+  padding: 10px;
+  background: #eae9e9;
+  border-radius: 5px;
+
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.logo {
+  width: 96px;
+  margin-right: auto;
+  order: -1;
+}
+.to-right {
+  text-align: right;
+}
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+.max-height {
+  height: 100%;
+}
+.eye {
+  display: flex;
+  align-items: center;
+}
+
+.form-group:not(.form-group .form-group) {
+  margin-top: 5px;
+}
+.form-group label {
+  padding-block: 5px;
+}
+
+.cadastrar {
+  margin-top: 1%;
+  align-self: flex-end;
+}
+@media (min-width: 240px) {
+  .form-group-sexo {
+    display: flex;
+  }
+  .form-group-sexo .form-group + .form-group {
+    margin-left: 5px;
+  }
+}
+@media (min-width: 411px) {
+  .form-group-cpf-e-data,
+  .form-group-pne-e-sexo {
+    display: flex;
+    justify-content: space-between;
+  }
+  .form-group-cpf-e-data > .form-group,
+  .form-group-pne-e-sexo > .form-group {
+    flex: 1 1 0;
+  }
+  .pne-selector {
+    display: flex;
+    flex-direction: column;
+  }
+  .form-group-cpf-e-data > .form-group + .form-group,
+  .form-group-pne-e-sexo > .form-group + .form-group {
+    margin-left: 10px;
+  }
+  .form-group-sexo > .form-group {
+    display: flex;
+  }
+  .radio-button-sexo {
+    margin-right: 5px;
+  }
+  .form-group-pne-e-sexo > .form-group {
+    flex: 1 1 0;
+  }
+  .image-wrapping {
+    display: flex;
+    align-items: center;
+  }
+}
+@media (min-width: 768px) {
+  .form-group-wrap {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .form-group-wrap > .form-group + .form-group {
+    margin-left: 10px;
+  }
+
+  .form-group-sexo .form-group + .form-group {
+    margin-left: 5px;
+  }
+
+  .pne {
+    height: 100%;
+  }
+  .cadastro-wrapper {
+    padding: 37.5px;
+  }
+}
+@media (min-width: 992px) {
+  .cadastro-wrapper {
+    padding: 50px;
+  }
+}
