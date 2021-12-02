@@ -33,10 +33,9 @@ public class CadastroUsuarioController {
 		model.addAttribute("app_name", appName);
 		model.addAttribute("pagina", CADASTRO_USUARIO);
 		model.addAttribute("form_name", "Cadastro de Usuário no"+appName);
-
+		
 		Usuario usuario = new Usuario();
 		Endereco endereco = new Endereco();
-		
 		usuario.setEndereco(endereco);
 		
 		model.addAttribute("endereco", endereco);
@@ -49,8 +48,8 @@ public class CadastroUsuarioController {
 		return CADASTRO_USUARIO;
 	}
 	
-	@PostMapping
-	public String processForm(@Valid Usuario usuario, @Valid Endereco endereco, BindingResult result) {
+	@PostMapping("/processar")
+	public String processForm(@Valid Usuario usuario, BindingResult result) {
 		if(result.hasErrors()) {
 			return CADASTRO_USUARIO;
 		}

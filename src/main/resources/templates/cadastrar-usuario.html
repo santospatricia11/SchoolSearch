@@ -11,9 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro de Usuario</title>
-    <div th:replace="fragments/head.html :: heading"></div>
-    <div th:insert="fragments/header.html :: css"></div>
-    <div th:replace="fragments/footer.html :: css"></div>
+    <div th:replace="/fragments/head.html :: heading"></div>
+    <div th:insert="/fragments/header.html :: css"></div>
+    <div th:replace="/fragments/footer.html :: css"></div>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
@@ -36,7 +36,7 @@
       referrerpolicy="no-referrer"
     />
 
-    <link rel="stylesheet" href="css/cadastro-usuario.css" />
+    <link rel="stylesheet" href="/css/cadastrar-usuario.css" />
   </head>
   <body>
     <div th:replace="fragments/header.html :: navbar"></div>
@@ -48,7 +48,7 @@
             <div class="cadastro-text">
               <div class="text-wrapping">
                 <h1 class="to-right">Cadastro de Usuário</h1 >
-                <img src="images/school-search-icon.png" alt="" class="logo" />
+                <img src="/images/school-search-icon.png" alt="" class="logo" />
               </div>
               <p class="to-right">
                 Preencha os campos abaixo para se cadastrar no sistema.
@@ -56,7 +56,7 @@
 
               <hr class="divider" />
             </div>
-            <form class="register-form" th:action="@{/cadastrar-usuario}" th:object="${usuario}" method="post">
+            <form class="register-form" th:action="@{/cadastrar-usuario/processar}" th:object="${usuario}" method="post">
               <div class="form-group">
                 <label for="nome">Nome</label>
                 <input
@@ -184,6 +184,11 @@
               					  th:field="*{endereco.logradouro}"
               					   />
               				</div>
+              				<div 
+			                  class="alert alert-danger error" 
+			                  th:if="${#fields.hasErrors('endereco.logradouro')}"
+					          th:errors="*{endereco.logradouro}"role="alert"
+					          ></div>
               			</div>
               			<div class="col-md-2">
               				<div class="form-group">
@@ -196,6 +201,11 @@
               				    th:field="*{endereco.numero}"
               				    />
               				</div>
+              				<div 
+			                  class="alert alert-danger error" 
+			                  th:if="${#fields.hasErrors('endereco.numero')}"
+					          th:errors="*{endereco.numero}" role="alert"
+					          ></div>
               			</div>
               		</div>
               		<div class="row">
@@ -210,6 +220,11 @@
               				    th:field="*{endereco.bairro}"
               				    />
               				</div>
+              				<div 
+			                  class="alert alert-danger error" 
+			                  th:if="${#fields.hasErrors('endereco.bairro')}"
+					          th:errors="*{endereco.bairro}"role="alert"
+					          ></div>
               			</div>
               			<div class="col-md-4">
               				<div class="form-group">
@@ -219,9 +234,14 @@
               				    type="text" 
               				    name="cidade" 
               				    id="cidade" 
-              				    th:field="*{endereco.logradouro}"
+              				    th:field="*{endereco.cidade}"
               				    />
               				</div>
+              				<div 
+			                  class="alert alert-danger error" 
+			                  th:if="${#fields.hasErrors('endereco.cidade')}"
+					          th:errors="*{endereco.cidade}"role="alert"
+					          ></div>
               			</div>
               			<div class="col-md-4">
               				<div class="form-group">
@@ -234,6 +254,11 @@
               				    th:field="*{endereco.estado}"
               				     />
               				</div>
+              				<div 
+			                  class="alert alert-danger error" 
+			                  th:if="${#fields.hasErrors('endereco.estado')}"
+					          th:errors="*{endereco.numero}"role="alert"
+					          ></div>
               			</div>
               		</div>
               	</div>
@@ -292,6 +317,6 @@
       </div>
     </div>
     <div th:replace="fragments/footer.html :: footer"></div> 
-    <script type="text/javascript" src="js/cadastro-usuario.js"></script>
+    <script type="text/javascript" src="/js/cadastro-usuario.js"></script>
   </body>
 </html>

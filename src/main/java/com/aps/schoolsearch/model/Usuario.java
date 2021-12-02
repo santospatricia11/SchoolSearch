@@ -7,10 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
-import javax.validation.constraints.Min;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,10 +28,12 @@ public class Usuario {
 	
 	@NotNull
 	@NotEmpty(message="Nome não pode ser vazio")
-	@Min(value=3, message="Nome deve ter no mínimo 3 caracteres")
+	@Size(min=3, message="Nome deve ter no mínimo 3 caracteres")
 	private String nome;
 	
 	@Id
+	@NotNull
+	@NotEmpty
 	@Column(unique=true)
 	@NotEmpty(message="O campo CPF não pode ser vazio")
 	@Pattern(regexp="^\\d{3}.\\d{3}.\\d{3}-\\d{2}$", message="Digite um CPF válido, padrão: ___.___.___-__")
@@ -40,9 +43,10 @@ public class Usuario {
 	@Column(unique=true)
 	@NotNull
 	@NotEmpty
-	@Pattern(regexp="^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+\\.([a-z]+)?$", message="Digite um email válido, padrão: _@_._")
+	@Pattern(regexp="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", message="Digite um email válido, padrão: _@_._")
 	private String email;
 	
+	@Valid
 	@NotNull
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cpf", referencedColumnName = "cpf")
@@ -50,12 +54,14 @@ public class Usuario {
 	private Endereco endereco;
 	
 	@NotNull
+	@NotEmpty
 	@Column(unique=true)
 	@Pattern(regexp="^(\\d{2})(9.)?\\d{4}-\\d{4}", message="Digite um telefone válido, padrão (__)(9.)____-____")
 	private String telefone;
 	
 	@NotNull(message="Digite/Escolha uma data de nascimento válida, mínimo 18 anos, máximo 01/01/1900")
 	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Pattern(regexp="^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$", message="Digite uma data de nascimento válida")
 	private String dataNascimento;
 	
 	@NotNull
@@ -66,6 +72,7 @@ public class Usuario {
 	
 	@NotNull
 	@NotEmpty(message="A senha não pode ser vazia")
+	@Size(min=8, message="A senha deve ter pelo menos 8 caracteres.")
 	private String senha;
 
 	public String getNome() {

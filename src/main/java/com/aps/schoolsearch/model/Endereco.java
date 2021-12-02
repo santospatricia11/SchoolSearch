@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -29,10 +33,26 @@ public class Endereco {
     @OneToOne(mappedBy = "endereco")
     private Usuario usuario;
 	
+    @NotNull
+    @NotEmpty(message="O campo do logradouro não pode ser vazio")
+    @Size(min=10, message="O logradouro deve conter ao menos 10 caracteres")
 	private String logradouro;
+    
+    @NotNull(message="O campo de nível não pode estar vazio")
+    @Min(value=0, message="O número do logradouro não deve ser negativo")
 	private Integer numero;
+    
+    @NotNull
+    @NotEmpty
+    @Size(min=2, message="O bairro deve ter ao menos {min} caracteres")
 	private String bairro;
+    
+    @NotNull
+    @NotEmpty
+    @Size(min=2, message="A cidade deve ter ao menos {min} caracteres")
 	private String cidade;
+    @NotNull
+    @NotEmpty
 	private String estado;
 	public String getLogradouro() {
 		return logradouro;
