@@ -32,7 +32,7 @@ $(document).ready(function () {
           $("#showPassword i").removeClass("fa-eye-slash");
           $("#showPassword i").addClass("fa-eye");
         });
-        
+      $(".numero").inputmask("9{*}");
       $("#feminino").click();
       }
 );

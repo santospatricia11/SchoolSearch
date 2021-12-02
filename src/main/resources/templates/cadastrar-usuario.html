@@ -46,8 +46,8 @@
         <div class="cadastro-form">
           <div class="cadastro-wrapper">
             <div class="cadastro-text">
-              <div class="image-wrapping">
-                <h1>Cadastro de Usuário</h1>
+              <div class="text-wrapping">
+                <h1 class="to-right">Cadastro de Usuário</h1 >
                 <img src="images/school-search-icon.png" alt="" class="logo" />
               </div>
               <p class="to-right">
@@ -56,7 +56,7 @@
 
               <hr class="divider" />
             </div>
-            <form class="register-form" th:action="@{/processar}" th:object="${usuario}" method="post">
+            <form class="register-form" th:action="@{/cadastrar-usuario}" th:object="${usuario}" method="post">
               <div class="form-group">
                 <label for="nome">Nome</label>
                 <input
@@ -73,7 +73,7 @@
 		          th:errors="*{nome}"role="alert"
 		          ></div>
               </div>
-              <div class="form-group">
+              <div class="form-group form-group-email">
                 <label for="email">Email</label>
                 <input
                   type="text"
@@ -107,7 +107,7 @@
 			          th:errors="*{cpf}"role="alert"
 			          ></div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group form-group-data-nascimento">
                     <label for="data">Data de Nascimento</label>
                     <div class="input-group date data" id="datepicker">
                       <input
@@ -116,6 +116,7 @@
                         id="data-nascimento"
                         class="form-control"
                         placeholder="dd/mm/aaaa"
+                        th:field="*{dataNascimento}"
                       />
                       <span class="input-group-append">
                         <span class="input-group-text max-height">
@@ -133,41 +134,112 @@
                 <div class="form-group form-group-pne-e-sexo">
                   <div class="form-group pne-selector">
                     <label for="pne">PNE</label>
-                    <select class="pne" name="pne" id="pne" th:field="*{pne}">
-                      <option th:value="false">Não</option>
-                      <option th:value="true">Sim</option>
+                    <select class="pne form-select" name="pne" id="pne" th:field="*{pne}">
+                      <option th:value="0">Não</option>
+                      <option th:value="1">Sim</option>
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="">Sexo</label>
-                    <div class="form-group-sexo">
-                      <div class="form-group">
+                    <div class="form-check-sexo">
+                      <div class="form-check">
                         <input
                           type="radio"
                           name="sexo"
                           id="masculino"
-                          class="radio-button-sexo"
+                          class="form-check-input radio-button-sexo "
                           th:field="*{sexo}"
                           th:value="masculino"
                         />
-                        <label for="masculino">Masculino</label>
+                        <label class="form-check-label" for="masculino">Masculino</label >
                       </div>
-                      <div class="form-group">
+                      <div class="form-check">
                         <input
                           type="radio"
                           name="sexo"
                           id="feminino"
-                          class="radio-button-sexo"
+                          class="form-check-input radio-button-sexo"
                           th:field="*{sexo}"
                           th:value="feminino"
-                          checked
                         />
-                        <label for="feminino">Feminino</label>
+                        <label class="form-check-label" for="feminino">Feminino</label>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              
+              <hr class="divider" />
+              	<div class="form-group">
+              		<h4>Endereço</h4>
+              		<div class="row">
+              			<div class="col-md-10">
+              				<div class="form-group">
+              					<label for="logradouro">Logradouro</label>
+              					<input 
+              					  class="form-control" 
+              					  type="text" 
+              					  name="logradouro" 
+              					  id="logradouro"
+              					  th:field="*{endereco.logradouro}"
+              					   />
+              				</div>
+              			</div>
+              			<div class="col-md-2">
+              				<div class="form-group">
+              				  <label for="numero">Número</label>
+              				  <input 
+              				    class="form-control numero" 
+              				    type="text" 
+              				    name="numero" 
+              				    id="numero" 
+              				    th:field="*{endereco.numero}"
+              				    />
+              				</div>
+              			</div>
+              		</div>
+              		<div class="row">
+              			<div class="col-md-4">
+              				<div class="form-group">
+              				  <label for="bairro">Bairro</label>
+              				  <input 
+              				    class="form-control" 
+              				    type="text" 
+              				    name="bairro" 
+              				    id="bairro" 
+              				    th:field="*{endereco.bairro}"
+              				    />
+              				</div>
+              			</div>
+              			<div class="col-md-4">
+              				<div class="form-group">
+              				  <label for="cidade">Cidade</label>
+              				  <input 
+              				    class="form-control" 
+              				    type="text" 
+              				    name="cidade" 
+              				    id="cidade" 
+              				    th:field="*{endereco.logradouro}"
+              				    />
+              				</div>
+              			</div>
+              			<div class="col-md-4">
+              				<div class="form-group">
+              				  <label for="estado">Estado</label>
+              				  <input 
+              				    class="form-control" 
+              				    type="text" 
+              				    name="estado" 
+              				    id="estado"
+              				    th:field="*{endereco.estado}"
+              				     />
+              				</div>
+              			</div>
+              		</div>
+              	</div>
+              <hr class="divider" />
+              
+              
               <div class="form-group">
                 <label for="senha">Senha</label>
                 <div id="showPassword" class="input-group">
@@ -177,6 +249,7 @@
                     id="senha"
                     name="senha"
                     placeholder="Senha"
+                    th:field="*{senha}"
                   />
                   <span class="input-group-append">
                     <i
@@ -191,8 +264,8 @@
 		          th:errors="*{senha}"role="alert"
 		          ></div>
               </div>
-              <div class="form-group">
-                <label for="confirmaSenha">Confirmar Senha</label>
+              <div class="form-group form-group-confirmar-senha">
+                <label for="confirmar-senha">Confirmar Senha</label>
                 <input
                   type="password"
                   class="form-control"
@@ -218,6 +291,7 @@
         </div>
       </div>
     </div>
+    <div th:replace="fragments/footer.html :: footer"></div> 
     <script type="text/javascript" src="js/cadastro-usuario.js"></script>
   </body>
 </html>

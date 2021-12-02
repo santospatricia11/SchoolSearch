@@ -19,9 +19,13 @@ import com.aps.schoolsearch.model.categorizacao.MetodoEnsino;
 import com.aps.schoolsearch.model.categorizacao.NivelEnsino;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @EqualsAndHashCode
+@Getter
+@Setter
 public class Escola {
 
 	@Id
@@ -121,5 +125,6 @@ public class Escola {
 		this.linguas = linguas;
 	}
 	
-
+	
+	
 }

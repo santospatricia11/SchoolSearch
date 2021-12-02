@@ -13,10 +13,14 @@ import javax.validation.constraints.NotNull;
 import com.aps.schoolsearch.model.identificacao.PublicacaoId;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @IdClass(PublicacaoId.class)
 @EqualsAndHashCode
+@Getter
+@Setter
 public class Publicacao implements Serializable{
 	
 	/**
@@ -67,11 +71,11 @@ public class Publicacao implements Serializable{
 		this.conteudo = conteudo;
 	}
 
-	public Usuario getPublicadoPorUsuario() {
+	public Usuario getPublicadoPor() {
 		return publicadoPor;
 	}
 
-	public void setPublicadoPorUsuario(Usuario publicadoPor) {
+	public void setPublicadoPor(Usuario publicadoPor) {
 		this.publicadoPor = publicadoPor;
 	}
 
@@ -82,7 +86,10 @@ public class Publicacao implements Serializable{
 	public void setEscola(Escola escola) {
 		this.escola = escola;
 	}
-	
-	
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
 }
