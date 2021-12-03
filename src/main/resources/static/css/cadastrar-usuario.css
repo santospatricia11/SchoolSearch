@@ -1,13 +1,3 @@
-:root {
-  --blue: #153c65;
-  --greenish-blue: #00ffb3;
-}
-*{
-	box-sizing: border-box;
-}
-body {
-  background: #546a76;
-}
 
 .cadastro-form {
   max-width: 900px;

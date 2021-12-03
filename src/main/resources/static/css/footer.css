@@ -1,6 +1,4 @@
-body{
-	height: 100vh;
-}
+
 
 .navbar-footer {
 	flex-direction: column;
@@ -8,11 +6,10 @@ body{
 .copyright-text {
   font-size: 0.8rem;
   text-align: center;
-  color: #ddd;
+  color: var(--dark-blue);
   margin: 0.35rem;
 }
 .wrapper-footer {
-  border-radius: 50px 50px 0 0;
   position: sticky;
   top: 100%;
 }
@@ -33,5 +30,5 @@ body{
 }
 
 .navbar-footer .nav-link {
-  color: #ddd;
+  color: var(--dark-blue);
 }
