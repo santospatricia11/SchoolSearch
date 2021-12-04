@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <script th:src="@{/webjars/jquery/3.6.0/jquery.js}"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"
+    ></script>
+
+    <div th:replace="fragments/head.html :: heading"></div>
+    <div th:insert="fragments/header.html :: css"></div>
+    <div th:replace="fragments/footer.html :: css"></div>
+
+    <link rel="stylesheet" href="css/login.css" />
+
+    <title>Login - School Search</title>
+  </head>
+  
+  <body>
+  	<div th:replace="fragments/header.html :: navbar"></div>
+
+    <div class="wrap">
+      <div class="container container-login">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card login-card">
+              <div class="card-header login-card-header">
+                <h3 class="login">Login</h3>
+                <a href="">
+                  <img
+                    class="school-search-icon"
+                    src="images/school-search-icon.png"
+                    alt=""
+                    srcset=""
+                  />
+                </a>
+              </div>
+              <div class="card-body login-body">
+	            <div class="error" th:if="${param.error}"> Senha e/ou username inválido!</div >
+				<div class="error" th:if="${param.logout}">Voce está desconectado!</div >
+                <form th:action="@{/login}" method="post">
+                  <div class="form-group">
+                    <label for="cpf">CPF</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="cpf"
+                      name="cpf"
+                      data-inputmask-alias="cadastro de pessoa fisica"
+                      data-inputmask-inputformat="999.999.999-99" 
+                      data-inputmask-placeholder="   .   .   -  "
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      name="password"
+
+                    />
+                  </div>
+
+                  <div class="button-wrapper">
+                    <a class="btn btn-primary criar-conta" th:href="@{/cadastrar}"
+                      >Criar Conta</a
+                    >
+                    <input
+                      type="submit"
+                      class="btn btn-primary"
+                      value="Entrar"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:replace="fragments/footer.html :: footer"></div> 
+    <script>
+    	$(document).ready(function(){
+    		  $("#cpf").inputmask("999.999.999-99");
+    	});
+    </script>
+	
+	<script></script>
+  </body>
+</html>

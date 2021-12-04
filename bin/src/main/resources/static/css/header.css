@@ -1,24 +1,14 @@
 :root {
-  --blue: #41EAD4;
-  --dark-blue:  #153c65;
-  --greenish-blue:  #114B53;
-  --caribbean-green: #21D19F;
-  --keppel: #45B69C;
-  --iris: #454ADE;
-  --aquamarine-blue: #4CE0B3;
-  --verde-persa: #12A592;
+  --blue: #153c65;
+  --greenish-blue: #00ffb3;
 }
 body {
-	background: var(--verde-persa);
-	min-height: 100vh;
+	background: #546a76;
 }
-*{
-	box-sizing: border-box;
-}
-
 .wrapper {
   padding-block: 2vh;
   background-color: var(--blue);
+  border-radius: 0 0 50px 50px;
 }
 .wrapper-header{
 	position:sticky;
@@ -28,10 +18,6 @@ body {
 .wrap {
   width: 90%;
   margin: 0 auto;
-}
-
-.fa-user{
-	color: var(--greenish-blue);
 }
 
 .navbar {
@@ -55,12 +41,13 @@ body {
 }
 .image-circle {
   display: inline-block;
-  border: 2.5px solid var(--greenish-blue);
+  border: 3.5px solid var(--greenish-blue);
   border-radius: 50%;
   padding: 5px;
-  
-  height: 48px;
-  aspect-ratio: 1;
+}
+
+.foto-perfil {
+  max-height: 48px;
 }
 
 .dropdown-toggle {
@@ -105,10 +92,6 @@ body {
 
 .navbar-collapse {
   padding-block: 2.5%;
-}
-
-.dropdown-menu {
-  z-index: 2;
 }
 
 @media (min-width: 992px) {

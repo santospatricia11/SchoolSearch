@@ -1,0 +1,71 @@
+:root {
+  --blue: #153c65;
+  --greenish-blue: #00ffb3;
+}
+
+body {
+  background: #546a76;
+}
+
+.login-card {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.container-login {
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  
+  padding: 10vh;
+}
+
+.container-login .row{
+  flex: 1 1 0;
+}
+
+.login {
+  text-align: center;
+  margin-block: 20px;
+}
+
+.login-card{
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.login-body {
+  padding-inline: 20px;
+}
+.form-group {
+  padding-block: 5px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  padding-top: 10px;
+}
+.criar-conta {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.login-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.school-search-icon {
+  height: 48px;
+}
+
+@media (max-width: 300px){
+	.button-wrapper{
+		flex-direction: column;
+	}
+	.btn + .btn{
+		margin-bottom: 10px;
+		order:-1;
+	}
+}

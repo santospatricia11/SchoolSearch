@@ -1,15 +1,18 @@
-
+body{
+	height: 100vh;
+}
 
 .navbar-footer {
-	flex-direction: row;
+	flex-direction: column;
 }
 .copyright-text {
-  font-size: 0.5rem;
+  font-size: 0.8rem;
   text-align: center;
-  color: var(--dark-blue);
+  color: #ddd;
   margin: 0.35rem;
 }
 .wrapper-footer {
+  border-radius: 50px 50px 0 0;
   position: sticky;
   top: 100%;
 }
@@ -30,5 +33,5 @@
 }
 
 .navbar-footer .nav-link {
-  color: var(--dark-blue);
+  color: #ddd;
 }
