@@ -1,11 +1,3 @@
-:root {
-  --blue: #153c65;
-  --greenish-blue: #00ffb3;
-}
-
-body {
-  background: #546a76;
-}
 
 .login-card {
   max-width: 500px;

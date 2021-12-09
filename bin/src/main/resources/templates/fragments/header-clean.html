@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+  <head>
+  	<title>Header Clean Fragment</title>
+  	<div th:fragment="css">
+  		<link rel="stylesheet" href="/css/header.css" />
+  		<link
+	      rel="stylesheet"
+	      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+	      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+	      crossorigin="anonymous"
+	      referrerpolicy="no-referrer"
+    	/>
+  	</div >
+  </head>
+  <body>
+    <div class="wrapper wrapper-header" th:fragment="navbar">
+      <div class="wrap">
+        <nav class="navbar navbar-transparent navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}"
+              ><img
+                src="/images/school-search-icon.png"
+                alt=""
+                class="school-search-icon"
+            /></a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </body>
+</html>
+         
+         

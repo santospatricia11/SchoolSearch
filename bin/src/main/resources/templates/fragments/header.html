@@ -3,17 +3,24 @@
   <head>
   	<title>Header Fragment</title>
   	<div th:fragment="css">
-  		<link rel="stylesheet" href="css/header.css" />
+  		<link rel="stylesheet" href="/css/header.css" />
+  		<link
+	      rel="stylesheet"
+	      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+	      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+	      crossorigin="anonymous"
+	      referrerpolicy="no-referrer"
+    	/>
   	</div >
   </head>
   <body>
     <div class="wrapper wrapper-header" th:fragment="navbar">
       <div class="wrap">
-        <nav class="navbar navbar-transparent navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-transparent navbar-expand-lg navbar-light bg-light">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#"
+            <a class="navbar-brand" th:href="@{/}"
               ><img
-                src="images/school-search-icon.png"
+                src="/images/school-search-icon.png"
                 alt=""
                 class="school-search-icon"
             /></a>
@@ -43,12 +50,12 @@
                     aria-expanded="false"
                   >
                     <div class="image-circle">
-                      <img class="foto-perfil" src="images/icon-user.png" alt="" />
+                      <i class="far fa-user foto-perfil fa-2x"></i>
                     </div>
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   	<li><a class="dropdown-item" th:href="@{/login}">Entrar</a></li>
-                    <li><a class="dropdown-item" th:href="@{/login}">Cadastrar-se</a></li>
+                    <li><a class="dropdown-item" href="/cadastrar-usuario">Cadastrar-se</a></li>
                     <li>
                       <a class="dropdown-item" href="#">Mudar Perspectiva</a>
                     </li>

@@ -1,0 +1,111 @@
+/* Estou vendo o que pode ser aproveitado na tela de cadastro de escola,
+ já que ambas possuem características gráficas semelhantes  */
+.cadastro-form {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.cadastro-wrapper {
+  padding: 25px;
+  background: #eae9e9;
+  border-radius: 5px;
+
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.text-wrapping {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 96px;
+  order: -1;
+}
+
+.logo_escola{
+  float: left;
+  width: 64px;
+  padding: 5px;
+  margin: 0px 10px 10px 0;
+  order: -1;
+}
+
+.to-right {
+  text-align: right;
+}
+
+.max-height {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.form-group:not(.form-group > .form-group) {
+  padding-block: 10px;
+}
+
+.pne {
+  width: 100%;
+}
+
+.cadastrar {
+  display: block;
+  max-width: fit-content;
+  margin-left: auto;
+}
+label {
+  padding-block: 5px;
+}
+
+@media (min-width: 414px) {
+  .form-check-sexo {
+    display: flex;
+  }
+  .form-check {
+	flex: 1 1 0;
+	width: 100%;
+   }
+  .form-check +.form-check {
+	margin-left: 10px;
+  }
+}
+
+@media (min-width: 768px){
+  .form-group-wrap {
+    display: flex;
+  }
+  .form-group-wrap > .form-group  {
+	flex: 1 1 0;
+	width: 100%;
+  }
+  
+  .form-group-wrap > .form-group + .form-group {
+	margin-left: 10px;
+  }
+  .form-group-pne-e-sexo > .form-group {
+	height: 50%;
+  }
+}
+
+@media (min-width: 992px){
+  .form-group-wrap {
+	display: flex;
+    justify-content: space-between;
+  }
+  .form-group-wrap > .form-group{
+    display: flex;
+  }
+  
+  .form-group:not(.form-group-cpf-e-data, .form-group-pne-e-sexo){
+	flex: 1 1 0;
+  }
+  .form-group + .form-group:not(
+	.form-group-wrap, 
+	.form-group-pne-e-sexo, 
+	.form-group-cpf-e-data-nascimento, 
+	.form-group-confirmar-senha,
+	.form-group-email) {
+    margin-left: 10px;
+  }
+}
