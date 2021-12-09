@@ -94,7 +94,8 @@ label {
   .form-group + .form-group:not(
 	.form-group-wrap, 
 	.form-group-pne-e-sexo, 
-	.form-group-cpf-e-data-nascimento, 
+	.form-group-cpf-e-data-nascimento,
+	.form-group-senha,
 	.form-group-confirmar-senha,
 	.form-group-email) {
     margin-left: 10px;
