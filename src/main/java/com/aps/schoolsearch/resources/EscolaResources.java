@@ -65,4 +65,5 @@ public class EscolaResources {
 			return modelAndView;
 			
 		}
+		
 }
