@@ -1,0 +1,31 @@
+.container{
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.listar-wrapper{
+  padding: 25px;
+  background: #eae9e9;
+  border-radius: 5px;
+
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.text-wrapping {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 96px;
+  order: -1;
+}
+
+.logo_escola{
+  float: left;
+  width: 64px;
+  padding: 5px;
+  margin: 0px 10px 10px 0;
+  order: -1;
+}
