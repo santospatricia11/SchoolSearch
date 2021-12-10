@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <script th:src="@{/webjars/jquery/3.6.0/jquery.js}"></script>
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"
-    ></script>
+   <head>
     
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro de Usuario</title>
     <div th:replace="/fragments/head.html :: heading"></div>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"
+    ></script>
+    
     <div th:insert="/fragments/header.html :: css"></div>
     <div th:replace="/fragments/footer.html :: css"></div>
+
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
@@ -47,7 +48,7 @@
           <div class="cadastro-wrapper">
             <div class="cadastro-text">
               <div class="text-wrapping">
-                <h1 class="to-right">Cadastro de Usuário</h1 >
+                <h1 class="to-right">Cadastro de Usuário</h1>
                 <i class="fas fa-graduation-cap logo fa-4x"></i>
               </div>
               <p class="to-right">
@@ -56,7 +57,12 @@
 
               <hr class="divider" />
             </div>
-            <form class="register-form" th:action="@{/cadastrar-usuario/processar}" th:object="${usuario}" method="post">
+            <form
+              class="register-form"
+              th:action="@{/cadastrar-usuario/processar}"
+              th:object="${usuario}"
+              method="post"
+            >
               <div class="form-group">
                 <label for="nome">Nome</label>
                 <input
@@ -67,11 +73,12 @@
                   placeholder="Nome"
                   th:field="*{nome}"
                 />
-                <div 
-                  class="alert alert-danger error" 
+                <div
+                  class="alert alert-danger error"
                   th:if="${#fields.hasErrors('nome')}"
-		          th:errors="*{nome}"role="alert"
-		          ></div>
+                  th:errors="*{nome}"
+                  role="alert"
+                ></div>
               </div>
               <div class="form-group form-group-email">
                 <label for="email">Email</label>
@@ -83,11 +90,12 @@
                   placeholder="Email"
                   th:field="*{email}"
                 />
-                <div 
-                  class="alert alert-danger error" 
+                <div
+                  class="alert alert-danger error"
                   th:if="${#fields.hasErrors('email')}"
-		          th:errors="*{email}"role="alert"
-		          ></div>
+                  th:errors="*{email}"
+                  role="alert"
+                ></div>
               </div>
               <div class="form-group form-group-wrap">
                 <div class="form-group form-group-cpf-e-data">
@@ -101,11 +109,12 @@
                       placeholder="CPF"
                       th:field="*{cpf}"
                     />
-                    <div 
-	                  class="alert alert-danger error" 
-	                  th:if="${#fields.hasErrors('cpf')}"
-			          th:errors="*{cpf}"role="alert"
-			          ></div>
+                    <div
+                      class="alert alert-danger error"
+                      th:if="${#fields.hasErrors('cpf')}"
+                      th:errors="*{cpf}"
+                      role="alert"
+                    ></div>
                   </div>
                   <div class="form-group form-group-data-nascimento">
                     <label for="data">Data de Nascimento</label>
@@ -124,17 +133,23 @@
                         </span>
                       </span>
                     </div>
-                    <div 
-	                  class="alert alert-danger error" 
-	                  th:if="${#fields.hasErrors('dataNascimento')}"
-			          th:errors="*{dataNascimento}"role="alert"
-			          ></div>
+                    <div
+                      class="alert alert-danger error"
+                      th:if="${#fields.hasErrors('dataNascimento')}"
+                      th:errors="*{dataNascimento}"
+                      role="alert"
+                    ></div>
                   </div>
                 </div>
                 <div class="form-group form-group-pne-e-sexo">
                   <div class="form-group pne-selector">
                     <label for="pne">PNE</label>
-                    <select class="pne form-select" name="pne" id="pne" th:field="*{pne}">
+                    <select
+                      class="pne form-select"
+                      name="pne"
+                      id="pne"
+                      th:field="*{pne}"
+                    >
                       <option th:value="0">Não</option>
                       <option th:value="1">Sim</option>
                     </select>
@@ -147,11 +162,13 @@
                           type="radio"
                           name="sexo"
                           id="masculino"
-                          class="form-check-input radio-button-sexo "
+                          class="form-check-input radio-button-sexo"
                           th:field="*{sexo}"
                           th:value="masculino"
                         />
-                        <label class="form-check-label" for="masculino">Masculino</label >
+                        <label class="form-check-label" for="masculino"
+                          >Masculino</label
+                        >
                       </div>
                       <div class="form-check">
                         <input
@@ -162,110 +179,137 @@
                           th:field="*{sexo}"
                           th:value="feminino"
                         />
-                        <label class="form-check-label" for="feminino">Feminino</label>
+                        <label class="form-check-label" for="feminino"
+                          >Feminino</label
+                        >
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              
+
               <hr class="divider" />
-              	<div class="form-group">
-              		<h4>Endereço</h4>
-              		<div class="row">
-              			<div class="col-md-10">
-              				<div class="form-group">
-              					<label for="logradouro">Logradouro</label>
-              					<input 
-              					  class="form-control" 
-              					  type="text" 
-              					  name="logradouro" 
-              					  id="logradouro"
-              					  th:field="*{endereco.logradouro}"
-              					   />
-              				</div>
-              				<div 
-			                  class="alert alert-danger error" 
-			                  th:if="${#fields.hasErrors('endereco.logradouro')}"
-					          th:errors="*{endereco.logradouro}"role="alert"
-					          ></div>
-              			</div>
-              			<div class="col-md-2">
-              				<div class="form-group">
-              				  <label for="numero">Número</label>
-              				  <input 
-              				    class="form-control numero" 
-              				    type="text" 
-              				    name="numero" 
-              				    id="numero" 
-              				    th:field="*{endereco.numero}"
-              				    />
-              				</div>
-              				<div 
-			                  class="alert alert-danger error" 
-			                  th:if="${#fields.hasErrors('endereco.numero')}"
-					          th:errors="*{endereco.numero}" role="alert"
-					          ></div>
-              			</div>
-              		</div>
-              		<div class="row">
-              			<div class="col-md-4">
-              				<div class="form-group">
-              				  <label for="bairro">Bairro</label>
-              				  <input 
-              				    class="form-control" 
-              				    type="text" 
-              				    name="bairro" 
-              				    id="bairro" 
-              				    th:field="*{endereco.bairro}"
-              				    />
-              				</div>
-              				<div 
-			                  class="alert alert-danger error" 
-			                  th:if="${#fields.hasErrors('endereco.bairro')}"
-					          th:errors="*{endereco.bairro}"role="alert"
-					          ></div>
-              			</div>
-              			<div class="col-md-4">
-              				<div class="form-group">
-              				  <label for="cidade">Cidade</label>
-              				  <input 
-              				    class="form-control" 
-              				    type="text" 
-              				    name="cidade" 
-              				    id="cidade" 
-              				    th:field="*{endereco.cidade}"
-              				    />
-              				</div>
-              				<div 
-			                  class="alert alert-danger error" 
-			                  th:if="${#fields.hasErrors('endereco.cidade')}"
-					          th:errors="*{endereco.cidade}"role="alert"
-					          ></div>
-              			</div>
-              			<div class="col-md-4">
-              				<div class="form-group">
-              				  <label for="estado">Estado</label>
-              				  <input 
-              				    class="form-control" 
-              				    type="text" 
-              				    name="estado" 
-              				    id="estado"
-              				    th:field="*{endereco.estado}"
-              				     />
-              				</div>
-              				<div 
-			                  class="alert alert-danger error" 
-			                  th:if="${#fields.hasErrors('endereco.estado')}"
-					          th:errors="*{endereco.numero}"role="alert"
-					          ></div>
-              			</div>
-              		</div>
-              	</div>
-              <hr class="divider" />
-              
-              
               <div class="form-group">
+                <h4>Endereço</h4>
+                <div class="row">
+                  <div class="col-md-10">
+                    <div class="form-group">
+                      <label for="logradouro">Logradouro</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="logradouro"
+                        id="logradouro"
+                        th:field="*{endereco.logradouro}"
+                        placeholder="Logradouro"
+                      />
+                    </div>
+                    <div
+                      class="alert alert-danger error"
+                      th:if="${#fields.hasErrors('endereco.logradouro')}"
+                      th:errors="*{endereco.logradouro}"
+                      role="alert"
+                    ></div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="numero">Número</label>
+                      <input
+                        class="form-control numero"
+                        type="text"
+                        name="numero"
+                        id="numero"
+                        th:field="*{endereco.numero}"
+                      />
+                    </div>
+                    <div
+                      class="alert alert-danger error"
+                      th:if="${#fields.hasErrors('endereco.numero')}"
+                      th:errors="*{endereco.numero}"
+                      role="alert"
+                    ></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="bairro">Bairro</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="bairro"
+                        id="bairro"
+                        th:field="*{endereco.bairro}"
+                        placeholder="Bairro"
+                      />
+                    </div>
+                    <div
+                      class="alert alert-danger error"
+                      th:if="${#fields.hasErrors('endereco.bairro')}"
+                      th:errors="*{endereco.bairro}"
+                      role="alert"
+                    ></div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="cidade">Cidade</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="cidade"
+                        id="cidade"
+                        th:field="*{endereco.cidade}"
+                        placeholder="Cidade"
+                      />
+                    </div>
+                    <div
+                      class="alert alert-danger error"
+                      th:if="${#fields.hasErrors('endereco.cidade')}"
+                      th:errors="*{endereco.cidade}"
+                      role="alert"
+                    ></div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="estado">Estado</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="estado"
+                        id="estado"
+                        th:field="*{endereco.estado}"
+                        placeholder="Estado"
+                      />
+                    </div>
+                    <div
+                      class="alert alert-danger error"
+                      th:if="${#fields.hasErrors('endereco.estado')}"
+                      th:errors="*{endereco.estado}"
+                      role="alert"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <hr class="divider" />
+			  <div class="form-group form-group-telefone">
+                <label for="telefone">Telefone</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="telefone"
+                  name="telefone"
+                  placeholder="Telefone"
+                  th:field="*{telefone}"
+                />
+                <div
+                  class="alert alert-danger error"
+                  th:if="${#fields.hasErrors('telefone')}"
+                  th:errors="*{telefone}"
+                  role="alert"
+                ></div>
+              </div>
+              
+              <div class="form-group form-group-senha">
                 <label for="senha">Senha</label>
                 <div id="showPassword" class="input-group">
                   <input
@@ -283,11 +327,12 @@
                     ></i>
                   </span>
                 </div>
-                <div 
-                  class="alert alert-danger error" 
+                <div
+                  class="alert alert-danger error"
                   th:if="${#fields.hasErrors('senha')}"
-		          th:errors="*{senha}"role="alert"
-		          ></div>
+                  th:errors="*{senha}"
+                  role="alert"
+                ></div>
               </div>
               <div class="form-group form-group-confirmar-senha">
                 <label for="confirmar-senha">Confirmar Senha</label>
@@ -297,15 +342,16 @@
                   id="confirmar-senha"
                   name="confirmar-senha"
                   placeholder="Confirmar Senha"
+                  th:field="*{confirmarSenha}"
                 />
-                <!--
-                <div 
-                  class="alert alert-danger error" 
+                <div
+                  class="alert alert-danger error"
                   th:if="${#fields.hasErrors('confirmarSenha')}"
-		          th:errors="*{confirmarSenha}"role="alert"
-		          ></div>
-		          -->
+                  th:errors="*{confirmarSenha}"
+                  role="alert"
+                ></div>
               </div>
+              
               <input
                 type="submit"
                 class="btn btn-primary cadastrar"
@@ -316,7 +362,7 @@
         </div>
       </div>
     </div>
-    <div th:replace="fragments/footer.html :: footer"></div> 
+    <div th:replace="fragments/footer.html :: footer"></div>
     <script type="text/javascript" src="/js/cadastro-usuario.js"></script>
   </body>
 </html>

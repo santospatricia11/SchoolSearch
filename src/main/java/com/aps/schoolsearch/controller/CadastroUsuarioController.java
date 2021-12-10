@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.aps.schoolsearch.model.Endereco;
 import com.aps.schoolsearch.model.Usuario;
+import com.aps.schoolsearch.model.dto.EnderecoDto;
+import com.aps.schoolsearch.model.dto.UsuarioDto;
 import com.aps.schoolsearch.repository.UsuarioRepository;
 
 @Controller
@@ -34,8 +36,9 @@ public class CadastroUsuarioController {
 		model.addAttribute("pagina", CADASTRO_USUARIO);
 		model.addAttribute("form_name", "Cadastro de Usuário no"+appName);
 		
-		Usuario usuario = new Usuario();
-		Endereco endereco = new Endereco();
+		UsuarioDto usuario = new UsuarioDto();
+		EnderecoDto endereco = new EnderecoDto();
+		
 		usuario.setEndereco(endereco);
 		
 		model.addAttribute("endereco", endereco);
@@ -49,11 +52,16 @@ public class CadastroUsuarioController {
 	}
 	
 	@PostMapping("/processar")
-	public String processForm(@Valid Usuario usuario, BindingResult result) {
+	public String processForm(@ModelAttribute("usuario") @Valid UsuarioDto usuario, BindingResult result) {
 		if(result.hasErrors()) {
 			return CADASTRO_USUARIO;
 		}
-		usuarioRepository.save(usuario);
+		System.out.println(usuario.getDataNascimento());
+		Usuario novo = new Usuario(usuario);
+		novo.setEndereco(new Endereco(usuario.getEndereco()));
+		novo.getEndereco().setUsuario(novo);
+		
+		usuarioRepository.save(novo);
 		return "redirect:/";
 	}
 }
