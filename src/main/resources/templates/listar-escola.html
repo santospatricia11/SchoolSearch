@@ -39,8 +39,9 @@
 							<h1 class="to-right">Listar Escola</h1>
 							<i class="logo_escola"><img src="../images/escola.png" /></i>
 						</div>
-						<div class="form-group">
+						<div class="form-group" th:action="@{/listar-escola}" th:object="${escola}" method="post">
 							<label for="exampleFormControlInput1">Pesquisar Escola</label>
+							
 							<input type="pesquisa" class="form-control" id="exampleFormControlInput1"
 								placeholder="Pesquisar">
 						</div>
@@ -56,16 +57,22 @@
 
 					<div class="form-group">
 						<label for="exampleFormControlTextarea1">Escolas</label>
-						<textarea class="form-control" id="exampleFormControlTextEscolas" rows="3"></textarea>
-						<img src"../images">
-					</div>
-					</diselv>
 
+
+						<div>
+							<div>
+								<i class="img_listar"><img src="../images/listar.jpeg" /></i>
+							</div>
+						</div>
+
+						</diselv>
+
+
+					</div>
 				</div>
-			</div>
+				<div th:replace="fragments/footer.html :: footer"></div>
+				<!--<script type="text/javascript" src="/js/cadastro-usuario.js"></script> -->
 
 </body>
-<div th:replace="fragments/footer.html :: footer"></div>
-<!--<script type="text/javascript" src="/js/cadastro-usuario.js"></script> -->
 
 </html>

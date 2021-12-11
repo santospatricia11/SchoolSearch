@@ -19,4 +19,10 @@ public class HomeController {
 	public String cadastrarEscola(){
 		return "cadastrar-escola";
 	}
+	
+	@RequestMapping("/listar-escola")
+	public String listarEscola(){
+		return "listar-escola";
+	}
+
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
+import com.aps.schoolsearch.repository.EscolaRepository;
 import com.aps.schoolsearch.repository.UsuarioRepository;
 
 @Controller
@@ -13,6 +14,6 @@ public class UsuarioController {
 	private String appName;
 	
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private EscolaRepository escolaRepository;
 
 }

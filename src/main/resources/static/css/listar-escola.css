@@ -17,11 +17,19 @@
   justify-content: space-between;
 }
 
-.logo {
+img.logo_escola {
   width: 96px;
   order: -1;
 }
-
+img {
+ width: 80px;
+}
+.img-listar {
+ height: 200px;
+ 
+ max-width: 15%;
+ max-height: 15%;
+}
 .logo_escola{
   float: left;
   width: 64px;

@@ -11,6 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -32,7 +33,8 @@ public class Escola {
 	@Pattern(regexp="^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$)|(^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$")
 	private String cnpj;
 
-	@NotNull
+	@NotNull(message="O campo do nome não pode ser nulo")
+	@NotEmpty(message="Nome não pode ser vazio")
 	private String nome;
 
 	@NotNull
