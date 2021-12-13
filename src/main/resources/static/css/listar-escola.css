@@ -16,7 +16,11 @@
   display: flex;
   justify-content: space-between;
 }
+.form-group{
+  padding: 25px;
 
+  border-radius: 5px
+}
 img.logo_escola {
   width: 96px;
   order: -1;
@@ -27,8 +31,9 @@ img {
 .img-listar {
  height: 200px;
  
- max-width: 15%;
+ width: 100px;
  max-height: 15%;
+   float: left;
 }
 .logo_escola{
   float: left;
@@ -37,3 +42,7 @@ img {
   margin: 0px 10px 10px 0;
   order: -1;
 }
+
+
+/*    ########################################################################*/
+

@@ -59,7 +59,7 @@ public class EscolaResources {
 	
 		@PostMapping("/pesquisarescola")
 		public ModelAndView pesquisarEscola(@RequestParam("nomepesquisa") String nomepesquisa) {
-			ModelAndView modelAndView = new ModelAndView("escola/cadastroescola");
+			ModelAndView modelAndView = new ModelAndView("listar/cadastroescola");
 			modelAndView.addObject("escolas", escolaRepository.findEscolaByName("nomepesquisa"));
 			modelAndView.addObject("escolaobj", new Escola());
 			return modelAndView;
