@@ -6,25 +6,26 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 import com.aps.schoolsearch.model.categorizacao.ClassificacaoEnsino;
+import com.aps.schoolsearch.model.categorizacao.MetodoEnsino;
 
 @Converter(autoApply = true)
-public class ClassificacaoEnsinoConverter implements AttributeConverter<ClassificacaoEnsino, String> {
+public class MetodoEnsinoConverter implements AttributeConverter<MetodoEnsino, String> {
 	
     @Override
-    public String convertToDatabaseColumn(ClassificacaoEnsino classificacao) {
+    public String convertToDatabaseColumn(MetodoEnsino classificacao) {
     	if(classificacao == null) {
     		return null;
     	}
-        return classificacao.getClassificacao();
+        return classificacao.getMetodo();
     }
  
     @Override
-    public ClassificacaoEnsino convertToEntityAttribute(String input) {
+    public MetodoEnsino convertToEntityAttribute(String input) {
     	if(input == null) {
     		return null;
     	}
-    	return Stream.of(ClassificacaoEnsino.values())
-    	          .filter(c -> c.getClassificacao().equals(input))
+    	return Stream.of(MetodoEnsino.values())
+    	          .filter(c -> c.getMetodo().equals(input))
     	          .findFirst()
     	          .orElseThrow(IllegalArgumentException::new);
     }

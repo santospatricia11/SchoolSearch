@@ -32,136 +32,62 @@
 	<div th:replace="fragments/header.html :: navbar"></div>
 	<div class="wrap">
 		<div class="container">
-			<div class="listar-form">
-				<div class="listar-wrapper">
-					<div class="cadastro-text">
-						<div class="text-wrapping">
-							<h1 class="to-right">Listar Escola</h1>
-							<i class="logo_escola"><img src="../images/escola.png" /></i>
+			<div class="input-group mb-3">
+			  <input type="text" class="form-control center" placeholder="Nome da Escola" aria-label="escola" aria-describedby="basic-addon1">
+			  
+			  <span class="input-group-text" id="basic-addon1">
+			  	<a href="/pesquisar">
+			  		<i class="fas fa-search"></i>
+			  	</a>
+			  </span>
+			</div>
+			<div class="group-wrapper">
+				<div class="input-group mb-3">
+					<a href="#filtros" class="form-control center text-filtro" aria-label="filtros" role="button" aria-expanded="false" aria-controls="filtros" data-bs-toggle="collapse" >Filtros</a>
+					<span class="input-group-text filtros" id="basic-addon2">
+						<a class="btn" data-bs-toggle="collapse" href="#filtros" role="button" aria-expanded="false" aria-controls="filtros">
+	    					<i class="fas fa-caret-down"></i>
+	  					</a>
+					</span>
+				</div>
+				<div class="collapse" id="filtros">
+				  <div class="card card-body filtros-body">
+				    <div class="classificacaoEnsinoWrapper">
+				    	<div class="form-check classificacaoEnsinoFiltro" th:each="classificacao : ${classificacaoEnsino}">
+						  <div class="classificacaoEnsino">
+						  	<input class="form-check-input" type="checkbox" th:value="${classificacao.classificacao}" id="flexCheckDefault">
+						  	<label class="form-check-label" for="flexCheckDefault">
+						  	  [[${classificacao.classificacao}]]
+						  	</label>
+						  </div>
 						</div>
-						<form action="pesquisarescola" method="post" th:action="@{/listar-escola}"
-							th:object="${escolaobj}">
-
-							<label form="exampleFormControlInput">Pesquisar Escola</label>
-
-							<input name="nomepesquisa">
-							<input class="btn" type="submit" value="Buscar">
-						</form>
-						<hr class="divider" />
-					</div>
-					<div class="form-group">
-						<label for="exampleFormControlSelectEscola">Filtros</label>
-
-						<p>
-							<a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1"
-								role="button" aria-expanded="false"
-								aria-controls="multiCollapseExample1">Classificação</a>
-
-							<a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample2"
-								role="button" aria-expanded="false" aria-controls="multiCollapseExample2">Nivel</a>
-
-							<a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample3"
-								role="button" aria-expanded="false" aria-controls="multiCollapseExample3">Método</a>
-
-
-						</p>
-						<div class="row">
-							<div class="col">
-								<div class="collapse multi-collapse" id="multiCollapseExample1">
-									<div class="panel-body">
-										<div class="checkbox"> <label> <input type="checkbox"
-													class="option-input checkbox" name="filter[]" value="12" /> <span
-													class="ml-10">Privada</span> </label> </div>
-										<div class="checkbox"> <label> <input type="checkbox"
-													class="option-input checkbox" name="filter[]" value="12" /> <span
-													class="ml-10">Comunitária</span> </label> </div>
-										<div class="checkbox"> <label> <input type="checkbox"
-													class="option-input checkbox" name="filter[]" value="12" /> <span
-													class="ml-10">Filantrópica</span> </label> </div>
-
-										<div class="checkbox"> <label> <input type="checkbox"
-													class="option-input checkbox" name="filter[]" value="12" /> <span
-													class="ml-10">Confessional</span> </label> </div>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div class="collapse multi-collapse" id="multiCollapseExample2">
-									<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
-												name="filter[]" value="12" /> <span class="ml-10">Infantil</span>
-										</label> </div>
-
-
-									<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
-												name="filter[]" value="12" /> <span class="ml-10">Fundamental I</span>
-										</label> </div>
-
-
-									<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
-												name="filter[]" value="12" /> <span class="ml-10">Fundamental II</span>
-										</label> </div>
-									<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
-												name="filter[]" value="12" /> <span class="ml-10">Médio</span>
-										</label> </div>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="col">
-							<div class="collapse multi-collapse" id="multiCollapseExample3">
-
-								<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
-											name="filter[]" value="12" /> <span class="ml-10">Construtivismo</span>
-									</label> </div>
-
-
-								<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
-											name="filter[]" value="12" /> <span class="ml-10">Montessori</span>
-									</label> </div>
-
-
-								<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
-											name="filter[]" value="12" /> <span class="ml-10">Waldorf</span>
-									</label> </div>
-
-								<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
-											name="filter[]" value="12" /> <span class="ml-10">Pikler</span>
-									</label> </div>
-
-								<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
-											name="filter[]" value="12" /> <span class="ml-10">Tradicional</span>
-									</label> </div>
-							</div>
+				    </div>
+					<div class="nivelEnsinoWrapper">
+						<div class="form-check nivelEnsinoFiltro" th:each="nivel : ${nivelEnsino}">
+						  <div class="classificacaoEnsino">
+						  	<input class="form-check-input" type="checkbox" th:value="${nivel.nivel}" id="flexCheckDefault">
+						  	<label class="form-check-label" for="flexCheckDefault">
+						  	  [[${nivel.nivel}]]
+						  	</label>
+						  </div>
 						</div>
 					</div>
-
-
-
-					<div>
-						<div>
-							<i class="img_listar"><img src="../images/listar.jpeg" /></i>
+					<div class="metodoEnsinoWrapper">
+						<div class="form-check metodoEnsinoFiltro" th:each="metodo : ${metodoEnsino}">
+						  <div class="classificacaoEnsino">
+						  	<input class="form-check-input" type="checkbox" th:value="${metodo.metodo}" id="flexCheckDefault">
+						  	<label class="form-check-label" for="flexCheckDefault">
+						  	  [[${metodo.metodo}]]
+						  	</label>
+						  </div>
 						</div>
 					</div>
-
+				  </div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	</div>
-
-	<div class="form-group">
-
-
-		</diselv>
-
-
-	</div>
-	</div>
+			
 	<div th:replace="fragments/footer.html :: footer"></div>
-	<!--<script type="text/javascript" src="/js/cadastro-usuario.js"></script> -->
-
-</body>
-
+	</body>
 </html>

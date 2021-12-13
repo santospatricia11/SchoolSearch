@@ -30,12 +30,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.aps.schoolsearch.model.dto.UsuarioDto;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-
-@EqualsAndHashCode
 @Entity
 @Getter
 @Setter

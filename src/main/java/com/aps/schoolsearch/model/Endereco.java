@@ -19,13 +19,11 @@ import javax.validation.constraints.Size;
 
 import com.aps.schoolsearch.model.dto.EnderecoDto;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 @Entity
 @Table(name="endereco")
 public class Endereco implements Serializable{

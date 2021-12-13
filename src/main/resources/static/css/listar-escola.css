@@ -43,6 +43,23 @@ img {
   order: -1;
 }
 
+.center {
+	text-align: center;
+	margin: 0;
+	text-decoration: none;
+}
 
+.text-filtro::hover {
+	color: initial;
+}
+.filtros {
+	padding: 0;
+	margin: 0;
+}
+
+.filtros-body {
+	flex-direction: row;
+	justify-content: space-between;
+}
 /*    ########################################################################*/
 
