@@ -1,5 +1,8 @@
 package com.aps.schoolsearch.model;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,15 +28,20 @@ import lombok.Setter;
 @EqualsAndHashCode
 @Entity
 @Table(name="endereco")
-public class Endereco {
+public class Endereco implements Serializable{
 	
-    @Id
-    @Column(unique=true, name = "cpf", nullable=false)
-    private String cpf;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4882895170324857697L;
+
+	@Id
+    @Column(unique=true, name = "id", nullable=false)
+    private Long id;
     
-    @OneToOne(fetch = FetchType.LAZY, targetEntity = Usuario.class, optional=false)
+    @OneToOne(fetch = FetchType.LAZY, optional=false)
     @MapsId
-    @JoinColumn(name = "cpf", foreignKey=@ForeignKey(name="endereco_usuario_cpf"), nullable=false)
+    @JoinColumn(name = "usuario_id", foreignKey=@ForeignKey(name="endereco_usuario_id"), nullable=false)
     private Usuario usuario;
 	
     @NotNull
@@ -104,6 +112,24 @@ public class Endereco {
 	}
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Endereco other = (Endereco) obj;
+		return Objects.equals(bairro, other.bairro) && Objects.equals(cidade, other.cidade)
+				&& Objects.equals(estado, other.estado) && Objects.equals(id, other.id)
+				&& Objects.equals(logradouro, other.logradouro) && Objects.equals(numero, other.numero)
+				&& Objects.equals(usuario, other.usuario);
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(bairro, cidade, estado, id, logradouro, numero, usuario);
 	}
 	
 	

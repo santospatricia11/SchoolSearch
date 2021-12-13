@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.aps.schoolsearch.model.Endereco;
-import com.aps.schoolsearch.model.Usuario;
-import com.aps.schoolsearch.model.dto.EnderecoDto;
+import com.aps.schoolsearch.exception.CpfExistsException;
+import com.aps.schoolsearch.exception.EmailExisteException;
+import com.aps.schoolsearch.exception.TelefoneExisteException;
 import com.aps.schoolsearch.model.dto.UsuarioDto;
 import com.aps.schoolsearch.repository.UsuarioRepository;
+import com.aps.schoolsearch.service.UsuarioService;
 
 @Controller
 @RequestMapping("/cadastrar-usuario")
@@ -30,18 +31,18 @@ public class CadastroUsuarioController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	@ModelAttribute
 	private void setModel(Model model) {
 		model.addAttribute("app_name", appName);
 		model.addAttribute("pagina", CADASTRO_USUARIO);
 		model.addAttribute("form_name", "Cadastro de Usuário no"+appName);
+		model.addAttribute("usuarios", usuarioRepository.findAll());
 		
 		UsuarioDto usuario = new UsuarioDto();
-		EnderecoDto endereco = new EnderecoDto();
 		
-		usuario.setEndereco(endereco);
-		
-		model.addAttribute("endereco", endereco);
 		model.addAttribute("usuario", usuario);
 	}
 	
@@ -52,16 +53,13 @@ public class CadastroUsuarioController {
 	}
 	
 	@PostMapping("/processar")
-	public String processForm(@ModelAttribute("usuario") @Valid UsuarioDto usuario, BindingResult result) {
+	public String processForm(@ModelAttribute("usuario") @Valid UsuarioDto usuario, BindingResult result) throws CpfExistsException, EmailExisteException, TelefoneExisteException {
 		if(result.hasErrors()) {
 			return CADASTRO_USUARIO;
 		}
-		System.out.println(usuario.getDataNascimento());
-		Usuario novo = new Usuario(usuario);
-		novo.setEndereco(new Endereco(usuario.getEndereco()));
-		novo.getEndereco().setUsuario(novo);
 		
-		usuarioRepository.save(novo);
+		usuarioService.registrarNovoUsuario(usuario);
+		
 		return "redirect:/";
 	}
 }

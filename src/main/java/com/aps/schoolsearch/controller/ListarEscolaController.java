@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.aps.schoolsearch.repository.UsuarioRepository;
 @Controller
 
-public class ListarEscolaComtroller {
+public class ListarEscolaController {
 	@Value("${spring.application.name}")
 	private String appName;
 	

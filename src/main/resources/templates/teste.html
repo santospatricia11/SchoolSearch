@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"
+    ></script>
+
+    <div th:replace="fragments/head.html :: heading"></div>
+    <div th:insert="fragments/header.html :: css"></div>
+    <div th:replace="fragments/footer.html :: css"></div>
+
+    <title>Teste - School Search</title>
+  </head>
+  <body>
+  	<div th:each="usuario : ${usuarios}">
+  		<p th:text="${usuario.senha}"></p >
+  		<p th:text="${usuario.cpf}"></p >
+  	</div >
+  </body>
+</html>

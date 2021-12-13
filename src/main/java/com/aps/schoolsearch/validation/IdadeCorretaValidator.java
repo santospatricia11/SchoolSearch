@@ -17,17 +17,26 @@ public class IdadeCorretaValidator implements ConstraintValidator<IdadeCorreta, 
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context){
     	try {
-	        String objeto = obj.toString();
 	        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	        
+    		LocalDate dataAtual;
+    		LocalDate dataNascimento;
+    		
 	        String hoje = LocalDate.now().format(formatador);
-	        LocalDate dataAtual= LocalDate.parse(hoje, formatador);
-	        LocalDate dataNascimento = LocalDate.parse(objeto, formatador);
+	        dataAtual= LocalDate.parse(hoje, formatador);
 	        
+    		if(obj instanceof String) {
+    	        String objeto = obj.toString();
+    	        dataNascimento = LocalDate.parse(objeto, formatador);
+    		} else {
+    			dataNascimento = (LocalDate) obj;
+    		}
+    		
 	        Integer intervalo = Period.between(dataNascimento, dataAtual).getYears();
 	        
 	        return intervalo >= 18;
     	}catch(DateTimeParseException exception) {
+    		
     	}
     	return false;
     }

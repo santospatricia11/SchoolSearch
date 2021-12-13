@@ -1,14 +1,24 @@
 package com.aps.schoolsearch.model;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -29,25 +39,40 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-//@SenhaCorresponde
-public class Usuario {
+@Table(name="usuarios")
+public class Usuario implements Serializable{
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2868699869225799614L;
 
+	@Id
+	@GeneratedValue(strategy= GenerationType.SEQUENCE)
+	@Column(name="id")
+	private Long id;
+	
+	@NotNull(message="O campo do CPF não pode ser nulo")
+	@NotEmpty(message="O campo CPF não pode ser vazio")
+//	/*
+	@ColumnTransformer(
+			forColumn="cpf",
+            read = "PGP_SYM_DECRYPT(cpf, 'segredo-43210')",
+            write = "PGP_SYM_ENCRYPT(?, 'segredo-43210')"
+    )
+//  */
+	@Column(unique=true,
+		name="cpf", 
+		columnDefinition="bytea",
+		nullable=false)
+
+	private String cpf;
+	
 	@NotNull(message="O campo do nome não pode ser nulo")
 	@NotEmpty(message="Nome não pode ser vazio")
 	@Size(min=3, message="Nome deve ter no mínimo 3 caracteres")
 	private String nome;
-	
-	@Id
-	@NotNull(message="O campo do CPF não pode ser nulo")
-	@Column(unique=true, name="cpf") 
-	@NotEmpty(message="O campo CPF não pode ser vazio")
-	@Pattern(regexp="^\\d{3}.\\d{3}.\\d{3}-\\d{2}$", message="Digite um CPF válido, padrão: ___.___.___-__")
-	@ColumnTransformer(
-		    read =  "PGP_SYM_DECRYPT(cpf,'senha-secreta-0123456789')",
-		    write = "PGP_SYM_ENCRYPT(?,'senha-secreta-0123456789')"
-		    )
-	private String cpf;
-	
 	
 	@Column(unique=true)
 	@NotNull(message="O campo do Email não pode ser nulo")
@@ -57,8 +82,8 @@ public class Usuario {
 	
 	@Valid
 	@NotNull(message="O campo do endereço não pode ser nulo")
-    @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY, mappedBy="usuario")
-	@JoinColumn(name="cpf", referencedColumnName="cpf", foreignKey=@ForeignKey(name="usuario_endereco_id"))
+    @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.EAGER, mappedBy="usuario")
+	@JoinColumn(name="usuario_id", referencedColumnName="id", foreignKey=@ForeignKey(name="usuario_endereco_id"))
     @PrimaryKeyJoinColumn
 	private Endereco endereco;
 	
@@ -70,8 +95,8 @@ public class Usuario {
 	
 	@NotNull(message="Digite/Escolha uma data de nascimento válida, mínimo 18 anos, máximo 01/01/1900")
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	@Pattern(regexp="^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$", message="Digite uma data de nascimento válida")
-	private String dataNascimento;
+	@Column(name="data_nascimento", columnDefinition="DATE")
+	private LocalDate dataNascimento;
 	
 	@NotNull
 	private Boolean pne;
@@ -82,7 +107,27 @@ public class Usuario {
 	@NotNull
 	@NotEmpty(message="A senha não pode ser vazia")
 	@Size(min=8, message="A senha deve ter pelo menos 8 caracteres.")
+//	/*
+	@ColumnTransformer(
+			forColumn="senha",
+            read = "PGP_SYM_DECRYPT(senha, 'segredo-01234')",
+            write = "PGP_SYM_ENCRYPT(?, 'segredo-01234')"
+    )
+//    */
+	@Column(name="senha", 
+		columnDefinition="bytea",
+		nullable=false)
+	
 	private String senha;
+	
+	@NotNull(message="A role não pode ficar vazia")
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	 @JoinTable(
+        name = "usuario_roles",
+        joinColumns = @JoinColumn(name = "usuario_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+	private Set<Role> roles;
 	
 	public Usuario() { } //contrutor padrão
 
@@ -90,7 +135,7 @@ public class Usuario {
 		setCpf(usuarioDto.getCpf());
 		setDataNascimento(usuarioDto.getDataNascimento());
 		setEmail(usuarioDto.getEmail());
-		setEndereco(new Endereco(usuarioDto.getEndereco()));
+		setEndereco(usuarioDto.getEnderecoReal());
 		setNome(usuarioDto.getNome());
 		setPne(usuarioDto.getPne());
 		setSenha(usuarioDto.getSenha());
@@ -122,8 +167,6 @@ public class Usuario {
 		this.email = email;
 	}
 
-	
-
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -140,11 +183,11 @@ public class Usuario {
 		this.telefone = telefone;
 	}
 
-	public String getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -171,7 +214,24 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(cpf, other.cpf) && Objects.equals(email, other.email) && Objects.equals(id, other.id)
+				&& Objects.equals(telefone, other.telefone);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cpf, email, id, telefone);
+	}
 	
 	
 }

@@ -95,9 +95,6 @@ body {
   border-radius: 5px;
   padding: 5px;
 }
-.navbar-header .nav-link {
-  border: 2px solid var(--greenish-blue);
-}
 
 .nav-link.dropdown-toggle {
   border: 0px;

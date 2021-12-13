@@ -2,10 +2,7 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
   <head>
     
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"
-    ></script>
+
 
     <div th:replace="fragments/head.html :: heading"></div>
     <div th:insert="fragments/header.html :: css"></div>
@@ -14,6 +11,10 @@
     <link rel="stylesheet" href="/css/login.css" />
 
     <title>Login - School Search</title>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"
+    ></script>
   </head>
   
   <body>
@@ -33,19 +34,16 @@
 				<div class="error" th:if="${param.logout}">Voce está desconectado!</div >
                 <form th:action="@{/login}" method="post">
                   <div class="form-group">
-                    <label for="cpf">CPF</label>
+                    <label for="username">Email</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="cpf"
-                      name="cpf"
-                      data-inputmask-alias="cadastro de pessoa fisica"
-                      data-inputmask-inputformat="999.999.999-99" 
-                      data-inputmask-placeholder="   .   .   -  "
+                      id="username"
+                      name="username"
                     />
                   </div>
                   <div class="form-group">
-                    <label for="password">Senha</label>
+                    <label for="senha">Senha</label>
                     <input
                       type="password"
                       class="form-control"
@@ -75,7 +73,7 @@
     <div th:replace="fragments/footer.html :: footer"></div> 
     <script>
     	$(document).ready(function(){
-    		  $("#cpf").inputmask("999.999.999-99");
+    		  $("#username").inputmask("email");
     	});
     </script>
 	
