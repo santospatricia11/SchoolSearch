@@ -39,39 +39,128 @@
 							<h1 class="to-right">Listar Escola</h1>
 							<i class="logo_escola"><img src="../images/escola.png" /></i>
 						</div>
-						<div class="form-group" th:action="@{/listar-escola}" th:object="${escola}" method="post">
-							<label for="exampleFormControlInput1">Pesquisar Escola</label>
-							
-							<input type="pesquisa" class="form-control" id="exampleFormControlInput1"
-								placeholder="Pesquisar">
-						</div>
+						<form action="pesquisarescola" method="post" th:action="@{/listar-escola}"
+							th:object="${escolaobj}">
+
+							<label form="exampleFormControlInput">Pesquisar Escola</label>
+
+							<input name="nomepesquisa">
+							<input class="btn" type="submit" value="Buscar">
+						</form>
 						<hr class="divider" />
 					</div>
 					<div class="form-group">
-						<label for="exampleFormControlSelectEscola">Selecione a Escola</label>
-						<select multiple class="form-control" id="exampleFormControlSelectEscola">
-							<option>Escola1</option>
+						<label for="exampleFormControlSelectEscola">Filtros</label>
 
-						</select>
-					</div>
+						<p>
+							<a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1"
+								role="button" aria-expanded="false"
+								aria-controls="multiCollapseExample1">Classificação</a>
 
-					<div class="form-group">
-						<label for="exampleFormControlTextarea1">Escolas</label>
+							<a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample2"
+								role="button" aria-expanded="false" aria-controls="multiCollapseExample2">Nivel</a>
+
+							<a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample3"
+								role="button" aria-expanded="false" aria-controls="multiCollapseExample3">Método</a>
 
 
-						<div>
-							<div>
-								<i class="img_listar"><img src="../images/listar.jpeg" /></i>
+						</p>
+						<div class="row">
+							<div class="col">
+								<div class="collapse multi-collapse" id="multiCollapseExample1">
+									<div class="panel-body">
+										<div class="checkbox"> <label> <input type="checkbox"
+													class="option-input checkbox" name="filter[]" value="12" /> <span
+													class="ml-10">Privada</span> </label> </div>
+										<div class="checkbox"> <label> <input type="checkbox"
+													class="option-input checkbox" name="filter[]" value="12" /> <span
+													class="ml-10">Comunitária</span> </label> </div>
+										<div class="checkbox"> <label> <input type="checkbox"
+													class="option-input checkbox" name="filter[]" value="12" /> <span
+													class="ml-10">Filantrópica</span> </label> </div>
+
+										<div class="checkbox"> <label> <input type="checkbox"
+													class="option-input checkbox" name="filter[]" value="12" /> <span
+													class="ml-10">Confessional</span> </label> </div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="collapse multi-collapse" id="multiCollapseExample2">
+									<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
+												name="filter[]" value="12" /> <span class="ml-10">Infantil</span>
+										</label> </div>
+
+
+									<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
+												name="filter[]" value="12" /> <span class="ml-10">Fundamental I</span>
+										</label> </div>
+
+
+									<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
+												name="filter[]" value="12" /> <span class="ml-10">Fundamental II</span>
+										</label> </div>
+									<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
+												name="filter[]" value="12" /> <span class="ml-10">Médio</span>
+										</label> </div>
+								</div>
 							</div>
 						</div>
 
-						</diselv>
+
+						<div class="col">
+							<div class="collapse multi-collapse" id="multiCollapseExample3">
+
+								<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
+											name="filter[]" value="12" /> <span class="ml-10">Construtivismo</span>
+									</label> </div>
 
 
+								<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
+											name="filter[]" value="12" /> <span class="ml-10">Montessori</span>
+									</label> </div>
+
+
+								<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
+											name="filter[]" value="12" /> <span class="ml-10">Waldorf</span>
+									</label> </div>
+
+								<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
+											name="filter[]" value="12" /> <span class="ml-10">Pikler</span>
+									</label> </div>
+
+								<div class="checkbox"> <label> <input type="checkbox" class="option-input checkbox"
+											name="filter[]" value="12" /> <span class="ml-10">Tradicional</span>
+									</label> </div>
+							</div>
+						</div>
 					</div>
+
+
+
+					<div>
+						<div>
+							<i class="img_listar"><img src="../images/listar.jpeg" /></i>
+						</div>
+					</div>
+
 				</div>
-				<div th:replace="fragments/footer.html :: footer"></div>
-				<!--<script type="text/javascript" src="/js/cadastro-usuario.js"></script> -->
+			</div>
+		</div>
+	</div>
+
+	</div>
+
+	<div class="form-group">
+
+
+		</diselv>
+
+
+	</div>
+	</div>
+	<div th:replace="fragments/footer.html :: footer"></div>
+	<!--<script type="text/javascript" src="/js/cadastro-usuario.js"></script> -->
 
 </body>
 
