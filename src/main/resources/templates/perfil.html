@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+  <head>
+	<div th:replace="fragments/head.html :: heading"> </div >
+    
+    <div th:replace="fragments/header.html :: css"></div >
+    
+    <div th:replace="fragments/footer.html :: css"></div >
+    
+    <title>Perfil de [[${usuario.nome}]] no School Search</title>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"
+    ></script>
+    
+    <link rel="stylesheet" th:href="@{/css/perfil.css}" media="all" />
+    
+  </head>
+  <body>
+  	<div th:replace="fragments/header.html :: navbar"></div>
+  	<div class="wrap">
+  		<div class="container">
+  			<div class="pad">
+  				<div class="card foto-perfil-card" style="width: 18rem;">
+				  	<div class="card-body">
+						<div class="mb-3">
+							<div class="usuario-perfil-wrapper">
+								<div class="usuario-image-circle">
+			                      <i class="far fa-user fa-2x foto-perfil-usuario"></i>
+			                    </div>
+							</div>
+							<label for="formFile" class="form-label foto-perfil-label">Selecione sua foto de perfil</label>
+							<input class="form-control" type="file" id="formFile" accept="image/*">
+						</div>
+				  	</div>
+				</div>
+				<div class="card usuario-info-card">
+					<div class="card-body">
+						<table class="table-user-info">
+							<tbody class="user-info">
+								<tr class="row">
+									<td class="col">Nome Completo</td >
+									<td class="col-info">[[${usuario.nome}]]</td >
+								</tr >
+
+								<tr class="row">
+									<td class="col">Email</td >
+									<td class="col-info">[[${usuario.email}]]</td >
+								</tr >
+
+								<tr class="row">
+									<td class="col">Telefone</td >
+									<td class="col-info">[[${usuario.telefone}]]</td >
+								</tr >
+								<tr class="row">
+									<td class="col">Endereço</td >
+									<td class="col-info">[[${usuario.endereco.logradouro}]]</td >
+								</tr >
+								<tr class="row">
+									<td class="col">Data de Nascimento</td >
+									<td class="col-info">
+										[[${#temporals.format(usuario.dataNascimento, 'dd/MMMM/yyyy', 'pt-BR')}]]
+									</td  >
+								</tr >
+							</tbody >
+						</table  >
+					</div>
+				</div>
+  			</div>
+  		</div>
+  	</div>
+  	
+  	<div th:replace="fragments/footer.html :: footer"></div>
+  	
+  	<script th:src="@{/js/perfil.js}"></script >
+  </body>
+</html>

@@ -43,6 +43,7 @@
 .hero-subtitle::after{
 	content: "!";
 }
+
 @media(min-width: 576px){
 	.hero-title{
 		font-size: 2rem;

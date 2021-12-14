@@ -59,4 +59,14 @@ public class UsuarioDetails implements UserDetails{
 		return true;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	
+
 }
