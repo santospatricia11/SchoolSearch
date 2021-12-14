@@ -23,6 +23,12 @@ body {
 .wrapper-header{
 	position:sticky;
 	bottom: 100%;
+	z-index: 1;
+}
+
+.wrapper-header,
+.wrapper-footer {
+	box-shadow: 0 0px 15px black;
 }
 
 .wrap {
@@ -45,6 +51,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 .navbar-nav + .navbar-nav {
@@ -102,10 +109,6 @@ body {
 
 .navbar-collapse {
   padding-block: 2.5%;
-}
-
-.dropdown-menu {
-  z-index: 2;
 }
 
 @media (min-width: 992px) {

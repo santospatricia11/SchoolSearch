@@ -4,10 +4,6 @@
   object-fit: cover;
 }
 
-.carousel {
-  z-index: -1;
-}
-
 .overlay {
 	z-index: 1;
 	position: absolute;

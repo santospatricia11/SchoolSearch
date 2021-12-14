@@ -38,7 +38,15 @@
 }
 
 .usuario-info-card {
+	position: relative;
 	flex-grow: 1;
+}
+.usuario-info-card * {
+	z-index: 1;
+}
+
+.card {
+	box-shadow: 0 0 15px black;
 }
 table {
 	width: 100%;
@@ -81,4 +89,11 @@ tr td {
 }
 .col-info {
 	width: 70%;
+}
+
+.account-options td{
+	width: 50%;
+}
+.account-options td a {
+	display: block;
 }
