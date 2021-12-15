@@ -14,7 +14,8 @@ import com.aps.schoolsearch.exception.EmailExisteException;
 import com.aps.schoolsearch.exception.TelefoneExisteException;
 import com.aps.schoolsearch.model.Endereco;
 import com.aps.schoolsearch.model.Usuario;
-import com.aps.schoolsearch.model.dto.UsuarioDto;
+import com.aps.schoolsearch.model.dto.UsuarioPostDto;
+import com.aps.schoolsearch.model.dto.mapper.MapperUsuarioDto;
 import com.aps.schoolsearch.repository.RoleRepository;
 import com.aps.schoolsearch.repository.UsuarioRepository;
 
@@ -30,7 +31,10 @@ public class UsuarioService {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
-	public Usuario registrarNovoUsuario(UsuarioDto usuarioDto) 
+	@Autowired
+	private MapperUsuarioDto mapeadorUsuario;
+	
+	public Usuario registrarNovoUsuario(UsuarioPostDto usuarioDto) 
 			throws 
 				CpfExistsException, 
 				EmailExisteException,
@@ -54,10 +58,7 @@ public class UsuarioService {
 				throw new TelefoneExisteException();
 			}
 		}
-		Usuario usuario = new Usuario(usuarioDto);
-		
-		usuario.setEndereco(new Endereco(usuarioDto.getEndereco()));
-		usuario.getEndereco().setUsuario(usuario);
+		Usuario usuario = mapeadorUsuario.toUsuario(usuarioDto);
 		
 		usuario.setSenha(encoder.encode(usuario.getSenha()));
 		

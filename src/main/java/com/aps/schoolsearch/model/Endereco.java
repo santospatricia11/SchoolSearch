@@ -66,13 +66,7 @@ public class Endereco implements Serializable{
     
     
     public Endereco() {	}
-    public Endereco(EnderecoDto endereco){
-    	setLogradouro(endereco.getLogradouro());
-    	setNumero(endereco.getNumero());
-    	setBairro(endereco.getBairro());
-    	setCidade(endereco.getCidade());
-    	setEstado(endereco.getEstado());
-    }
+
     
     
 	public String getLogradouro() {
@@ -99,7 +93,7 @@ public class Endereco implements Serializable{
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-	public String getEstado() {
+	public String Dto() {
 		return estado;
 	}
 	public void setEstado(String estado) {

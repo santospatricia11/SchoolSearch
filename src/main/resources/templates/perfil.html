@@ -21,7 +21,7 @@
   	<div class="wrap">
   		<div class="container">
   			<div class="pad">
-  				<div class="card foto-perfil-card" style="width: 18rem;">
+  				<div class="card foto-perfil-card">
 				  	<div class="card-body">
 						<div class="mb-3">
 							<div class="usuario-perfil-wrapper">
@@ -58,21 +58,16 @@
 								</tr >
 								<tr class="row">
 									<td class="col">Data de Nascimento</td >
-									<td class="col-info">
-										[[${#temporals.format(usuario.dataNascimento, 'dd/MMMM/yyyy', 'pt-BR')}]]
-									</td  >
-								</tr >
-								
-								<tr class="row account-options">
-									<td class="col">
-										<a class="btn btn-primary" href="#">Excluir Conta</a >
-									</td >
-									<td class="col-info">
-										<a class="btn btn-primary" href="#">Editar Informações</a >
+									<td th:with="dataNascimento=${#temporals.format(usuario.dataNascimento, 'dd/MM/yyyy', 'pt-BR')}"class="col-info">
+										[[${dataNascimento}]]
 									</td  >
 								</tr >
 							</tbody >
 						</table  >
+						<div class="group-buttons">
+							<a class="btn btn-primary btn-user-info" href="#">Excluir Conta</a >
+							<a class="btn btn-primary btn-user-info" href="#">Editar Informações</a >
+						</div>
 					</div>
 				</div>
   			</div>

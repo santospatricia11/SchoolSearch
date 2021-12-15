@@ -11,9 +11,7 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
-import com.aps.schoolsearch.model.Endereco;
 import com.aps.schoolsearch.validation.IdadeCorreta;
-import com.aps.schoolsearch.validation.SenhaCorresponde;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,7 +20,6 @@ import lombok.Setter;
 @EqualsAndHashCode
 @Getter
 @Setter
-@SenhaCorresponde
 @Validated
 public class UsuarioDto {
 	
@@ -68,10 +65,6 @@ public class UsuarioDto {
 	@Size(min=8, message="A senha deve ter pelo menos 8 caracteres.")
 	private String senha;
 	
-	@NotNull(message="A contrassenha não pode ser nula")
-	@NotEmpty(message="A contrassenha não pode ser vazia")
-	@Size(min=8, message="A contrassenha deve ter pelo menos 8 caracteres.")
-	private String confirmarSenha;
 
 	public String getNome() {
 		return nome;
@@ -95,9 +88,6 @@ public class UsuarioDto {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public Endereco getEnderecoReal() {
-		return new Endereco(endereco);
 	}
 	public EnderecoDto getEndereco() {
 		return endereco;
@@ -148,11 +138,4 @@ public class UsuarioDto {
 		this.senha = senha;
 	}
 
-	public String getConfirmarSenha() {
-		return confirmarSenha;
-	}
-
-	public void setConfirmarSenha(String confirmarSenha) {
-		this.confirmarSenha = confirmarSenha;
-	}
 }

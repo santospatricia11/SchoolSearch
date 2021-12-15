@@ -28,7 +28,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.ColumnTransformer;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.aps.schoolsearch.model.dto.UsuarioDto;
+import com.aps.schoolsearch.model.dto.UsuarioPostDto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -128,17 +128,6 @@ public class Usuario implements Serializable{
 	
 	public Usuario() { } //contrutor padrão
 
-	public Usuario(UsuarioDto usuarioDto) {
-		setCpf(usuarioDto.getCpf());
-		setDataNascimento(usuarioDto.getDataNascimento());
-		setEmail(usuarioDto.getEmail());
-		setEndereco(usuarioDto.getEnderecoReal());
-		setNome(usuarioDto.getNome());
-		setPne(usuarioDto.getPne());
-		setSenha(usuarioDto.getSenha());
-		setTelefone(usuarioDto.getTelefone());
-		setSexo(usuarioDto.getSexo());
-	}
 
 	public String getNome() {
 		return nome;
