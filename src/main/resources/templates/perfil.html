@@ -1,130 +1,485 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
   <head>
-	<div th:replace="fragments/head.html :: heading"> </div >
-    
-    <div th:replace="fragments/header.html :: css"></div >
-    
-    <div th:replace="fragments/footer.html :: css"></div >
-    
+    <div th:replace="fragments/head.html :: heading"></div>
+
+    <div th:replace="fragments/header.html :: css"></div>
+
+    <div th:replace="fragments/footer.html :: css"></div>
+
     <title>Perfil de [[${usuario.nome}]] no School Search</title>
     <script
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"
     ></script>
-    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
     <link rel="stylesheet" th:href="@{/css/perfil.css}" media="all" />
-    
   </head>
   <body>
-  	<div th:replace="fragments/header.html :: navbar"></div>
-  	<div class="wrap">
-  		<div class="container">
-  			<div class="pad">
-  				<div class="card foto-perfil-card">
-				  	<div class="card-body">
-						<div class="mb-3">
-							<div class="usuario-perfil-wrapper">
-								<div class="usuario-image-circle">
-			                      <i class="far fa-user fa-2x foto-perfil-usuario"></i>
-			                    </div>
-							</div>
-							<label for="formFile" class="form-label foto-perfil-label">Selecione sua foto de perfil</label>
-							<input class="form-control" type="file" id="formFile" accept="image/*">
-						</div>
-				  	</div>
-				</div>
-				<div class="card usuario-info-card">
-					<div class="card-body">
-						<table class="table-user-info">
-							<tbody class="user-info">
-								<tr class="row">
-									<td class="col">Nome Completo</td >
-									<td class="col-info">[[${usuario.nome}]]</td >
-								</tr >
+    <div th:replace="fragments/header.html :: navbar"></div>
+    <div class="wrap">
+      <div class="container">
+        <div class="pad">
+          <div class="card foto-perfil-card">
+            <div class="card-body">
+              <div class="mb-3">
+                <div class="usuario-perfil-wrapper">
+                  <div class="usuario-image-circle">
+                    <i class="far fa-user fa-2x foto-perfil-usuario"></i>
+                  </div>
+                </div>
+                <label for="formFile" class="form-label foto-perfil-label"
+                  >Selecione sua foto de perfil</label
+                >
+                <input
+                  class="form-control"
+                  type="file"
+                  id="formFile"
+                  accept="image/*"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="card usuario-info-card">
+            <div class="card-body">
+              <table class="table-user-info">
+                <tbody class="user-info">
+                  <tr class="row">
+                    <td class="col">Nome Completo</td>
+                    <td class="col-info">[[${usuario.nome}]]</td>
+                  </tr>
 
-								<tr class="row">
-									<td class="col">Email</td >
-									<td class="col-info">[[${usuario.email}]]</td >
-								</tr >
+                  <tr class="row">
+                    <td class="col">Email</td>
+                    <td class="col-info">[[${usuario.email}]]</td>
+                  </tr>
 
-								<tr class="row">
-									<td class="col">Telefone</td >
-									<td class="col-info">[[${usuario.telefone}]]</td >
-								</tr >
-								<tr class="row">
-									<td class="col">Endereço</td >
-									<td class="col-info">[[${usuario.endereco.logradouro}]]</td >
-								</tr >
-								<tr class="row">
-									<td class="col">Data de Nascimento</td >
-									<td th:with="dataNascimento=${#temporals.format(usuario.dataNascimento, 'dd/MM/yyyy', 'pt-BR')}"class="col-info">
-										[[${dataNascimento}]]
-									</td  >
-								</tr >
-							</tbody >
-						</table  >
-						<div class="group-buttons">
-							<div class="modal-button">
-								<a 
-									class="btn btn-primary btn-user-info" 
-									role="button" 
-									data-bs-toggle="modal"
-									data-bs-target="#modal-delete-account" 
-									href="#">Excluir Conta</a >
-								
-								<div 
-									class="modal face"
-									tabindex="-1"
-									id="modal-delete-account"
-									aria-hidden="true"
-								>
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">EXCLUIR CONTA</h5>
-        										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-												<div class="alert alert-danger" role="alert">
-												  <p class="alert-danger-text">AVISO: ESSA AÇÃO É <span class="font-italic">IRREVERSÍVEL</span>!</p >
-												</div>
-												<p>Você deseja realmente excluir sua conta no School Search?</p>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-												
-												<form
-									              class="delete-form"
-									              th:action="@{/perfil/delete}"
-									              th:object="${usuario}"
-									              method="post"
-									            >
-        										<button type="submit" class="btn btn-primary">Confirmar</button>
-        										
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-							<div class="modal-button">
-								<a 
-									class="btn btn-primary btn-user-info" 
-									role="button" 
-									data-bs-toggle="modal"  
-									href="#">Editar Informações</a >
-							</div>
-						</div>
-					</div>
-				</div>
-  			</div>
-  		</div>
-  	</div>
-  	
-  	<div th:replace="fragments/footer.html :: footer"></div>
-  	
-  	<script th:src="@{/js/perfil.js}"></script >
+                  <tr class="row">
+                    <td class="col">Telefone</td>
+                    <td class="col-info">[[${usuario.telefone}]]</td>
+                  </tr>
+                  <tr class="row">
+                    <td class="col">Endereço</td>
+                    <td class="col-info">[[${usuario.endereco.logradouro}]]</td>
+                  </tr>
+                  <tr class="row">
+                    <td class="col">Data de Nascimento</td>
+                    <td
+                      th:with="dataNascimento=${#temporals.format(usuario.dataNascimento, 'dd/MM/yyyy', 'pt-BR')}"
+                      class="col-info"
+                    >
+                      [[${dataNascimento}]]
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="group-buttons">
+                <div class="modal-button">
+                  <a
+                    class="btn btn-primary btn-user-info"
+                    role="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-delete-account"
+                    href="#"
+                    >Excluir Conta</a
+                  >
+
+                  <div
+                    class="modal fade"
+                    tabindex="-1"
+                    id="modal-delete-account"
+                    aria-labelledby="modalLabel-delete-account"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">
+                            EXCLUIR CONTA
+                          </h5>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-danger" role="alert">
+                            <p class="alert-danger-text">
+                              AVISO: ESSA AÇÃO É
+                              <span class="font-italic">IRREVERSÍVEL</span>!
+                            </p>
+                          </div>
+                          <p>
+                            Você deseja realmente excluir sua conta no School
+                            Search?
+                          </p>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Fechar
+                          </button>
+
+                          <form
+                            class="delete-form"
+                            th:action="@{/perfil/delete}"
+                            th:object="${usuario}"
+                            method="post"
+                          >
+                            <button type="submit" class="btn btn-primary">
+                              Confirmar
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-button">
+                  <a
+                    class="btn btn-primary btn-user-info"
+                    role="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-edit-user-info"
+                    >Editar Informações</a
+                  >
+
+                  <div
+                    class="modal fade"
+                    id="modal-edit-user-info"
+                    tabindex="-1"
+                    aria-labelledby="modalLabel-edit-user-info"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog dialog-user-info-edit">
+                      <form
+                        class="register-form"
+                        th:action="@{/perfil/editar}"
+                        th:object="${usuario}"
+                        method="post"
+                      >
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5
+                              class="modal-title"
+                              id="modalLabel-edit-user-info"
+                            >
+                              Editar Informações
+                            </h5>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <label for="nome">Nome</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="nome"
+                                name="nome"
+                                placeholder="Nome"
+                                th:field="*{nome}"
+                              />
+                              <div
+                                class="alert alert-danger error"
+                                th:if="${#fields.hasErrors('nome')}"
+                                th:errors="*{nome}"
+                                role="alert"
+                              ></div>
+                            </div>
+                            <div class="form-group form-group-email">
+                              <label for="email">Email</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="email"
+                                name="email"
+                                placeholder="Email"
+                                th:field="*{email}"
+                              />
+                              <div
+                                class="alert alert-danger error"
+                                th:if="${#fields.hasErrors('email')}"
+                                th:errors="*{email}"
+                                role="alert"
+                              ></div>
+                            </div>
+                            <div class="form-group form-group-wrap">
+                              <div class="form-group form-group-cpf-e-data">
+                                <div class="form-group">
+                                  <label for="cpf">CPF</label>
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="cpf"
+                                    name="cpf"
+                                    placeholder="CPF"
+                                    th:field="*{cpf}"
+                                  />
+                                  <div
+                                    class="alert alert-danger error"
+                                    th:if="${#fields.hasErrors('cpf')}"
+                                    th:errors="*{cpf}"
+                                    role="alert"
+                                  ></div>
+                                </div>
+                                <div
+                                  class="form-group form-group-data-nascimento"
+                                >
+                                  <label for="data">Data de Nascimento</label>
+                                  <div
+                                    class="input-group date data"
+                                    id="datepicker"
+                                  >
+                                    <input
+                                      type="text"
+                                      name="data-nascimento"
+                                      id="data-nascimento"
+                                      class="form-control"
+                                      placeholder="dd/mm/aaaa"
+                                      th:field="*{dataNascimento}"
+                                    />
+                                    <span class="input-group-append">
+                                      <span class="input-group-text max-height">
+                                        <i
+                                          class="fa fa-calendar"
+                                          aria-hidden="true"
+                                        ></i>
+                                      </span>
+                                    </span>
+                                  </div>
+                                  <div
+                                    class="alert alert-danger error"
+                                    th:if="${#fields.hasErrors('dataNascimento')}"
+                                    th:errors="*{dataNascimento}"
+                                    role="alert"
+                                  ></div>
+                                </div>
+                              </div>
+                              <div class="form-group form-group-pne-e-sexo">
+                                <div class="form-group pne-selector">
+                                  <label for="pne">PNE</label>
+                                  <select
+                                    class="pne form-select"
+                                    name="pne"
+                                    id="pne"
+                                    th:field="*{pne}"
+                                  >
+                                    <option th:value="0">Não</option>
+                                    <option th:value="1">Sim</option>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                  <label for="">Sexo</label>
+                                  <div class="form-check-sexo">
+                                    <div class="form-check">
+                                      <input
+                                        type="radio"
+                                        name="sexo"
+                                        id="masculino"
+                                        class="
+                                          form-check-input
+                                          radio-button-sexo
+                                        "
+                                        th:field="*{sexo}"
+                                        th:value="masculino"
+                                      />
+                                      <label
+                                        class="form-check-label"
+                                        for="masculino"
+                                        >Masculino
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input
+                                        type="radio"
+                                        name="sexo"
+                                        id="feminino"
+                                        class="
+                                          form-check-input
+                                          radio-button-sexo
+                                        "
+                                        th:field="*{sexo}"
+                                        th:value="feminino"
+                                      />
+                                      <label
+                                        class="form-check-label"
+                                        for="feminino"
+                                        >Feminino</label
+                                      >
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <hr class="divider" />
+                            <div class="form-group">
+                              <h4>Endereço</h4>
+                              <div class="row">
+                                <div class="col-md-10">
+                                  <div class="form-group">
+                                    <label for="logradouro">Logradouro</label>
+                                    <input
+                                      class="form-control"
+                                      type="text"
+                                      name="logradouro"
+                                      id="logradouro"
+                                      th:field="*{endereco.logradouro}"
+                                      placeholder="Logradouro"
+                                    />
+                                  </div>
+                                  <div
+                                    class="alert alert-danger error"
+                                    th:if="${#fields.hasErrors('endereco.logradouro')}"
+                                    th:errors="*{endereco.logradouro}"
+                                    role="alert"
+                                  ></div>
+                                </div>
+                                <div class="col-md-2">
+                                  <div class="form-group">
+                                    <label for="numero">Número</label>
+                                    <input
+                                      class="form-control numero"
+                                      type="text"
+                                      name="numero"
+                                      id="numero"
+                                      th:field="*{endereco.numero}"
+                                    />
+                                  </div>
+                                  <div
+                                    class="alert alert-danger error"
+                                    th:if="${#fields.hasErrors('endereco.numero')}"
+                                    th:errors="*{endereco.numero}"
+                                    role="alert"
+                                  ></div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="bairro">Bairro</label>
+                                    <input
+                                      class="form-control"
+                                      type="text"
+                                      name="bairro"
+                                      id="bairro"
+                                      th:field="*{endereco.bairro}"
+                                      placeholder="Bairro"
+                                    />
+                                  </div>
+                                  <div
+                                    class="alert alert-danger error"
+                                    th:if="${#fields.hasErrors('endereco.bairro')}"
+                                    th:errors="*{endereco.bairro}"
+                                    role="alert"
+                                  ></div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="cidade">Cidade</label>
+                                    <input
+                                      class="form-control"
+                                      type="text"
+                                      name="cidade"
+                                      id="cidade"
+                                      th:field="*{endereco.cidade}"
+                                      placeholder="Cidade"
+                                    />
+                                  </div>
+                                  <div
+                                    class="alert alert-danger error"
+                                    th:if="${#fields.hasErrors('endereco.cidade')}"
+                                    th:errors="*{endereco.cidade}"
+                                    role="alert"
+                                  ></div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="estado">Estado</label>
+                                    <input
+                                      class="form-control"
+                                      type="text"
+                                      name="estado"
+                                      id="estado"
+                                      th:field="*{endereco.estado}"
+                                      placeholder="Estado"
+                                    />
+                                  </div>
+                                  <div
+                                    class="alert alert-danger error"
+                                    th:if="${#fields.hasErrors('endereco.estado')}"
+                                    th:errors="*{endereco.estado}"
+                                    role="alert"
+                                  ></div>
+                                </div>
+                              </div>
+                            </div>
+                            <hr class="divider" />
+                            <div class="form-group form-group-telefone">
+                              <label for="telefone">Telefone</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="telefone"
+                                name="telefone"
+                                placeholder="Telefone"
+                                th:field="*{telefone}"
+                              />
+                              <div
+                                class="alert alert-danger error"
+                                th:if="${#fields.hasErrors('telefone')}"
+                                th:errors="*{telefone}"
+                                role="alert"
+                              ></div>
+                            </div>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Fechar
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                              Atualizar Perfil
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div th:replace="fragments/footer.html :: footer"></div>
+
+    <script th:src="@{/js/perfil.js}"></script>
   </body>
 </html>

@@ -1,8 +1,5 @@
 package com.aps.schoolsearch.service;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +11,10 @@ import com.aps.schoolsearch.exception.EmailExisteException;
 import com.aps.schoolsearch.exception.TelefoneExisteException;
 import com.aps.schoolsearch.model.Endereco;
 import com.aps.schoolsearch.model.Usuario;
+import com.aps.schoolsearch.model.dto.UsuarioDto;
 import com.aps.schoolsearch.model.dto.UsuarioPostDto;
 import com.aps.schoolsearch.model.dto.mapper.MapperUsuarioDto;
+import com.aps.schoolsearch.repository.EnderecoRepository;
 import com.aps.schoolsearch.repository.RoleRepository;
 import com.aps.schoolsearch.repository.UsuarioRepository;
 
@@ -34,6 +33,23 @@ public class UsuarioService {
 	@Autowired
 	private MapperUsuarioDto mapeadorUsuario;
 	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
+	
+	private boolean telefoneExiste(String telefone) {
+		return usuarioRepository.findByTelefone(telefone) != null;
+	}
+
+	private boolean cpfExiste(String cpf) {
+		return usuarioRepository.findByCpf(cpf) != null;
+	}
+	
+	private boolean emailExiste(String email) {
+		return usuarioRepository.findByEmail(email) != null;
+	}
+	
+	
 	public Usuario registrarNovoUsuario(UsuarioPostDto usuarioDto) 
 			throws 
 				CpfExistsException, 
@@ -43,20 +59,7 @@ public class UsuarioService {
 		if(usuarioRepository.findAll().isEmpty()) {
 			role = "ADMIN";
 		} else {
-			if(cpfExiste(usuarioDto.getCpf())) {
-				throw new CpfExistsException(
-						String.format(
-								"O CPF %s já foi cadastrado no sistema."
-								, usuarioDto.getCpf()
-						)
-					);
-			}
-			if(emailExiste(usuarioDto.getEmail())) {
-				throw new EmailExisteException();
-			}
-			if(telefoneExiste(usuarioDto.getTelefone())) {
-				throw new TelefoneExisteException();
-			}
+			isUsuarioNoSistema(usuarioDto);
 		}
 		Usuario usuario = mapeadorUsuario.toUsuario(usuarioDto);
 		
@@ -79,15 +82,56 @@ public class UsuarioService {
 		usuarioRepository.delete(usuario);
 	}
 	
-	private boolean telefoneExiste(String telefone) {
-		return usuarioRepository.findByTelefone(telefone) != null;
-	}
-
-	private boolean cpfExiste(String cpf) {
-		return usuarioRepository.findByCpf(cpf) != null;
+	public void editarUsuario(UsuarioDto usuarioDto, String username) 
+			throws 
+				CpfExistsException, 
+				EmailExisteException, 
+				TelefoneExisteException {
+		try {
+			isUsuarioNoSistema(usuarioDto);
+		}catch(CpfExistsException exception) {
+			// usuario que possui o cpf cadastro
+			Usuario cpf = usuarioRepository.findByCpf(usuarioDto.getCpf());
+			
+			// se o usuario logado tem o mesmo email do usuario com esse cpf
+			if(!username.equals(cpf.getEmail())) {
+				throw exception;
+			}
+		} catch(EmailExisteException exception) {
+			Usuario email = usuarioRepository.findByEmail(usuarioDto.getEmail());
+			if(!username.equals(email.getEmail())) {
+				throw exception;
+			}
+		} catch(TelefoneExisteException exception) {
+			Usuario telefone = usuarioRepository.findByTelefone(usuarioDto.getTelefone());
+			if(!username.equals(telefone.getEmail())) {
+				throw exception;
+			}
+		}
+		
+		Usuario usuario = mapeadorUsuario.toUsuario(usuarioDto, usuarioRepository.findByEmail(username));
+		
+		usuarioRepository.save(usuario);
 	}
 	
-	private boolean emailExiste(String email) {
-		return usuarioRepository.findByEmail(email) != null;
+	private void isUsuarioNoSistema(UsuarioDto usuarioDto) 
+			throws CpfExistsException, 
+			EmailExisteException, 
+			TelefoneExisteException{
+		if(cpfExiste(usuarioDto.getCpf())) {
+			throw new CpfExistsException(
+					String.format(
+							"O CPF %s já foi cadastrado no sistema."
+							, usuarioDto.getCpf()
+					)
+				);
+		}
+		if(emailExiste(usuarioDto.getEmail())) {
+			throw new EmailExisteException();
+		}
+		if(telefoneExiste(usuarioDto.getTelefone())) {
+			throw new TelefoneExisteException();
+		}
 	}
+
 }

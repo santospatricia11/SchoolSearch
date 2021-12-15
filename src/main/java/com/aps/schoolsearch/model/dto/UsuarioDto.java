@@ -60,12 +60,6 @@ public class UsuarioDto {
 	@NotNull
 	private String sexo;
 	
-	@NotNull(message="A senha não pode ser nula")
-	@NotEmpty(message="A senha não pode ser vazia")
-	@Size(min=8, message="A senha deve ter pelo menos 8 caracteres.")
-	private String senha;
-	
-
 	public String getNome() {
 		return nome;
 	}
@@ -128,14 +122,6 @@ public class UsuarioDto {
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 }

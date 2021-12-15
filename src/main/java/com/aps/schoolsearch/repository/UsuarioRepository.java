@@ -12,5 +12,3 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String>{
 
 	Usuario findByTelefone(String telefone);
 }
-
-//value="SELECT id, pgp_sym_decrypt(cpf, 'segredo-43210') as cpf, data_nascimento, email, nome,pne,pgp_sym_decrypt(senha, 'segredo-01234') as senha,sexo, telefone FROM usuario WHERE telefone = :telefone"

@@ -48,15 +48,15 @@
 .card {
 	box-shadow: 0 0 15px black;
 }
-table {
-	width: 100%;
-}
-tbody .col {
+
+.user-info .col {
 	text-transform: uppercase;
 	font-weight: bold;
 }
 .table-user-info {
 	font-family: "Open Sans", sans-serif;
+	
+	width: 100%;
 }
 .user-info {
 	display: flex;
@@ -79,12 +79,16 @@ tbody .col {
 
 .row .col {
 	width: 30%;
-}
-tr td {
+	
 	display: inline;
 }
+
 .col-info {
 	width: 70%;
+}
+
+.form-group-data-nascimento{
+	position:relative;
 }
 
 .account-options td{
@@ -119,6 +123,80 @@ tr td {
 .font-italic {
 	font-style: italic;
 }
+.dialog-user-info-edit{
+	max-width: 768px;
+}
+.max-height{
+	height: 100%;
+}
+
+.login-card {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.container-login {
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  
+  padding: 10vh;
+}
+
+.container-login .row{
+  flex: 1 1 0;
+}
+
+.login {
+  text-align: center;
+  margin-block: 20px;
+}
+
+.login-card{
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.login-body {
+  padding-inline: 20px;
+}
+.form-group {
+  padding-block: 5px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  padding-top: 10px;
+}
+.criar-conta {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.login-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.school-search-icon {
+  height: 48px;
+}
+
+.datepicker{
+	z-index: 1999;
+}
+
+@media (max-width: 300px){
+	.button-wrapper{
+		flex-direction: column;
+	}
+	.btn + .btn{
+		margin-bottom: 10px;
+		order:-1;
+	}
+}
+
 
 @media (min-width: 768px){
 	.pad {

@@ -17,6 +17,11 @@ import lombok.Setter;
 @Validated
 public class UsuarioPostDto extends UsuarioDto{
 	
+	@NotNull(message="A senha não pode ser nula")
+	@NotEmpty(message="A senha não pode ser vazia")
+	@Size(min=8, message="A senha deve ter pelo menos 8 caracteres.")
+	private String senha;
+	
 	@NotNull(message="A contrassenha não pode ser nula")
 	@NotEmpty(message="A contrassenha não pode ser vazia")
 	@Size(min=8, message="A contrassenha deve ter pelo menos 8 caracteres.")

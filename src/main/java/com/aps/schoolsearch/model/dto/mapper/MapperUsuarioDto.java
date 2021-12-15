@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.aps.schoolsearch.model.Usuario;
 import com.aps.schoolsearch.model.dto.UsuarioDto;
+import com.aps.schoolsearch.model.dto.UsuarioPostDto;
 
 @Component
 public class MapperUsuarioDto {
@@ -20,7 +21,6 @@ public class MapperUsuarioDto {
 		usuarioDto.setEndereco(mapeador.toDto(usuario.getEndereco()));
 		usuarioDto.setNome(usuario.getNome());
 		usuarioDto.setPne(usuario.getPne());
-		usuarioDto.setSenha(usuario.getSenha());
 		usuarioDto.setTelefone(usuario.getTelefone());
 		usuarioDto.setSexo(usuario.getSexo());
 		
@@ -28,21 +28,24 @@ public class MapperUsuarioDto {
 	}
 	
 	public Usuario toUsuario(UsuarioDto usuarioDto) {
-		Usuario usuario = new Usuario();
-		
+		return toUsuario(usuarioDto, new Usuario());
+	}
+	
+	public Usuario toUsuario(UsuarioDto usuarioDto, Usuario usuario) {
 		usuario.setCpf(usuarioDto.getCpf());
 		usuario.setDataNascimento(usuarioDto.getDataNascimento());
 		usuario.setEmail(usuarioDto.getEmail());
-		usuario.setEndereco(mapeador.toEndereco(usuarioDto.getEndereco()));
-		
+		usuario.setEndereco(mapeador.toEndereco(usuarioDto.getEndereco(), usuario.getEndereco()));
 		usuario.getEndereco().setUsuario(usuario);
 		
 		usuario.setNome(usuarioDto.getNome());
 		usuario.setPne(usuarioDto.getPne());
-		usuario.setSenha(usuarioDto.getSenha());
+		if(usuarioDto instanceof UsuarioPostDto) {
+			UsuarioPostDto postDto = (UsuarioPostDto) usuarioDto;
+			usuario.setSenha(postDto.getSenha());
+		}
 		usuario.setTelefone(usuarioDto.getTelefone());
 		usuario.setSexo(usuarioDto.getSexo());
-		
 		return usuario;
 	}
 }
