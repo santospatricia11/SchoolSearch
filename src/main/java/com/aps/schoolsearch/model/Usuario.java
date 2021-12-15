@@ -2,6 +2,7 @@ package com.aps.schoolsearch.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,9 +27,9 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.ColumnTransformer;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import com.aps.schoolsearch.model.dto.UsuarioPostDto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -46,8 +47,8 @@ public class Usuario implements Serializable{
 	private static final long serialVersionUID = 2868699869225799614L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE)
-	@Column(name="id")
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name="usuario_id")
 	private Long id;
 	
 	@NotNull(message="O campo do CPF não pode ser nulo")
@@ -118,13 +119,13 @@ public class Usuario implements Serializable{
 	private String senha;
 	
 	@NotNull(message="A role não pode ficar vazia")
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	 @JoinTable(
+	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinTable(
         name = "usuario_roles",
-        joinColumns = @JoinColumn(name = "usuario_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
+        joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName="usuario_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName="role_id")
     )
-	private Set<Role> roles;
+	private Set<Role> roles = new HashSet<>();
 	
 	public Usuario() { } //contrutor padrão
 

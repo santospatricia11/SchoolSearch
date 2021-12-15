@@ -62,11 +62,21 @@ public class UsuarioService {
 		
 		usuario.setSenha(encoder.encode(usuario.getSenha()));
 		
-		usuario.setRoles(
-				Stream.of(
-					roleRepository.findByRole(role))
-				.collect(Collectors.toSet()));
+		usuario.getRoles().add(roleRepository.findByRole(role));
+		
+		if("ADMIN".equals(role)) {
+			usuario
+				.getRoles()
+					.add(roleRepository.findByRole("USER"));
+		}
+		
 		return usuarioRepository.save(usuario);
+	}
+	
+	public void removerUsuario(String username) {
+		Usuario usuario = usuarioRepository.findByEmail(username);
+		
+		usuarioRepository.delete(usuario);
 	}
 	
 	private boolean telefoneExiste(String telefone) {

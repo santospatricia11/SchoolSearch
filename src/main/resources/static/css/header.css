@@ -68,6 +68,8 @@ body {
   
   height: 48px;
   aspect-ratio: 1;
+  
+  text-align: center;
 }
 
 .dropdown-toggle {

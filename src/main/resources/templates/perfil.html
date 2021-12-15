@@ -65,8 +65,57 @@
 							</tbody >
 						</table  >
 						<div class="group-buttons">
-							<a class="btn btn-primary btn-user-info" href="#">Excluir Conta</a >
-							<a class="btn btn-primary btn-user-info" href="#">Editar Informações</a >
+							<div class="modal-button">
+								<a 
+									class="btn btn-primary btn-user-info" 
+									role="button" 
+									data-bs-toggle="modal"
+									data-bs-target="#modal-delete-account" 
+									href="#">Excluir Conta</a >
+								
+								<div 
+									class="modal face"
+									tabindex="-1"
+									id="modal-delete-account"
+									aria-hidden="true"
+								>
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">EXCLUIR CONTA</h5>
+        										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<div class="alert alert-danger" role="alert">
+												  <p class="alert-danger-text">AVISO: ESSA AÇÃO É <span class="font-italic">IRREVERSÍVEL</span>!</p >
+												</div>
+												<p>Você deseja realmente excluir sua conta no School Search?</p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+												
+												<form
+									              class="delete-form"
+									              th:action="@{/perfil/delete}"
+									              th:object="${usuario}"
+									              method="post"
+									            >
+        										<button type="submit" class="btn btn-primary">Confirmar</button>
+        										
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+							<div class="modal-button">
+								<a 
+									class="btn btn-primary btn-user-info" 
+									role="button" 
+									data-bs-toggle="modal"  
+									href="#">Editar Informações</a >
+							</div>
 						</div>
 					</div>
 				</div>

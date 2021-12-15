@@ -8,7 +8,6 @@ import org.springframework.validation.annotation.Validated;
 
 import com.aps.schoolsearch.validation.SenhaCorresponde;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 

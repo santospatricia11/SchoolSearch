@@ -44,9 +44,6 @@
 	position: relative;
 	flex-grow: 1;
 }
-.usuario-info-card * {
-	z-index: 1;
-}
 
 .card {
 	box-shadow: 0 0 15px black;
@@ -103,8 +100,24 @@ tr td {
 	gap: 2.5%;
 }
 
-.btn-user-info {
+.modal-button{
 	flex-grow: 1;
+}
+.btn-user-info {
+	width: 100%;
+}
+
+.alert-danger-text{
+	margin-bottom: 0;
+	text-align: center;
+}
+
+.group-buttons .modal-content{
+	width: 80%;
+	margin: 0 auto;
+}
+.font-italic {
+	font-style: italic;
 }
 
 @media (min-width: 768px){
