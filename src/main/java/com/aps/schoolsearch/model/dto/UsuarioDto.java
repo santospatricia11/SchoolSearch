@@ -60,6 +60,8 @@ public class UsuarioDto {
 	@NotNull
 	private String sexo;
 	
+	private String senha;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -122,6 +124,14 @@ public class UsuarioDto {
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }
