@@ -2,13 +2,12 @@ package com.aps.schoolsearch.model.dto.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.aps.schoolsearch.model.Endereco;
-import com.aps.schoolsearch.model.Usuario;
+import com.aps.schoolsearch.model.EnderecoUsuario;
 import com.aps.schoolsearch.model.dto.EnderecoDto;
 
 @Component
 public class MapperEnderecoDto {
-	public EnderecoDto toDto(Endereco endereco) {
+	public EnderecoDto toDto(EnderecoUsuario endereco) {
 		EnderecoDto enderecoDto = new EnderecoDto();
 		
 		enderecoDto.setLogradouro(endereco.getLogradouro());
@@ -20,14 +19,15 @@ public class MapperEnderecoDto {
 		return enderecoDto;
 	}
 	
-	public Endereco toEndereco(EnderecoDto enderecoDto) {
+	public EnderecoUsuario toEndereco(EnderecoDto enderecoDto) {
 		
-		return toEndereco(enderecoDto, new Endereco());
+		return toEndereco(enderecoDto, new EnderecoUsuario());
 	}
 	
-	public Endereco toEndereco(EnderecoDto enderecoDto, Endereco endereco) {
+	public EnderecoUsuario toEndereco(EnderecoDto enderecoDto, EnderecoUsuario endereco) {
 		
-		endereco.setLogradouro(enderecoDto.getLogradouro());
+		endereco.setLogradouro(
+				enderecoDto.getLogradouro());
 		endereco.setNumero(enderecoDto.getNumero());
 		endereco.setBairro(enderecoDto.getBairro());
 		endereco.setCidade(enderecoDto.getCidade());

@@ -48,10 +48,14 @@
                   accept="image/*"
                 />
               </div>
+              <div class="options-buttons">
+              	<a href="" class="btn btn-primary opt">Upgrade Plano</a>
+              	<a th:href="@{/cadastrar-escola}" class="btn btn-primary opt">Cadastrar Escola</a>
+              </div>
             </div>
           </div>
           <div class="card usuario-info-card">
-            <div class="card-body">
+            <div class="card-body card-body-flex">
               <table class="table-user-info">
                 <tbody class="user-info">
                   <tr class="row">
@@ -215,6 +219,9 @@
                                 name="email"
                                 placeholder="Email"
                                 th:field="*{email}"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top" 
+                                title="Se você modificar o email, você vai sair da conta e terá que se reconectar."
                               />
                               <div
                                 class="alert alert-danger error"
@@ -454,7 +461,7 @@
                             </div>
 
                           </div>
-                          <div class="modal-footer">
+                          <div class="modal-footer modal-footer-bottom">
                             <button
                               type="button"
                               class="btn btn-secondary"
@@ -467,6 +474,8 @@
                             </button>
                           </div>
                         </div>
+                        <div id="user-info-edit-errors" th:if="${#fields.hasAnyErrors()}">
+                        </div >
                       </form>
                     </div>
                   </div>

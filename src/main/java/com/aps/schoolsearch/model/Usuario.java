@@ -35,8 +35,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @Table(name="usuarios")
 public class Usuario implements Serializable{
 	
@@ -83,7 +81,7 @@ public class Usuario implements Serializable{
     @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.EAGER, mappedBy="usuario")
 	@JoinColumn(name="usuario_id", referencedColumnName="id", foreignKey=@ForeignKey(name="usuario_endereco_id"))
     @PrimaryKeyJoinColumn
-	private Endereco endereco;
+	private EnderecoUsuario endereco;
 	
 	@NotNull(message="O campo do telefone não pode ser nulo")
 	@NotEmpty(message="O campo do telefone não pode estar vazio")
@@ -154,11 +152,11 @@ public class Usuario implements Serializable{
 		this.email = email;
 	}
 
-	public Endereco getEndereco() {
+	public EnderecoUsuario getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(Endereco endereco) {
+	public void setEndereco(EnderecoUsuario endereco) {
 		this.endereco = endereco;
 	}
 

@@ -3,6 +3,7 @@ package com.aps.schoolsearch.model.dto.mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.aps.schoolsearch.model.EnderecoUsuario;
 import com.aps.schoolsearch.model.Usuario;
 import com.aps.schoolsearch.model.dto.UsuarioDto;
 import com.aps.schoolsearch.model.dto.UsuarioPostDto;
@@ -27,15 +28,23 @@ public class MapperUsuarioDto {
 		return usuarioDto;
 	}
 	
-	public Usuario toUsuario(UsuarioDto usuarioDto) {
-		return toUsuario(usuarioDto, new Usuario());
+	public Usuario toUsuario(UsuarioDto usuarioDto) {	
+		Usuario usuario = new Usuario();
+		usuario.setEndereco(new EnderecoUsuario());
+		
+		return toUsuario(usuarioDto, usuario);
 	}
 	
 	public Usuario toUsuario(UsuarioDto usuarioDto, Usuario usuario) {
 		usuario.setCpf(usuarioDto.getCpf());
 		usuario.setDataNascimento(usuarioDto.getDataNascimento());
 		usuario.setEmail(usuarioDto.getEmail());
-		usuario.setEndereco(mapeador.toEndereco(usuarioDto.getEndereco(), usuario.getEndereco()));
+		
+		usuario.setEndereco(
+				mapeador.toEndereco(usuarioDto.getEndereco(),
+						usuario.getEndereco()));
+		
+		
 		usuario.getEndereco().setUsuario(usuario);
 		
 		usuario.setNome(usuarioDto.getNome());

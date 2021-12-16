@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.aps.schoolsearch.exception.CpfExistsException;
 import com.aps.schoolsearch.exception.EmailExisteException;
 import com.aps.schoolsearch.exception.TelefoneExisteException;
-import com.aps.schoolsearch.model.Endereco;
+import com.aps.schoolsearch.model.EnderecoUsuario;
 import com.aps.schoolsearch.model.Usuario;
 import com.aps.schoolsearch.model.dto.UsuarioDto;
 import com.aps.schoolsearch.model.dto.UsuarioPostDto;
@@ -61,6 +61,7 @@ public class UsuarioService {
 		} else {
 			isUsuarioNoSistema(usuarioDto);
 		}
+		
 		Usuario usuario = mapeadorUsuario.toUsuario(usuarioDto);
 		
 		usuario.setSenha(encoder.encode(usuario.getSenha()));

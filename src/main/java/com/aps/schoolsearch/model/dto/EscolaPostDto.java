@@ -1,4 +1,4 @@
-package com.aps.schoolsearch.model;
+package com.aps.schoolsearch.model.dto;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -7,35 +7,20 @@ import java.util.Set;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.aps.schoolsearch.model.EnderecoEscola;
 import com.aps.schoolsearch.model.categorizacao.ClassificacaoEnsino;
 import com.aps.schoolsearch.model.categorizacao.MetodoEnsino;
 import com.aps.schoolsearch.model.categorizacao.NivelEnsino;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
-@Entity
-@EqualsAndHashCode
-public class Escola {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="escola_id")
-	private Long id;
-	
+public class EscolaPostDto {
 	@NotEmpty
 	@NotNull
 	@Pattern(regexp="^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$)|(^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$")
@@ -53,7 +38,7 @@ public class Escola {
 	
 	@Valid
 	@NotNull
-	private EnderecoEscola endereco;
+	private EnderecoDto endereco;
 
 	@NotNull
 	private BigDecimal mensalidade;
@@ -102,13 +87,6 @@ public class Escola {
 		this.email = email;
 	}
 
-	public EnderecoEscola getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(EnderecoEscola endereco) {
-		this.endereco = endereco;
-	}
 
 	public BigDecimal getMensalidade() {
 		return mensalidade;
@@ -150,5 +128,13 @@ public class Escola {
 		this.linguas = linguas;
 	}
 
+	public EnderecoDto getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(EnderecoDto endereco) {
+		this.endereco = endereco;
+	}
+	
 	
 }

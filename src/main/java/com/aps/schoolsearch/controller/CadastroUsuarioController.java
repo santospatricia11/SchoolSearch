@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.aps.schoolsearch.exception.CpfExistsException;
 import com.aps.schoolsearch.exception.EmailExisteException;
 import com.aps.schoolsearch.exception.TelefoneExisteException;
+import com.aps.schoolsearch.model.dto.EnderecoDto;
 import com.aps.schoolsearch.model.dto.UsuarioPostDto;
 import com.aps.schoolsearch.repository.UsuarioRepository;
 import com.aps.schoolsearch.service.UsuarioService;
@@ -43,6 +44,7 @@ public class CadastroUsuarioController {
 		model.addAttribute("usuarios", usuarioRepository.findAll());
 		
 		UsuarioPostDto usuario = new UsuarioPostDto();
+		usuario.setEndereco(new EnderecoDto());
 		
 		model.addAttribute("usuario", usuario);
 	}

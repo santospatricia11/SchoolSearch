@@ -1,5 +1,5 @@
 /* Estou vendo o que pode ser aproveitado na tela de cadastro de escola,
- já que ambas possuem características gráficas semelhantes  */
+ jï¿½ que ambas possuem caracterï¿½sticas grï¿½ficas semelhantes  */
 .cadastro-form {
   max-width: 900px;
   margin: 0 auto;
@@ -35,12 +35,33 @@
 .to-right {
   text-align: right;
 }
+.nav-tabs-form-escola {
+	display: flex;
+	justify-content: center;
+}
 
+.info-ensino-title{
+	font-size: 0.95em;
+	text-align: center;
+}
+.tab-pane {
+	padding-block: 0.625rem;
+}
+
+@media (min-width: 768px){
+	.options-wrapper{
+		display: flex;
+		justify-content: space-between;
+	}
+}
+/*
 .max-height {
   display: flex;
   align-items: center;
   height: 100%;
 }
+
+
 .form-group:not(.form-group > .form-group) {
   padding-block: 10px;
 }
@@ -57,6 +78,8 @@
 label {
   padding-block: 5px;
 }
+
+
 
 @media (min-width: 414px) {
   .form-check-sexo {
@@ -109,3 +132,4 @@ label {
     margin-left: 10px;
   }
 }
+*/

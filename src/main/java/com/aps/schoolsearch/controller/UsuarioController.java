@@ -45,9 +45,11 @@ public class UsuarioController {
 	
 
 	@RequestMapping
-	public String perfil(Model model, Principal principal) {
+	public String perfil(Model model, Principal principal, HttpSession session) {
 		Usuario usuario = usuarioRepository.findByEmail(principal.getName());
-		
+		if(usuario == null) {
+			return invalidarSessao(session);
+		}
 		model.addAttribute("usuario", mapeadorUsuario.toDto(usuario));
 		
 		return "perfil";
@@ -55,8 +57,11 @@ public class UsuarioController {
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
+		return invalidarSessao(session);
+	}
+	private String invalidarSessao(HttpSession session){
 		session.invalidate();
-	    return "redirect:/login?logout"; //You can redirect wherever you want, but generally it's a good practice to show login screen again.
+	    return "redirect:/login?logout";
 	}
 	
 	@PostMapping("/delete")

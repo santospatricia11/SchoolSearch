@@ -14,7 +14,7 @@ public class HomeController {
 	public String login(){
 		return "login";
 	}
-	
+	/*
 	@RequestMapping("/cadastrar-escola")
 	public String cadastrarEscola(){
 		return "cadastrar-escola";
@@ -24,5 +24,5 @@ public class HomeController {
 	public String listarEscola(){
 		return "listar-escola";
 	}
-
+	*/
 }

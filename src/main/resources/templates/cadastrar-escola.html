@@ -37,7 +37,7 @@
       referrerpolicy="no-referrer"
     />
 
-    <link rel="stylesheet" href="/css/cadastrar-usuario.css" />
+    <link rel="stylesheet" href="/css/cadastrar-escola.css" />
   </head>
   <body>
     <div th:replace="fragments/header.html :: navbar"></div>
@@ -48,7 +48,7 @@
           <div class="cadastro-wrapper">
             <div class="cadastro-text">
               <div class="text-wrapping">
-                <h1 class="to-right">Cadastro de Usuário</h1>
+                <h1 class="to-right">Cadastro de Escola</h1>
                 <i class="fas fa-graduation-cap logo fa-4x"></i>
               </div>
               <p class="to-right">
@@ -57,307 +57,209 @@
 
               <hr class="divider" />
             </div>
-            <form
-              class="register-form"
-              th:action="@{/cadastrar-usuario/processar}"
-              th:object="${usuario}"
-              method="post"
-            >
-              <div class="form-group">
-                <label for="nome">Nome</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nome"
-                  name="nome"
-                  placeholder="Nome"
-                  th:field="*{nome}"
-                />
-                <div
-                  class="alert alert-danger error"
-                  th:if="${#fields.hasErrors('nome')}"
-                  th:errors="*{nome}"
-                  role="alert"
-                ></div>
-              </div>
-              <div class="form-group form-group-email">
-                <label for="email">Email</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  placeholder="Email"
-                  th:field="*{email}"
-                />
-                <div
-                  class="alert alert-danger error"
-                  th:if="${#fields.hasErrors('email')}"
-                  th:errors="*{email}"
-                  role="alert"
-                ></div>
-              </div>
-              <div class="form-group form-group-wrap">
-                <div class="form-group form-group-cpf-e-data">
-                  <div class="form-group">
-                    <label for="cpf">CPF</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="cpf"
-                      name="cpf"
-                      placeholder="CPF"
-                      th:field="*{cpf}"
-                    />
-                    <div
-                      class="alert alert-danger error"
-                      th:if="${#fields.hasErrors('cpf')}"
-                      th:errors="*{cpf}"
-                      role="alert"
-                    ></div>
-                  </div>
-                  <div class="form-group form-group-data-nascimento">
-                    <label for="data">Data de Nascimento</label>
-                    <div class="input-group date data" id="datepicker">
-                      <input
-                        type="text"
-                        name="data-nascimento"
-                        id="data-nascimento"
-                        class="form-control"
-                        placeholder="dd/mm/aaaa"
-                        th:field="*{dataNascimento}"
-                      />
-                      <span class="input-group-append">
-                        <span class="input-group-text max-height">
-                          <i class="fa fa-calendar" aria-hidden="true"></i>
-                        </span>
-                      </span>
-                    </div>
-                    <div
-                      class="alert alert-danger error"
-                      th:if="${#fields.hasErrors('dataNascimento')}"
-                      th:errors="*{dataNascimento}"
-                      role="alert"
-                    ></div>
-                  </div>
-                </div>
-                <div class="form-group form-group-pne-e-sexo">
-                  <div class="form-group pne-selector">
-                    <label for="pne">PNE</label>
-                    <select
-                      class="pne form-select"
-                      name="pne"
-                      id="pne"
-                      th:field="*{pne}"
-                    >
-                      <option th:value="0">Não</option>
-                      <option th:value="1">Sim</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Sexo</label>
-                    <div class="form-check-sexo">
-                      <div class="form-check">
-                        <input
-                          type="radio"
-                          name="sexo"
-                          id="masculino"
-                          class="form-check-input radio-button-sexo"
-                          th:field="*{sexo}"
-                          th:value="masculino"
-                        />
-                        <label class="form-check-label" for="masculino"
-                          >Masculino</label
-                        >
-                      </div>
-                      <div class="form-check">
-                        <input
-                          type="radio"
-                          name="sexo"
-                          id="feminino"
-                          class="form-check-input radio-button-sexo"
-                          th:field="*{sexo}"
-                          th:value="feminino"
-                        />
-                        <label class="form-check-label" for="feminino"
-                          >Feminino</label
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <hr class="divider" />
-              <div class="form-group">
-                <h4>Endereço</h4>
-                <div class="row">
-                  <div class="col-md-10">
-                    <div class="form-group">
-                      <label for="logradouro">Logradouro</label>
-                      <input
-                        class="form-control"
-                        type="text"
-                        name="logradouro"
-                        id="logradouro"
-                        th:field="*{endereco.logradouro}"
-                        placeholder="Logradouro"
-                      />
-                    </div>
-                    <div
-                      class="alert alert-danger error"
-                      th:if="${#fields.hasErrors('endereco.logradouro')}"
-                      th:errors="*{endereco.logradouro}"
-                      role="alert"
-                    ></div>
-                  </div>
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label for="numero">Número</label>
-                      <input
-                        class="form-control numero"
-                        type="text"
-                        name="numero"
-                        id="numero"
-                        th:field="*{endereco.numero}"
-                      />
-                    </div>
-                    <div
-                      class="alert alert-danger error"
-                      th:if="${#fields.hasErrors('endereco.numero')}"
-                      th:errors="*{endereco.numero}"
-                      role="alert"
-                    ></div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="bairro">Bairro</label>
-                      <input
-                        class="form-control"
-                        type="text"
-                        name="bairro"
-                        id="bairro"
-                        th:field="*{endereco.bairro}"
-                        placeholder="Bairro"
-                      />
-                    </div>
-                    <div
-                      class="alert alert-danger error"
-                      th:if="${#fields.hasErrors('endereco.bairro')}"
-                      th:errors="*{endereco.bairro}"
-                      role="alert"
-                    ></div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="cidade">Cidade</label>
-                      <input
-                        class="form-control"
-                        type="text"
-                        name="cidade"
-                        id="cidade"
-                        th:field="*{endereco.cidade}"
-                        placeholder="Cidade"
-                      />
-                    </div>
-                    <div
-                      class="alert alert-danger error"
-                      th:if="${#fields.hasErrors('endereco.cidade')}"
-                      th:errors="*{endereco.cidade}"
-                      role="alert"
-                    ></div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="estado">Estado</label>
-                      <input
-                        class="form-control"
-                        type="text"
-                        name="estado"
-                        id="estado"
-                        th:field="*{endereco.estado}"
-                        placeholder="Estado"
-                      />
-                    </div>
-                    <div
-                      class="alert alert-danger error"
-                      th:if="${#fields.hasErrors('endereco.estado')}"
-                      th:errors="*{endereco.estado}"
-                      role="alert"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-              <hr class="divider" />
-			  <div class="form-group form-group-telefone">
-                <label for="telefone">Telefone</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="telefone"
-                  name="telefone"
-                  placeholder="Telefone"
-                  th:field="*{telefone}"
-                />
-                <div
-                  class="alert alert-danger error"
-                  th:if="${#fields.hasErrors('telefone')}"
-                  th:errors="*{telefone}"
-                  role="alert"
-                ></div>
-              </div>
-              
-              <div class="form-group form-group-senha">
-                <label for="senha">Senha</label>
-                <div id="showPassword" class="input-group">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="senha"
-                    name="senha"
-                    placeholder="Senha"
-                    th:field="*{senha}"
-                  />
-                  <span class="input-group-append">
-                    <i
-                      class="input-group-text fa fa-eyes max-height eye"
-                      aria-hidden="true"
-                    ></i>
-                  </span>
-                </div>
-                <div
-                  class="alert alert-danger error"
-                  th:if="${#fields.hasErrors('senha')}"
-                  th:errors="*{senha}"
-                  role="alert"
-                ></div>
-              </div>
-              <div class="form-group form-group-confirmar-senha">
-                <label for="confirmar-senha">Confirmar Senha</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="confirmar-senha"
-                  name="confirmar-senha"
-                  placeholder="Confirmar Senha"
-                  th:field="*{confirmarSenha}"
-                />
-                <div
-                  class="alert alert-danger error"
-                  th:if="${#fields.hasErrors('confirmarSenha')}"
-                  th:errors="*{confirmarSenha}"
-                  role="alert"
-                ></div>
-              </div>
-              
-              <input
-                type="submit"
-                class="btn btn-primary cadastrar"
-                value="Cadastrar"
-              />
-            </form>
+          <form 
+          	th:object="${escola}"
+          	th:action="@{/cadastrar-escola/processar}"
+          	method="post"
+          	>
+          	<ul class="nav nav-tabs nav-tabs-form-escola" id="tabs-form-escola" role="tablist">
+			  <li class="nav-item" role="presentation">
+			    <button class="nav-link active" id="info-basica-tab" data-bs-toggle="tab" data-bs-target="#info-basica" type="button" role="tab" aria-controls="info-basica" aria-selected="true">
+			    Informações Básicas
+			    </button>
+			  </li>
+			  <li class="nav-item" role="presentation">
+			    <button class="nav-link" id="info-endereco-tab" data-bs-toggle="tab" data-bs-target="#info-endereco" type="button" role="tab" aria-controls="info-endereco" aria-selected="false">
+			    Endereço
+			    </button>
+			  </li>
+			  <li class="nav-item" role="presentation">
+			    <button class="nav-link" id="info-ensino-tab" data-bs-toggle="tab" data-bs-target="#info-ensino" type="button" role="tab" aria-controls="info-ensino" aria-selected="false">
+			    Informações de Ensino
+			    </button>
+			  </li>
+			</ul>
+			<div class="tab-content" id="form-escola-tab-content">
+			  <div class="tab-pane fade show active" id="info-basica" role="tabpanel" aria-labelledby="info-basica-tab">
+			  	<div class="form-group">
+	                <label for="nome-da-escola">Nome da Escola</label>
+	                <input
+	                  type="text"
+	                  class="form-control"
+	                  id="nome-da-escola"
+	                  name="nome-da-escola"
+	                  placeholder="Nome"
+	                  th:field="*{nome}"
+	                />
+	                <div
+	                  class="alert alert-danger error"
+	                  th:if="${#fields.hasErrors('nome')}"
+	                  th:errors="*{nome}"
+	                  role="alert"
+	                ></div>
+              	</div>
+	            <div class="form-group form-group-email">
+	                <label for="email">Email</label>
+	                <input
+	                  type="text"
+	                  class="form-control"
+	                  id="email"
+	                  name="email"
+	                  placeholder="Email"
+	                  th:field="*{email}"
+	             />
+		            <div
+		              class="alert alert-danger error"
+		              th:if="${#fields.hasErrors('email')}"
+		              th:errors="*{email}"
+		              role="alert"
+		            >
+		         	</div>
+	          	</div>
+			  </div>
+			  <div class="tab-pane fade" id="info-endereco" role="tabpanel" aria-labelledby="info-endereco">
+			  	<div class="form-group">
+	                <h4>Endereço</h4>
+	                <div class="row">
+	                  <div class="col-md-10">
+	                    <div class="form-group">
+	                      <label for="logradouro">Logradouro</label>
+	                      <input
+	                        class="form-control"
+	                        type="text"
+	                        name="logradouro"
+	                        id="logradouro"
+	                        th:field="*{endereco.logradouro}"
+	                        placeholder="Logradouro"
+	                      />
+	                    </div>
+	                    <div
+	                      class="alert alert-danger error"
+	                      th:if="${#fields.hasErrors('endereco.logradouro')}"
+	                      th:errors="*{endereco.logradouro}"
+	                      role="alert"
+	                    ></div>
+	                  </div>
+	                  <div class="col-md-2">
+	                    <div class="form-group">
+	                      <label for="numero">Número</label>
+	                      <input
+	                        class="form-control numero"
+	                        type="text"
+	                        name="numero"
+	                        id="numero"
+	                        th:field="*{endereco.numero}"
+	                      />
+	                    </div>
+	                    <div
+	                      class="alert alert-danger error"
+	                      th:if="${#fields.hasErrors('endereco.numero')}"
+	                      th:errors="*{endereco.numero}"
+	                      role="alert"
+	                    ></div>
+	                  </div>
+	                </div>
+	                <div class="row">
+	                  <div class="col-md-4">
+	                    <div class="form-group">
+	                      <label for="bairro">Bairro</label>
+	                      <input
+	                        class="form-control"
+	                        type="text"
+	                        name="bairro"
+	                        id="bairro"
+	                        th:field="*{endereco.bairro}"
+	                        placeholder="Bairro"
+	                      />
+	                    </div>
+	                    <div
+	                      class="alert alert-danger error"
+	                      th:if="${#fields.hasErrors('endereco.bairro')}"
+	                      th:errors="*{endereco.bairro}"
+	                      role="alert"
+	                    ></div>
+	                  </div>
+	                  <div class="col-md-4">
+	                    <div class="form-group">
+	                      <label for="cidade">Cidade</label>
+	                      <input
+	                        class="form-control"
+	                        type="text"
+	                        name="cidade"
+	                        id="cidade"
+	                        th:field="*{endereco.cidade}"
+	                        placeholder="Cidade"
+	                      />
+	                    </div>
+	                    <div
+	                      class="alert alert-danger error"
+	                      th:if="${#fields.hasErrors('endereco.cidade')}"
+	                      th:errors="*{endereco.cidade}"
+	                      role="alert"
+	                    ></div>
+	                  </div>
+	                  <div class="col-md-4">
+	                    <div class="form-group">
+	                      <label for="estado">Estado</label>
+	                      <input
+	                        class="form-control"
+	                        type="text"
+	                        name="estado"
+	                        id="estado"
+	                        th:field="*{endereco.estado}"
+	                        placeholder="Estado"
+	                      />
+	                    </div>
+	                    <div
+	                      class="alert alert-danger error"
+	                      th:if="${#fields.hasErrors('endereco.estado')}"
+	                      th:errors="*{endereco.estado}"
+	                      role="alert"
+	                    ></div>
+	                  </div>
+	                </div>
+	              </div>
+			  
+			  </div>
+			  <div class="tab-pane fade" id="info-ensino" role="tabpanel" aria-labelledby="info-ensino-tab">
+			    <div class="options-wrapper">
+			    	<div class="classificacaoEnsinoWrapper">
+			    		<h5 class="info-ensino-title">Classificação de Ensino</h5>  
+			    		<div class="form-check classificacaoEnsinoFiltro" th:each="classificacao : ${classificacoesEnsino}">
+						  <div class="classificacaoEnsino">
+						  	<input class="form-check-input" type="radio" th:name="classificacao" th:value="${classificacao}" id="flexCheckDefault">
+						  	<label class="form-check-label" for="flexCheckDefault">
+						  	  [[${classificacao.classificacao}]]
+						  	</label>
+						  </div>
+						</div>
+			    	</div>
+					<div class="nivelEnsinoWrapper">
+						<h5 class="info-ensino-title">Níveis de Ensino</h5 >
+						<div class="form-check nivelEnsinoFiltro" th:each="nivel : ${niveisEnsino}">
+						  <div class="classificacaoEnsino">
+						  	<input class="form-check-input" type="checkbox" th:value="${nivel}" id="flexCheckDefault">
+						  	<label class="form-check-label" for="flexCheckDefault">
+						  	  [[${nivel.nivel}]]
+						  	</label>
+						  </div>
+						</div>
+					</div>
+					<div class="metodoEnsinoWrapper">
+						<h5 class="info-ensino-title">Método de Ensino</h5 >
+						<div class="form-check metodoEnsinoFiltro" th:each="metodo : ${metodosEnsino}">
+						  <div class="classificacaoEnsino">
+						  	<input class="form-check-input" type="radio" name="metodo" th:field="*{metodoEnsino}" th:value="${metodo}" id="flexCheckDefault">
+						  	<label class="form-check-label" for="flexCheckDefault">
+						  	  [[${metodo.metodo}]]
+						  	</label>
+						  </div>
+						</div>
+					</div>
+			    </div>
+			  </div>
+			</div>
+			</form>
           </div>
         </div>
       </div>

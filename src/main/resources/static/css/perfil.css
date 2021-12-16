@@ -43,6 +43,16 @@
 .usuario-info-card {
 	position: relative;
 	flex-grow: 1;
+	height: fit-content;
+}
+
+.options-buttons {
+	display: flex;
+	flex-direction: column;
+}
+
+.opt + .opt {
+	margin-top: 5px;
 }
 
 .card {
@@ -70,21 +80,13 @@
 }
 
 .user-info .row:not(:first-child) {
-	padding-top: 10px;
+	padding-top: 5px;
 }
 .user-info .row/*:not(:last-child)*/
 {
-	padding-bottom: 10px;
-}
-
-.row .col {
-	width: 30%;
-	
-	display: inline;
-}
-
-.col-info {
-	width: 70%;
+	padding-bottom: 5px;
+	display:flex;
+	flex-direction: column;
 }
 
 .form-group-data-nascimento{
@@ -100,6 +102,8 @@
 
 
 .group-buttons {
+
+	margin-top: auto;
 	display: flex;
 	gap: 2.5%;
 }
@@ -187,6 +191,11 @@
 	z-index: 1999;
 }
 
+.tooltip-inner {
+	min-width: 50% !important; 
+	max-width: 100% !important;
+}
+
 @media (max-width: 300px){
 	.button-wrapper{
 		flex-direction: column;
@@ -198,12 +207,24 @@
 }
 
 
-@media (min-width: 768px){
+@media (min-width: 992px){
+	.row .col {
+		width: 30%;
+		
+		display: inline;
+	}
+
+	.col-info {
+		width: 70%;
+	}
 	.pad {
 		flex-direction: row;
 	}
 	.foto-perfil-card {
 		margin-bottom: 0%;
 		height: fit-content;
+	}
+	.user-info .row{
+		flex-direction: row;
 	}
 }
