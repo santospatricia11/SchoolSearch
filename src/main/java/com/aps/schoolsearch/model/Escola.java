@@ -90,7 +90,7 @@ public class Escola implements Serializable{
 	@CollectionTable(name="idiomas")
 	@Column(name="idioma")
 	@NotNull
-	@ManyToMany(cascade=CascadeType.ALL, mappedBy="escolas")
+	@ManyToMany(cascade=CascadeType.PERSIST, mappedBy="escolas")
 	@JoinColumn(name="idioma_id")
 	private Set<Idioma> linguas;
 	
