@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ public class CadastroAssinaturaEscolaMensalController {
 
 	private static final String CADASTRO_ASSINATURA_ESCOLA_MENSAL = "cadastrar-assinatura-escola";
 
-	@Autowired
+	@Autowired(required=false)
 	private AssinaturaEscolaRepository assinaturaEscolaRepository;
 
 	@ModelAttribute
