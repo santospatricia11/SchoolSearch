@@ -15,18 +15,22 @@ import lombok.Setter;
 @Setter
 @SenhaCorresponde
 @Validated
-public class UsuarioPostDto extends UsuarioDto{
-	
-	@NotNull(message="A senha não pode ser nula")
-	@NotEmpty(message="A senha não pode ser vazia")
-	@Size(min=8, message="A senha deve ter pelo menos 8 caracteres.")
+public class UsuarioPostDto extends UsuarioDto {
+
+	@NotNull(message = "A senha não pode ser nula")
+	@NotEmpty(message = "A senha não pode ser vazia")
+	@Size(min = 8, message = "A senha deve ter pelo menos 8 caracteres.")
 	private String senha;
-	
-	@NotNull(message="A contrassenha não pode ser nula")
-	@NotEmpty(message="A contrassenha não pode ser vazia")
-	@Size(min=8, message="A contrassenha deve ter pelo menos 8 caracteres.")
+
+	@NotNull(message = "A contrassenha não pode ser nula")
+	@NotEmpty(message = "A contrassenha não pode ser vazia")
+	@Size(min = 8, message = "A contrassenha deve ter pelo menos 8 caracteres.")
 	private String confirmarSenha;
-	
+
+	public String getSenha() {
+		return senha;
+	}
+
 	public String getConfirmarSenha() {
 		return confirmarSenha;
 	}
