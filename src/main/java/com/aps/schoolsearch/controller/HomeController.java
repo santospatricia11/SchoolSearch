@@ -19,6 +19,16 @@ public class HomeController {
 	public String sobre(){
 		return "sobre";
 	}
+	
+	@RequestMapping("/preco")
+	public String preco(){
+		return "preco";
+	}
+	
+	@RequestMapping("/contato")
+	public String contato(){
+		return "contato";
+	}
 /*	
 	@RequestMapping("/listar-escola")
 	public String listarEscola(){
