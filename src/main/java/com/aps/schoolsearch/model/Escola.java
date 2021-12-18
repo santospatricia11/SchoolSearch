@@ -12,12 +12,15 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -59,7 +62,10 @@ public class Escola implements Serializable{
 	private String email;
 	
 	@Valid
-	@NotNull
+	@NotNull(message="O campo do endereço não pode ser nulo")
+    @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.EAGER, mappedBy="escola")
+	@JoinColumn(name="escola_id", referencedColumnName="escola_id", foreignKey=@ForeignKey(name="escola_endereco_id"))
+    @PrimaryKeyJoinColumn
 	private EnderecoEscola endereco;
 
 	@NotNull(message="O valor da mensalidade não pode ficar vazio.")
@@ -211,10 +217,10 @@ public class Escola implements Serializable{
 		Escola other = (Escola) obj;
 		return Objects.equals(administrador, other.administrador) && classificacaoEnsino == other.classificacaoEnsino
 				&& Objects.equals(cnpj, other.cnpj) && Objects.equals(email, other.email)
-				&& Objects.equals(endereco, other.endereco) && Objects.equals(id, other.id)
-				&& Objects.equals(linguas, other.linguas) && Objects.equals(mensalidade, other.mensalidade)
-				&& metodoEnsino == other.metodoEnsino && Objects.equals(nivelEnsino, other.nivelEnsino)
-				&& Objects.equals(nome, other.nome) && Objects.equals(telefone, other.telefone);
+				&& Objects.equals(id, other.id)&& Objects.equals(linguas, other.linguas) 
+				&& Objects.equals(mensalidade, other.mensalidade) && metodoEnsino == other.metodoEnsino
+				&& Objects.equals(nivelEnsino, other.nivelEnsino) && Objects.equals(nome, other.nome)
+				&& Objects.equals(telefone, other.telefone);
 	}
 	
 	
