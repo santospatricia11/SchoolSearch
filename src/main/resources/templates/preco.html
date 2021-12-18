@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<div th:replace="/fragments/head.html :: heading"></div>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+
+	<div th:insert="/fragments/header.html :: css"></div>
+	<div th:replace="/fragments/footer.html :: css"></div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+		integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+		integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+		integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" href="/css/cadastrar-usuario.css" />
+
+	<title>Preços</title>
+	<link rel="stylesheet" href="preco.css" />
+</head>
+
+<body>
+	<div th:replace="fragments/header.html :: navbar"></div>
+
+	<div class="wrap">
+		<div class="container">
+			<div class="cadastro-form">
+				<div class="cadastro-wrapper">
+					<div class="cadastro-text">
+						<div class="text-wrapping">
+							<h1>Preços</h1>
+
+							<!-- aqui comeca div responsaveis-->
+						</div>
+						<center>
+							<h3>Responsaveis</h3>
+							<p></p>
+							<div>
+								<div>
+									<class="row">
+										<!-- inicio card responsaveis-->
+										<div class="row">
+											<div class="col-sm-4">
+												<div class="card">
+													<div class="card-body">
+														<h5 class="card-title">Padrão</h5>
+														<p class="card-text">With supporting text below as a natural
+															lead-in to additional content.</p>
+														<p>
+														<h2>R$ 50,00</h2>
+														</p>
+														<a href="#" class="btn btn-primary">Assinar</a>
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div class="card">
+													<div class="card-body">
+														<h5 class="card-title">Básico</h5>
+														<p class="card-text">With supporting text below as a natural
+															lead-in to additional content.</p>
+														<p>
+														<h2>R$ 100,00</h2>
+														</p>
+														<a href="#" class="btn btn-primary">Assinar</a>
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div class="card">
+													<div class="card-body">
+														<h5 class="card-title">Premium</h5>
+														<p class="card-text">With supporting text below as a natural
+															lead-in to additional content.</p>
+														<p>
+														<h2>R$ 250,00</h2>
+														</p>
+														<a href="#" class="btn btn-primary">Assinar</a>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<!--final card responsaveis-->
+										<div>
+											<hr class="divider" />
+										</div>
+										<!--inicio card escola-->
+
+										<h3>Escolas</h3>
+
+										<center>
+											<div class="row">
+												<div class="col-sm-4">
+													<div class="card">
+														<div class="card-body">
+															<h5 class="card-title">Mensal</h5>
+															<p class="card-text">With supporting text below as a natural
+																lead-in
+																to additional content.</p>
+															<p>
+															<h2>R$ 70,00</h2>
+															</p>
+															<a href="#" class="btn btn-primary">Assinar</a>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="card">
+														<div class="card-body">
+															<h5 class="card-title">Anual</h5>
+															<p class="card-text">With supporting text below as a natural
+																lead-in
+																to additional content.</p>
+															<p>
+															<h2>R$ 600,00</h2>
+															</p>
+															<a href="#" class="btn btn-primary">Assinar</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</center>
+
+										<!-- fim card escola-->
+
+								</div>
+
+							</div>
+
+
+					</div>
+					</center>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div th:replace="fragments/footer.html :: footer"></div>
+	<script type="text/javascript" src="/js/cadastro-usuario.js"></script>
+</body>
+
+</html>
