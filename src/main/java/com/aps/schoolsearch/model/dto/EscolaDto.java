@@ -1,102 +1,68 @@
-package com.aps.schoolsearch.model;
+package com.aps.schoolsearch.model.dto;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
 import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+import com.aps.schoolsearch.model.Idioma;
 import com.aps.schoolsearch.model.categorizacao.ClassificacaoEnsino;
 import com.aps.schoolsearch.model.categorizacao.MetodoEnsino;
 import com.aps.schoolsearch.model.categorizacao.NivelEnsino;
 
-@Entity
-@Table(name="escolas")
-public class Escola implements Serializable{
-	
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7581760189223157052L;
+public class EscolaDto {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="escola_id")
-	private Long id;
-	
-	@NotEmpty
+		
+	@NotEmpty(message="O CNPJ não pode ficar vazio")
 	@NotNull
-	@Pattern(regexp="^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$")
+	@Pattern(regexp="^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$", message="O cnpj deve seguir o padrão 00.000.000/0000-00")
 	private String cnpj;
 
-	@NotNull(message="O campo do nome não pode ser nulo.")
-	@NotEmpty(message="Nome não pode ser vazio.")
+	@NotNull(message="O campo do nome não pode ser nulo")
+	@NotEmpty(message="Nome não pode ser vazio")
+	@Size(min=10, message="O nome da escola deve ter ao menos {min} caracteres.")
 	private String nome;
 	
-	@Column(unique=true)
-	@NotNull(message="O campo do Email não pode ser nulo.")
-	@NotEmpty
+	@NotNull(message="O campo do Email não pode ser nulo")
+	@NotEmpty(message="O campo do email não pode ficar vazio")
 	@Pattern(regexp="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", message="Digite um email válido, padrão: _@_._")
 	private String email;
 	
 	@Valid
 	@NotNull
-	private EnderecoEscola endereco;
+	private EnderecoDto endereco;
 
-	@NotNull(message="O valor da mensalidade não pode ficar vazio.")
+	@NotNull(message="A mensalidade não pode ficar vazia")
+	@Min(0)
 	private BigDecimal mensalidade;
 	
-	@NotNull(message="O campo do telefone não pode ser nulo")
+    @NotNull(message="O campo do telefone não pode ser nulo")
 	@NotEmpty(message="O campo do telefone não pode estar vazio")
-	@Column(unique=true)
 	@Pattern(regexp="^\\(\\d{2}\\)9\\.\\d{4}-\\d{4}", message="Digite um telefone válido, padrão (__)9.____-____")
 	private String telefone;
 
-	@NotNull(message="Você deve escolher a classificação de ensino.")
+    @NotNull(message="Você deve escolher a classificação de ensino.")
 	@Enumerated(EnumType.STRING)
 	private ClassificacaoEnsino classificacaoEnsino;
 	
 	@ElementCollection(targetClass=NivelEnsino.class)
 	@Enumerated(EnumType.STRING)
-	@CollectionTable(name="nivel_ensino_escola", joinColumns = @JoinColumn(name="cnpj_escola", referencedColumnName="cnpj"))
-	@Column(name="nivel_ensino")
 	@NotNull
 	@NotEmpty(message="Você deve escolher no mínimo 1 dos níveis de ensino.")
 	private Set<NivelEnsino> nivelEnsino;
 
-	@NotNull(message="Você deve escolher a classificação de ensino.")
+	@NotNull(message="Você deve indicar o método de ensino utilizado.")
 	private MetodoEnsino metodoEnsino;
 	
-	@ElementCollection
-	@CollectionTable(name="idiomas")
-	@Column(name="idioma")
-	@NotNull
-	@ManyToMany(cascade=CascadeType.ALL, mappedBy="escolas")
-	@JoinColumn(name="idioma_id")
 	private Set<Idioma> linguas;
-	
-	
-	@OneToOne(mappedBy="escola")
-	private Usuario administrador;
 
 	public String getCnpj() {
 		return cnpj;
@@ -122,13 +88,6 @@ public class Escola implements Serializable{
 		this.email = email;
 	}
 
-	public EnderecoEscola getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(EnderecoEscola endereco) {
-		this.endereco = endereco;
-	}
 
 	public BigDecimal getMensalidade() {
 		return mensalidade;
@@ -170,12 +129,12 @@ public class Escola implements Serializable{
 		this.linguas = linguas;
 	}
 
-	public Usuario getAdministrador() {
-		return administrador;
+	public EnderecoDto getEndereco() {
+		return endereco;
 	}
 
-	public void setAdministrador(Usuario administrador) {
-		this.administrador = administrador;
+	public void setEndereco(EnderecoDto endereco) {
+		this.endereco = endereco;
 	}
 
 	public String getTelefone() {
@@ -184,37 +143,6 @@ public class Escola implements Serializable{
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(administrador, classificacaoEnsino, cnpj, email, endereco, id, linguas, mensalidade,
-				metodoEnsino, nivelEnsino, nome, telefone);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Escola other = (Escola) obj;
-		return Objects.equals(administrador, other.administrador) && classificacaoEnsino == other.classificacaoEnsino
-				&& Objects.equals(cnpj, other.cnpj) && Objects.equals(email, other.email)
-				&& Objects.equals(endereco, other.endereco) && Objects.equals(id, other.id)
-				&& Objects.equals(linguas, other.linguas) && Objects.equals(mensalidade, other.mensalidade)
-				&& metodoEnsino == other.metodoEnsino && Objects.equals(nivelEnsino, other.nivelEnsino)
-				&& Objects.equals(nome, other.nome) && Objects.equals(telefone, other.telefone);
 	}
 	
 	

@@ -40,11 +40,8 @@ public class MapperUsuarioDto {
 		usuario.setDataNascimento(usuarioDto.getDataNascimento());
 		usuario.setEmail(usuarioDto.getEmail());
 		
-		usuario.setEndereco(
-				mapeador.toEndereco(usuarioDto.getEndereco(),
-						usuario.getEndereco()));
-		
-		
+		EnderecoUsuario endereco = (EnderecoUsuario) mapeador.toEndereco(usuarioDto.getEndereco(), usuario.getEndereco());
+		usuario.setEndereco(endereco);
 		usuario.getEndereco().setUsuario(usuario);
 		
 		usuario.setNome(usuarioDto.getNome());

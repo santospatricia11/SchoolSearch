@@ -27,12 +27,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.ColumnTransformer;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name="usuarios")
@@ -125,6 +120,11 @@ public class Usuario implements Serializable{
     )
 	private Set<Role> roles = new HashSet<>();
 	
+	@JoinColumn(name="escola_id", nullable=true, referencedColumnName = "escola_id")
+	@OneToOne
+	private Escola escola;
+	
+	
 	public Usuario() { } //contrutor padrão
 
 
@@ -207,6 +207,28 @@ public class Usuario implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+	
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public Escola getEscola() {
+		return escola;
+	}
+
+
+	public void setEscola(Escola escola) {
+		this.escola = escola;
+	}
+
 
 	@Override
 	public boolean equals(Object obj) {

@@ -116,6 +116,48 @@
 		            >
 		         	</div>
 	          	</div>
+	          	<div class="form-group form-group-email">
+					<div class="row">
+	                	<div class="col-md-6">
+	                		<label for="email">CNPJ</label>
+	                		<input
+	                		  type="text"
+	                		  class="form-control"
+	                		  id="cnpj"
+	                		  name="cnpj"
+	                		  placeholder="CNPJ"
+	                		  th:field="*{cnpj}"
+    			             />
+				            <div
+				              class="alert alert-danger error"
+				              th:if="${#fields.hasErrors('cnpj')}"
+				              th:errors="*{cnpj}"
+				              role="alert"
+				            >
+				         	</div>
+	                	</div>
+	                	<div class="col-md-6">
+	                		<label for="telefone">Telefone</label>
+			                <input
+			                  type="text"
+			                  class="form-control"
+			                  id="telefone"
+			                  name="telefone"
+			                  placeholder="Telefone"
+			                  th:field="*{telefone}"
+			                />
+			                <div
+			                  class="alert alert-danger error"
+			                  th:if="${#fields.hasErrors('telefone')}"
+			                  th:errors="*{telefone}"
+			                  role="alert"
+			                ></div>
+	                	</div>
+	                </div>
+	          	</div>
+	          	<div class="btn-wrapper">
+	          		<button type="button" role="button" class="btn btn-primary btn-proximo">Próximo</button >
+	          	</div>
 			  </div>
 			  <div class="tab-pane fade" id="info-endereco" role="tabpanel" aria-labelledby="info-endereco">
 			  	<div class="form-group">
@@ -219,7 +261,10 @@
 	                  </div>
 	                </div>
 	              </div>
-			  
+			  	<div class="btn-wrapper">
+			  		<button type="button" role="button" class="btn btn-primary btn-anterior">Anterior</button >
+	          		<button type="button" role="button" class="btn btn-primary btn-proximo">Próximo</button >
+	          	</div>
 			  </div>
 			  <div class="tab-pane fade" id="info-ensino" role="tabpanel" aria-labelledby="info-ensino-tab">
 			    <div class="options-wrapper">
@@ -227,23 +272,35 @@
 			    		<h5 class="info-ensino-title">Classificação de Ensino</h5>  
 			    		<div class="form-check classificacaoEnsinoFiltro" th:each="classificacao : ${classificacoesEnsino}">
 						  <div class="classificacaoEnsino">
-						  	<input class="form-check-input" type="radio" th:name="classificacao" th:value="${classificacao}" id="flexCheckDefault">
+						  	<input class="form-check-input" type="radio" th:name="classificacao" th:value="${classificacao}" th:field="*{classificacaoEnsino}" id="flexCheckDefault">
 						  	<label class="form-check-label" for="flexCheckDefault">
 						  	  [[${classificacao.classificacao}]]
 						  	</label>
 						  </div>
 						</div>
+						<div
+	                      class="alert alert-danger error"
+	                      th:if="${#fields.hasErrors('classificacaoEnsino')}"
+	                      th:errors="*{classificacaoEnsino}"
+	                      role="alert"
+	                    ></div>
 			    	</div>
 					<div class="nivelEnsinoWrapper">
 						<h5 class="info-ensino-title">Níveis de Ensino</h5 >
 						<div class="form-check nivelEnsinoFiltro" th:each="nivel : ${niveisEnsino}">
 						  <div class="classificacaoEnsino">
-						  	<input class="form-check-input" type="checkbox" th:value="${nivel}" id="flexCheckDefault">
+						  	<input class="form-check-input" type="checkbox" th:value="${nivel}" th:field="*{nivelEnsino}"id="flexCheckDefault">
 						  	<label class="form-check-label" for="flexCheckDefault">
 						  	  [[${nivel.nivel}]]
 						  	</label>
 						  </div>
 						</div>
+						<div
+	                      class="alert alert-danger error"
+	                      th:if="${#fields.hasErrors('nivelEnsino')}"
+	                      th:errors="*{nivelEnsino}"
+	                      role="alert"
+	                    ></div>
 					</div>
 					<div class="metodoEnsinoWrapper">
 						<h5 class="info-ensino-title">Método de Ensino</h5 >
@@ -255,8 +312,61 @@
 						  	</label>
 						  </div>
 						</div>
+						<div
+	                      class="alert alert-danger error"
+	                      th:if="${#fields.hasErrors('metodoEnsino')}"
+	                      th:errors="*{metodoEnsino}"
+	                      role="alert"
+	                    ></div>
 					</div>
 			    </div>
+
+			    <div class="form-group row">
+			    	<div class="col-md-4">
+			    		<label for="idioma">Idiomas</label>
+	                	<input
+	                    	class="form-control"
+	                    	type="text"
+	                    	name="idioma"
+	                    	id="idioma"
+	                    	data-bs-toggle="tooltip" 
+	                    	data-bs-placement="top" 
+	                    	title="A língua Português Brasileiro é adicionada por padrão, para adicionar outras é só dar escrever a língua e seguida de uma vírgula!"
+	                    	
+	                    	th:field="*{idiomas}"
+	                	/>
+			    	</div>
+			    	<div class="col-md-4">
+			    		<label for="proposta">Proposta curricular</label>
+		                <input
+	                    	class="form-control"
+	                    	type="file"
+	                    	accept=".pdf,.odf,.doc,.docx,.txt"
+	                    	name="proposta"
+	                    	id="proposta"
+		                />
+			    	</div>
+			    	<div class="col-md-4">
+			    		<label for="mensalidade">Mensalidade</label>
+			    		<input 
+			    			class="form-control mensalidade"
+			    			type="text" 
+			    			name="mensalidade" 
+			    			id="mensalidade" 
+			    			th:field="*{mensalidade}" 
+			    			/>
+			    		<div
+	                      class="alert alert-danger error"
+	                      th:if="${#fields.hasErrors('mensalidade')}"
+	                      th:errors="*{mensalidade}"
+	                      role="alert"
+	                    ></div>
+			    	</div>
+			    </div>
+			    <div class="btn-wrapper">
+			  		<button type="button" role="button" class="btn btn-primary btn-anterior">Anterior</button >
+			  		<button type="submit" class="btn btn-primary btn-confirmar">Confirmar</button >
+	          	</div>
 			  </div>
 			</div>
 			</form>
@@ -265,6 +375,6 @@
       </div>
     </div>
     <div th:replace="fragments/footer.html :: footer"></div>
-    <script type="text/javascript" src="/js/cadastro-usuario.js"></script>
+    <script type="text/javascript" src="/js/cadastro-escola.js"></script>
   </body>
 </html>

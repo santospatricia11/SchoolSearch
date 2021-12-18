@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.aps.schoolsearch.model.Escola;
 import com.aps.schoolsearch.repository.EscolaRepository;
 
+/*
 @RestController
 @RequestMapping(value = "/escolas")
 public class EscolaResources {
@@ -67,3 +68,4 @@ public class EscolaResources {
 		}
 		
 }
+*/
