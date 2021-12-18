@@ -48,6 +48,12 @@
 label {
   padding-block: 5px;
 }
+.alerta-admin{
+	text-transform: uppercase;
+	text-align: right;
+	width: fit-content;
+	margin-left: auto;
+}
 
 @media (min-width: 414px) {
   .form-check-sexo {

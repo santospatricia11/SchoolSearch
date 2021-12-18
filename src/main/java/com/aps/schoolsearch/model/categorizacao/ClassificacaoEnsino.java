@@ -2,7 +2,10 @@ package com.aps.schoolsearch.model.categorizacao;
 
 public enum ClassificacaoEnsino {
 	
-	PRIVADA("Privada"), COMUNITARIA("Comunitária"), FILANTROPICA("Filantrópica"), CONFESSIONAL("Confessional");
+	PRIVADA("Privada"), 
+	COMUNITARIA("Comunitária"), 
+	FILANTROPICA("Filantrópica"), 
+	CONFESSIONAL("Confessional");
 
 	private String classificacao;
 	

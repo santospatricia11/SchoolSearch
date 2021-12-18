@@ -14,9 +14,15 @@ public class HomeController {
 	public String login(){
 		return "login";
 	}
-	
+	/*
 	@RequestMapping("/cadastrar-escola")
 	public String cadastrarEscola(){
 		return "cadastrar-escola";
 	}
+	
+	@RequestMapping("/listar-escola")
+	public String listarEscola(){
+		return "listar-escola";
+	}
+	*/
 }

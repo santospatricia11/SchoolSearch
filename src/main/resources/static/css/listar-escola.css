@@ -16,12 +16,25 @@
   display: flex;
   justify-content: space-between;
 }
+.form-group{
+  padding: 25px;
 
-.logo {
+  border-radius: 5px
+}
+img.logo_escola {
   width: 96px;
   order: -1;
 }
-
+img {
+ width: 80px;
+}
+.img-listar {
+ height: 200px;
+ 
+ width: 100px;
+ max-height: 15%;
+   float: left;
+}
 .logo_escola{
   float: left;
   width: 64px;
@@ -29,3 +42,24 @@
   margin: 0px 10px 10px 0;
   order: -1;
 }
+
+.center {
+	text-align: center;
+	margin: 0;
+	text-decoration: none;
+}
+
+.text-filtro::hover {
+	color: initial;
+}
+.filtros {
+	padding: 0;
+	margin: 0;
+}
+
+.filtros-body {
+	flex-direction: row;
+	justify-content: space-between;
+}
+/*    ########################################################################*/
+

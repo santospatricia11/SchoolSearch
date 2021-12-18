@@ -1,5 +1,7 @@
 package com.aps.schoolsearch.model.dto;
 
+import java.time.LocalDate;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -10,7 +12,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
 import com.aps.schoolsearch.validation.IdadeCorreta;
-import com.aps.schoolsearch.validation.SenhaCorresponde;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,10 +20,9 @@ import lombok.Setter;
 @EqualsAndHashCode
 @Getter
 @Setter
-@SenhaCorresponde
 @Validated
 public class UsuarioDto {
-
+	
 	@NotNull(message="O campo do nome não pode ser nulo")
 	@NotEmpty(message="Nome não pode ser vazio")
 	@Size(min=3, message="Nome deve ter no mínimo 3 caracteres")
@@ -51,9 +51,8 @@ public class UsuarioDto {
 	@IdadeCorreta
 	@NotNull(message="Digite/Escolha uma data de nascimento válida, mínimo 18 anos, máximo 01/01/1900")
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	@Pattern(regexp="^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$", message="Digite uma data de nascimento válida")
-	@Size(min=10,max=10, message="O campo da data deve ter 10 caracteres, incluindo as barras.")
-	private String dataNascimento;
+//	@Pattern(regexp="^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$", message="Digite uma data de nascimento válida")
+	private LocalDate dataNascimento;
 	
 	@NotNull
 	private Boolean pne;
@@ -61,16 +60,6 @@ public class UsuarioDto {
 	@NotNull
 	private String sexo;
 	
-	@NotNull(message="A senha não pode ser nula")
-	@NotEmpty(message="A senha não pode ser vazia")
-	@Size(min=8, message="A senha deve ter pelo menos 8 caracteres.")
-	private String senha;
-	
-	@NotNull(message="A contrassenha não pode ser nula")
-	@NotEmpty(message="A contrassenha não pode ser vazia")
-	@Size(min=8, message="A contrassenha deve ter pelo menos 8 caracteres.")
-	private String confirmarSenha;
-
 	public String getNome() {
 		return nome;
 	}
@@ -94,7 +83,6 @@ public class UsuarioDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public EnderecoDto getEndereco() {
 		return endereco;
 	}
@@ -111,11 +99,12 @@ public class UsuarioDto {
 		this.telefone = telefone;
 	}
 
-	public String getDataNascimento() {
+	public LocalDate getDataNascimento() {
+		
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -135,20 +124,4 @@ public class UsuarioDto {
 		this.sexo = sexo;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public String getConfirmarSenha() {
-		return confirmarSenha;
-	}
-
-	public void setConfirmarSenha(String confirmarSenha) {
-		this.confirmarSenha = confirmarSenha;
-	}
-	
 }

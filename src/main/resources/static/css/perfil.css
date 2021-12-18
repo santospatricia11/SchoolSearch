@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+.pad {
+	padding-block: 5vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 5%;
+}
+.foto-perfil-card {
+	margin-bottom: 5%;
+}
+.usuario-perfil-wrapper,
+.usuario-image-circle{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	border: 5px solid var(--greenish-blue);
+}
+
+.usuario-perfil-wrapper {
+	border-radius: 10px;
+	padding-block: 0.625rem;
+}
+
+.usuario-image-circle {
+	width: 100px;
+	aspect-ratio: 1;
+	border-radius: 50%;
+}
+
+.foto-perfil-label{
+	width: 100%;
+	text-align:center;
+}
+
+.foto-perfil-card,
+.usuario-info-card{
+	background-color: var(--blue);
+}
+
+.usuario-info-card {
+	position: relative;
+	flex-grow: 1;
+	height: fit-content;
+}
+
+.options-buttons {
+	display: flex;
+	flex-direction: column;
+}
+
+.opt + .opt {
+	margin-top: 5px;
+}
+
+.card {
+	box-shadow: 0 0 15px black;
+}
+
+.user-info .col {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.table-user-info {
+	font-family: "Open Sans", sans-serif;
+	
+	width: 100%;
+}
+.user-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.row {
+	flex-grow: 1;
+	flex-direction: row;
+}
+
+.user-info .row:not(:first-child) {
+	padding-top: 5px;
+}
+.user-info .row/*:not(:last-child)*/
+{
+	padding-bottom: 5px;
+	display:flex;
+	flex-direction: column;
+}
+
+.form-group-data-nascimento{
+	position:relative;
+}
+
+.account-options td{
+	width: 50%;
+}
+.account-options td a {
+	display: block;
+}
+
+
+.group-buttons {
+
+	margin-top: auto;
+	display: flex;
+	gap: 2.5%;
+}
+
+.modal-button{
+	flex-grow: 1;
+}
+.btn-user-info {
+	width: 100%;
+}
+
+.alert-danger-text{
+	margin-bottom: 0;
+	text-align: center;
+}
+
+.group-buttons .modal-content{
+	width: 80%;
+	margin: 0 auto;
+}
+.font-italic {
+	font-style: italic;
+}
+.dialog-user-info-edit{
+	max-width: 768px;
+}
+.max-height{
+	height: 100%;
+}
+
+.login-card {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.container-login {
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  
+  padding: 10vh;
+}
+
+.container-login .row{
+  flex: 1 1 0;
+}
+
+.login {
+  text-align: center;
+  margin-block: 20px;
+}
+
+.login-card{
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.login-body {
+  padding-inline: 20px;
+}
+.form-group {
+  padding-block: 5px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  padding-top: 10px;
+}
+.criar-conta {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.login-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.school-search-icon {
+  height: 48px;
+}
+
+.datepicker{
+	z-index: 1999;
+}
+
+.tooltip-inner {
+	min-width: 50% !important; 
+	max-width: 100% !important;
+}
+
+@media (max-width: 300px){
+	.button-wrapper{
+		flex-direction: column;
+	}
+	.btn + .btn{
+		margin-bottom: 10px;
+		order:-1;
+	}
+}
+
+
+@media (min-width: 992px){
+	.row .col {
+		width: 30%;
+		
+		display: inline;
+	}
+
+	.col-info {
+		width: 70%;
+	}
+	.pad {
+		flex-direction: row;
+	}
+	.foto-perfil-card {
+		margin-bottom: 0%;
+		height: fit-content;
+	}
+	.user-info .row{
+		flex-direction: row;
+	}
+}

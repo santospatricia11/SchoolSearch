@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.aps.schoolsearch.model.Escola;
 import com.aps.schoolsearch.repository.EscolaRepository;
 
+/*
 @RestController
 @RequestMapping(value = "/escolas")
 public class EscolaResources {
@@ -59,7 +60,7 @@ public class EscolaResources {
 	
 		@PostMapping("/pesquisarescola")
 		public ModelAndView pesquisarEscola(@RequestParam("nomepesquisa") String nomepesquisa) {
-			ModelAndView modelAndView = new ModelAndView("escola/cadastroescola");
+			ModelAndView modelAndView = new ModelAndView("listar/cadastroescola");
 			modelAndView.addObject("escolas", escolaRepository.findEscolaByName("nomepesquisa"));
 			modelAndView.addObject("escolaobj", new Escola());
 			return modelAndView;
@@ -67,3 +68,4 @@ public class EscolaResources {
 		}
 		
 }
+*/

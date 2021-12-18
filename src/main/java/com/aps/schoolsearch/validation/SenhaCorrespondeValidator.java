@@ -3,7 +3,7 @@ package com.aps.schoolsearch.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.aps.schoolsearch.model.dto.UsuarioDto;
+import com.aps.schoolsearch.model.dto.UsuarioPostDto;
 
 public class SenhaCorrespondeValidator implements ConstraintValidator<SenhaCorresponde, Object> {
     
@@ -13,7 +13,7 @@ public class SenhaCorrespondeValidator implements ConstraintValidator<SenhaCorre
     }
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context){
-        UsuarioDto user = (UsuarioDto) obj;
+        UsuarioPostDto user = (UsuarioPostDto) obj;
         
         Boolean isValid = user.getSenha().equals(user.getConfirmarSenha());
         

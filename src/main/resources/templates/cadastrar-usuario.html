@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-   <head>
-    
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro de Usuario</title>
+
     <div th:replace="/fragments/head.html :: heading"></div>
     <script
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"
     ></script>
-    
+
     <div th:insert="/fragments/header.html :: css"></div>
     <div th:replace="/fragments/footer.html :: css"></div>
-
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
@@ -38,6 +36,8 @@
     />
 
     <link rel="stylesheet" href="/css/cadastrar-usuario.css" />
+
+    <title>[[${form_name}]]</title>
   </head>
   <body>
     <div th:replace="fragments/header.html :: navbar"></div>
@@ -54,7 +54,13 @@
               <p class="to-right">
                 Preencha os campos abaixo para se cadastrar no sistema.
               </p>
-
+              <div class="no-admin" th:if="${usuarios.isEmpty()}">
+                <hr class="divider" />
+                <div class="alert alert-warning alerta-admin" role="alert">
+                  Esse é o cadastro do usuário
+                  <span class="alerta-admin">ADMINISTRADOR</span>
+                </div>
+              </div>
               <hr class="divider" />
             </div>
             <form
@@ -291,7 +297,7 @@
                 </div>
               </div>
               <hr class="divider" />
-			  <div class="form-group form-group-telefone">
+              <div class="form-group form-group-telefone">
                 <label for="telefone">Telefone</label>
                 <input
                   type="text"
@@ -308,7 +314,7 @@
                   role="alert"
                 ></div>
               </div>
-              
+
               <div class="form-group form-group-senha">
                 <label for="senha">Senha</label>
                 <div id="showPassword" class="input-group">
@@ -351,7 +357,7 @@
                   role="alert"
                 ></div>
               </div>
-              
+
               <input
                 type="submit"
                 class="btn btn-primary cadastrar"

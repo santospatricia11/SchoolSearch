@@ -7,9 +7,6 @@ import java.util.Objects;
 import com.aps.schoolsearch.model.Escola;
 import com.aps.schoolsearch.model.Usuario;
 
-import lombok.EqualsAndHashCode;
-
-@EqualsAndHashCode
 public class PublicacaoId implements Serializable {
 	
 	/**

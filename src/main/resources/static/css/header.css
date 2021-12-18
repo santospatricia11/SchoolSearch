@@ -23,6 +23,12 @@ body {
 .wrapper-header{
 	position:sticky;
 	bottom: 100%;
+	z-index: 1;
+}
+
+.wrapper-header,
+.wrapper-footer {
+	box-shadow: 0 0px 15px black;
 }
 
 .wrap {
@@ -45,6 +51,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 .navbar-nav + .navbar-nav {
@@ -61,6 +68,8 @@ body {
   
   height: 48px;
   aspect-ratio: 1;
+  
+  text-align: center;
 }
 
 .dropdown-toggle {
@@ -95,9 +104,6 @@ body {
   border-radius: 5px;
   padding: 5px;
 }
-.navbar-header .nav-link {
-  border: 2px solid var(--greenish-blue);
-}
 
 .nav-link.dropdown-toggle {
   border: 0px;
@@ -105,10 +111,6 @@ body {
 
 .navbar-collapse {
   padding-block: 2.5%;
-}
-
-.dropdown-menu {
-  z-index: 2;
 }
 
 @media (min-width: 992px) {

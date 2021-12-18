@@ -1,42 +1,17 @@
 package com.aps.schoolsearch.model;
 
-import javax.persistence.Column;
+import java.util.Objects;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.aps.schoolsearch.model.dto.EnderecoDto;
-
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-@EqualsAndHashCode
-@Entity
-@Table(name="endereco")
+@MappedSuperclass
 public class Endereco {
-	
-    @Id
-    @Column(unique=true, name = "cpf", nullable=false)
-    private String cpf;
-    
-    @OneToOne(fetch = FetchType.LAZY, targetEntity = Usuario.class, optional=false)
-    @MapsId
-    @JoinColumn(name = "cpf", foreignKey=@ForeignKey(name="endereco_usuario_cpf"), nullable=false)
-    private Usuario usuario;
-	
-    @NotNull
+	@NotNull
     @NotEmpty(message="O campo do logradouro não pode ser vazio")
     @Size(min=10, message="O logradouro deve conter ao menos 10 caracteres")
 	private String logradouro;
@@ -57,18 +32,6 @@ public class Endereco {
     @NotNull
     @NotEmpty
 	private String estado;
-    
-    
-    public Endereco() {	}
-    public Endereco(EnderecoDto endereco){
-    	setLogradouro(endereco.getLogradouro());
-    	setNumero(endereco.getNumero());
-    	setBairro(endereco.getBairro());
-    	setCidade(endereco.getCidade());
-    	setEstado(endereco.getEstado());
-    }
-    
-    
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -99,12 +62,23 @@ public class Endereco {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public Usuario getUsuario() {
-		return usuario;
+	@Override
+	public int hashCode() {
+		return Objects.hash(bairro, cidade, estado, logradouro, numero);
 	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Endereco other = (Endereco) obj;
+		return Objects.equals(bairro, other.bairro) && Objects.equals(cidade, other.cidade)
+				&& Objects.equals(estado, other.estado) && Objects.equals(logradouro, other.logradouro)
+				&& Objects.equals(numero, other.numero);
 	}
-	
-	
+    
+    
 }
