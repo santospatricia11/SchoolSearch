@@ -1,5 +1,7 @@
 package com.aps.schoolsearch.controller;
 
+import java.util.Set;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,16 +65,19 @@ public class CadastroUsuarioController {
 		if(result.hasErrors()) {
 			return CADASTRO_USUARIO;
 		}
-		try {
-			usuarioService.registrarNovoUsuario(usuario);
-		} catch(CpfExistsException exception) {
-			result.addError(new FieldError("cpf","cpf", exception.getMessage()));
-			return CADASTRO_USUARIO;
-		} catch(EmailExisteException exception) {
-			result.addError(new FieldError("email", "email", exception.getMessage()));
-			return CADASTRO_USUARIO;
-		} catch(TelefoneExisteException exception) {
-			result.addError(new FieldError("telefone", "telefone", exception.getMessage()));
+		
+		Set<Exception> excecoes = usuarioService.registrarNovoUsuario(usuario);
+		
+		if(!excecoes.isEmpty()) {
+			for(Exception exception: excecoes) {
+				if(exception instanceof CpfExistsException) {
+					result.addError(new FieldError("cpf","cpf", exception.getMessage()));
+				} else if (exception instanceof  EmailExisteException) {
+					result.addError(new FieldError("email", "email", exception.getMessage()));
+				} else if (exception instanceof TelefoneExisteException) {
+					result.addError(new FieldError("telefone", "telefone", exception.getMessage()));
+				}
+			}
 			return CADASTRO_USUARIO;
 		}
 		

@@ -1,5 +1,8 @@
 package com.aps.schoolsearch.service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.aps.schoolsearch.exception.CpfExistsException;
 import com.aps.schoolsearch.exception.EmailExisteException;
 import com.aps.schoolsearch.exception.TelefoneExisteException;
-import com.aps.schoolsearch.model.EnderecoUsuario;
 import com.aps.schoolsearch.model.Usuario;
 import com.aps.schoolsearch.model.dto.UsuarioDto;
 import com.aps.schoolsearch.model.dto.UsuarioPostDto;
@@ -48,33 +50,54 @@ public class UsuarioService {
 	private boolean emailExiste(String email) {
 		return usuarioRepository.findByEmail(email) != null;
 	}
+	private Set<Exception> isUsuarioNoSistema(UsuarioDto usuarioDto) {
+		
+		Set<Exception> excecoes = new HashSet<>();
+		if(cpfExiste(usuarioDto.getCpf())) {
+			excecoes.add (new CpfExistsException(
+					String.format(
+							"O CPF %s já foi cadastrado no sistema."
+							, usuarioDto.getCpf()
+					)
+				));
+		}
+		if(emailExiste(usuarioDto.getEmail())) {
+			excecoes.add(new EmailExisteException());
+		}
+		if(telefoneExiste(usuarioDto.getTelefone())) {
+			excecoes.add(new TelefoneExisteException());
+		}
+		
+		return excecoes;
+	}
 	
 	
-	public Usuario registrarNovoUsuario(UsuarioPostDto usuarioDto) 
-			throws 
-				CpfExistsException, 
-				EmailExisteException,
-				TelefoneExisteException {
+	public Set<Exception> registrarNovoUsuario(UsuarioPostDto usuarioDto) {
 		String role = "USER";
+		
+		Set<Exception> excecoes = new HashSet<>();
 		if(usuarioRepository.findAll().isEmpty()) {
 			role = "ADMIN";
 		} else {
-			isUsuarioNoSistema(usuarioDto);
+			excecoes = isUsuarioNoSistema(usuarioDto);
 		}
 		
-		Usuario usuario = mapeadorUsuario.toUsuario(usuarioDto);
-		
-		usuario.setSenha(encoder.encode(usuario.getSenha()));
-		
-		usuario.getRoles().add(roleRepository.findByRole(role));
-		
-		if("ADMIN".equals(role)) {
-			usuario
-				.getRoles()
-					.add(roleRepository.findByRole("USER"));
+		if(excecoes.isEmpty()) {
+			Usuario usuario = mapeadorUsuario.toUsuario(usuarioDto);
+			
+			usuario.setSenha(encoder.encode(usuario.getSenha()));
+			
+			usuario.getRoles().add(roleRepository.findByRole(role));
+			
+			if("ADMIN".equals(role)) {
+				usuario
+					.getRoles()
+						.add(roleRepository.findByRole("USER"));
+			}
+			usuarioRepository.save(usuario);
 		}
-		
-		return usuarioRepository.save(usuario);
+
+		return excecoes;
 	}
 	
 	public void removerUsuario(String username) {
@@ -83,56 +106,36 @@ public class UsuarioService {
 		usuarioRepository.delete(usuario);
 	}
 	
-	public void editarUsuario(UsuarioDto usuarioDto, String username) 
-			throws 
-				CpfExistsException, 
-				EmailExisteException, 
-				TelefoneExisteException {
-		try {
-			isUsuarioNoSistema(usuarioDto);
-		}catch(CpfExistsException exception) {
-			// usuario que possui o cpf cadastro
-			Usuario cpf = usuarioRepository.findByCpf(usuarioDto.getCpf());
-			
-			// se o usuario logado tem o mesmo email do usuario com esse cpf
-			if(!username.equals(cpf.getEmail())) {
-				throw exception;
-			}
-		} catch(EmailExisteException exception) {
-			Usuario email = usuarioRepository.findByEmail(usuarioDto.getEmail());
-			if(!username.equals(email.getEmail())) {
-				throw exception;
-			}
-		} catch(TelefoneExisteException exception) {
-			Usuario telefone = usuarioRepository.findByTelefone(usuarioDto.getTelefone());
-			if(!username.equals(telefone.getEmail())) {
-				throw exception;
+	public Set<Exception> editarUsuario(UsuarioDto usuarioDto, String username) {
+		
+		Set<Exception> excecoes = isUsuarioNoSistema(usuarioDto);
+		
+		Set<Exception> reais = new HashSet<>();
+		
+		if(excecoes.isEmpty()) {
+			saveUsuario(usuarioDto, username);
+		} else {
+			for(Exception excecao : excecoes) {
+				Usuario erro;
+				if(excecao instanceof CpfExistsException) {
+					erro = usuarioRepository.findByCpf(usuarioDto.getCpf());
+				} else if(excecao instanceof EmailExisteException) {
+					erro = usuarioRepository.findByEmail(usuarioDto.getEmail());
+				} else {
+					erro = usuarioRepository.findByTelefone(usuarioDto.getTelefone());
+				}
+				if(!username.equals(erro.getEmail())) {
+					reais.add(excecao);
+				}
 			}
 		}
-		
+		return reais;
+	}
+	
+	private void saveUsuario(UsuarioDto usuarioDto, String username) {
 		Usuario usuario = mapeadorUsuario.toUsuario(usuarioDto, usuarioRepository.findByEmail(username));
 		
 		usuarioRepository.save(usuario);
-	}
-	
-	private void isUsuarioNoSistema(UsuarioDto usuarioDto) 
-			throws CpfExistsException, 
-			EmailExisteException, 
-			TelefoneExisteException{
-		if(cpfExiste(usuarioDto.getCpf())) {
-			throw new CpfExistsException(
-					String.format(
-							"O CPF %s já foi cadastrado no sistema."
-							, usuarioDto.getCpf()
-					)
-				);
-		}
-		if(emailExiste(usuarioDto.getEmail())) {
-			throw new EmailExisteException();
-		}
-		if(telefoneExiste(usuarioDto.getTelefone())) {
-			throw new TelefoneExisteException();
-		}
 	}
 
 }

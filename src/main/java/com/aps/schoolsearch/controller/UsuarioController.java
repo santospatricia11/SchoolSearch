@@ -1,6 +1,7 @@
 package com.aps.schoolsearch.controller;
 
 import java.security.Principal;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,6 @@ import com.aps.schoolsearch.exception.EmailExisteException;
 import com.aps.schoolsearch.exception.TelefoneExisteException;
 import com.aps.schoolsearch.model.Usuario;
 import com.aps.schoolsearch.model.dto.UsuarioDto;
-import com.aps.schoolsearch.model.dto.UsuarioPostDto;
 import com.aps.schoolsearch.model.dto.mapper.MapperUsuarioDto;
 import com.aps.schoolsearch.repository.UsuarioRepository;
 import com.aps.schoolsearch.service.UsuarioService;
@@ -42,6 +41,7 @@ public class UsuarioController {
 	@Autowired
 	public UsuarioService usuarioService;
 	
+	private static final String PERFIL = "/perfil";
 	
 
 	@RequestMapping
@@ -79,19 +79,21 @@ public class UsuarioController {
 			, BindingResult result, 
 			Principal principal) {
 		
-		
-		try {
-			usuarioService.editarUsuario(usuario, principal.getName());
-		} catch(CpfExistsException exception) {
-			result.addError(new FieldError("cpf","cpf", exception.getMessage()));
-			return "/perfil";
-		} catch(EmailExisteException exception) {
-			result.addError(new FieldError("email", "email", exception.getMessage()));
-			return "/perfil";
-		} catch(TelefoneExisteException exception) {
-			result.addError(new FieldError("telefone", "telefone", exception.getMessage()));
-			return "/perfil";
+		Set<Exception> excecoes = usuarioService.editarUsuario(usuario, principal.getName());
+		if(!excecoes.isEmpty()) {
+			for(Exception exception: excecoes) {
+				if(exception instanceof CpfExistsException) {
+					result.addError(new FieldError("cpf","cpf", exception.getMessage()));
+				} else if (exception instanceof  EmailExisteException) {
+					result.addError(new FieldError("email", "email", exception.getMessage()));
+				} else if (exception instanceof TelefoneExisteException) {
+					result.addError(new FieldError("telefone", "telefone", exception.getMessage()));
+				}
+			}
+			return PERFIL;
 		}
+			
+
 		
 		return "redirect:/perfil";
 	}

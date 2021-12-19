@@ -49,7 +49,7 @@ public class Usuario implements Serializable{
 //	/*
 	@ColumnTransformer(
 			forColumn="cpf",
-            read = "PGP_SYM_DECRYPT(cpf, 'segredo-43210')",
+            read = "PGP_SYM_DECRYPT(cpf,'segredo-43210')",
             write = "PGP_SYM_ENCRYPT(?, 'segredo-43210')"
     )
 //  */
@@ -125,7 +125,8 @@ public class Usuario implements Serializable{
 	private Escola escola;
 	
 	
-	public Usuario() { } //contrutor padrão
+	public Usuario() {//contrutor padrão
+	}
 
 
 	public String getNome() {

@@ -1,6 +1,7 @@
 package com.aps.schoolsearch.controller;
 
 import java.security.Principal;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -67,18 +68,21 @@ public class CadastroEscolaController {
 			return CADASTRO_ESCOLA;
 		}
 		
-		try {
-			escolaService.registrarEscola(usuario, principal.getName());
-		} catch(CnpjExistsException exception) {
-			result.addError(new FieldError("cnpj","cnpj", exception.getMessage()));
+		
+		Set<Exception> excecoes = escolaService.registrarEscola(usuario, principal.getName());
+		if(!excecoes.isEmpty()) {
+			for(Exception excecao : excecoes ) {
+				if(excecao instanceof CnpjExistsException) {
+					result.addError(new FieldError("cnpj","cnpj", excecao.getMessage()));
+				} else if(excecao instanceof EmailExisteException) {
+					result.addError(new FieldError("email", "email", excecao.getMessage()));
+				}else if(excecao instanceof TelefoneExisteException) {
+					result.addError(new FieldError("telefone", "telefone", excecao.getMessage()));
+				}
+			}
+
 			return CADASTRO_ESCOLA;
-		} catch(EmailExisteException exception) {
-			result.addError(new FieldError("email", "email", exception.getMessage()));
-			return CADASTRO_ESCOLA;
-		} catch(TelefoneExisteException exception) {
-			result.addError(new FieldError("telefone", "telefone", exception.getMessage()));
-			return CADASTRO_ESCOLA;
-		}
+		} 
 		
 		return "redirect:/perfil";
 	}

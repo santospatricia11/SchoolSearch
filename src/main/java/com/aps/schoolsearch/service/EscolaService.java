@@ -1,5 +1,8 @@
 package com.aps.schoolsearch.service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,45 +42,42 @@ public class EscolaService {
 		return escolaRepository.findByEmail(email) != null;
 	}
 	
-	public void registrarEscola(EscolaPostDto escolaDto, String username) 
-			throws 
-				CnpjExistsException, 
-				EmailExisteException, 
-				TelefoneExisteException {
-		isEscolaNoSistema(escolaDto);
-		Usuario usuario = usuarioRepository.findByEmail(username);
+	public Set<Exception> registrarEscola(EscolaPostDto escolaDto, String username) {
+		Set<Exception> excecoes = isEscolaNoSistema(escolaDto);
+		if(excecoes.isEmpty()) {
+			Usuario usuario = usuarioRepository.findByEmail(username);
+			
+			Escola escola = mapeadorEscola.toEscola(escolaDto);
+			escola.getEndereco().setEscola(escola);
+			
+			usuario.setEscola(escola);
+			escola.setAdministrador(usuario);
+			
+			escolaRepository.save(escola);
+		}
 		
-		Escola escola = mapeadorEscola.toEscola(escolaDto);
-		escola.getEndereco().setEscola(escola);
-		
-		usuario.setEscola(escola);
-		escola.setAdministrador(usuario);
-		
-		escolaRepository.save(escola);
-		
-		
+		return excecoes;
 	}
 
-	private void isEscolaNoSistema(EscolaPostDto escolaDto) 
-			throws 
-				CnpjExistsException,
-				EmailExisteException, 
-				TelefoneExisteException{
+	private Set<Exception> isEscolaNoSistema(EscolaPostDto escolaDto){
+		
+		Set<Exception> excecoes = new HashSet<>();
 		if(cnpjExiste(escolaDto.getCnpj())) {
-			throw new CnpjExistsException(
+			excecoes.add(new CnpjExistsException(
 					String.format(
 							"O CPF %s já foi cadastrado no sistema."
 							, escolaDto.getCnpj()
 					)
-				);
+				));
 		}
 		if(emailExiste(escolaDto.getEmail())) {
-			throw new EmailExisteException();
+			excecoes.add(new EmailExisteException());
 		}
 		if(telefoneExiste(escolaDto.getTelefone())) {
-			throw new TelefoneExisteException();
+			excecoes.add(new TelefoneExisteException());
 		}
 		
+		return excecoes;
 	}
 	
 }

@@ -36,6 +36,7 @@ public class MapperUsuarioDto {
 	}
 	
 	public Usuario toUsuario(UsuarioDto usuarioDto, Usuario usuario) {
+		
 		usuario.setCpf(usuarioDto.getCpf());
 		usuario.setDataNascimento(usuarioDto.getDataNascimento());
 		usuario.setEmail(usuarioDto.getEmail());
