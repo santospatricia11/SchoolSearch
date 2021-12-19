@@ -29,6 +29,11 @@ public class HomeController {
 	public String contato(){
 		return "contato";
 	}
+	
+	@RequestMapping("/boleto")
+	public String boleto(){
+		return "boleto";
+	}
 /*	
 	@RequestMapping("/listar-escola")
 	public String listarEscola(){
