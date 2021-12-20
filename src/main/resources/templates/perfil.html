@@ -50,7 +50,8 @@
               </div>
               <div class="options-buttons">
               	<a href="" class="btn btn-primary opt">Upgrade Plano</a>
-              	<a th:href="@{/cadastrar-escola}" class="btn btn-primary opt">Cadastrar Escola</a>
+              	<a th:if="${usuario.escola == null}"th:href="@{/cadastrar-escola}" class="btn btn-primary opt">Cadastrar Escola</a>
+              	<a th:if="${usuario.escola != null}"th:href="@{/perfil-escola}" class="btn btn-primary opt">Perfil Escola</a>
               </div>
             </div>
           </div>

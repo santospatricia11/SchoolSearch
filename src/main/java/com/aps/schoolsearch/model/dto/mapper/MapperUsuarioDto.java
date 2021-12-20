@@ -11,7 +11,10 @@ import com.aps.schoolsearch.model.dto.UsuarioPostDto;
 @Component
 public class MapperUsuarioDto {
 	@Autowired
-	private MapperEnderecoDto mapeador;
+	private MapperEnderecoDto mapeadorEndereco;
+	
+	@Autowired
+	private MapperEscolaDto mapeadorEscola;
 	
 	public UsuarioDto toDto(Usuario usuario) {
 		UsuarioDto usuarioDto = new UsuarioDto();
@@ -19,11 +22,14 @@ public class MapperUsuarioDto {
 		usuarioDto.setCpf(usuario.getCpf());
 		usuarioDto.setDataNascimento(usuario.getDataNascimento());
 		usuarioDto.setEmail(usuario.getEmail());
-		usuarioDto.setEndereco(mapeador.toDto(usuario.getEndereco()));
+		usuarioDto.setEndereco(mapeadorEndereco.toDto(usuario.getEndereco()));
 		usuarioDto.setNome(usuario.getNome());
 		usuarioDto.setPne(usuario.getPne());
 		usuarioDto.setTelefone(usuario.getTelefone());
 		usuarioDto.setSexo(usuario.getSexo());
+		if(usuario.getEscola() != null) {
+			usuarioDto.setEscola(mapeadorEscola.toDto(usuario.getEscola()));
+		}
 		
 		return usuarioDto;
 	}
@@ -41,7 +47,7 @@ public class MapperUsuarioDto {
 		usuario.setDataNascimento(usuarioDto.getDataNascimento());
 		usuario.setEmail(usuarioDto.getEmail());
 		
-		EnderecoUsuario endereco = (EnderecoUsuario) mapeador.toEndereco(usuarioDto.getEndereco(), usuario.getEndereco());
+		EnderecoUsuario endereco = (EnderecoUsuario) mapeadorEndereco.toEndereco(usuarioDto.getEndereco(), usuario.getEndereco());
 		usuario.setEndereco(endereco);
 		usuario.getEndereco().setUsuario(usuario);
 		
@@ -53,6 +59,7 @@ public class MapperUsuarioDto {
 		}
 		usuario.setTelefone(usuarioDto.getTelefone());
 		usuario.setSexo(usuarioDto.getSexo());
+		
 		return usuario;
 	}
 }

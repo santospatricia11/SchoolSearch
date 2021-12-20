@@ -6,7 +6,7 @@ public enum ClassificacaoEnsino {
 	COMUNITARIA("Comunitária"), 
 	FILANTROPICA("Filantrópica"), 
 	CONFESSIONAL("Confessional");
-
+	
 	private String classificacao;
 	
 	ClassificacaoEnsino(String classificacao){
@@ -14,6 +14,11 @@ public enum ClassificacaoEnsino {
 	}
 	
 	public String getClassificacao() {
+		return classificacao;
+	}
+	
+	@Override
+	public String toString() {
 		return classificacao;
 	}
 

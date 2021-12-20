@@ -61,5 +61,66 @@ img {
 	flex-direction: row;
 	justify-content: space-between;
 }
-/*    ########################################################################*/
 
+.escola-wrapper {
+	display: flex;
+}
+.school-image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.info-escola {
+	margin-left: 2.5%;
+	flex-grow: 1;
+}
+
+.info-escola p {
+	margin-bottom: 0;
+}
+
+.info-endereco {
+	width: 100%;
+}
+
+.wrap-values {
+	margin-left: 15%;
+}
+
+.titulo {
+	font-weight: bold;
+}
+.wrap-info {
+	padding-block: 5px;
+}
+
+.wrap-button {
+	display: flex;
+}
+.btn-more-info {
+	margin-left: auto;
+}
+
+.info-escola {
+	height: max-content;
+}
+
+.wrap-enums,
+.wrap-mensalidade-idiomas {
+	display: flex;
+}
+
+.wrap-info {
+	flex: 1 1 0;
+	width: 100%;
+}
+
+.more-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+.btn-more-info.btn-collapsed {
+	width: 100%;
+}

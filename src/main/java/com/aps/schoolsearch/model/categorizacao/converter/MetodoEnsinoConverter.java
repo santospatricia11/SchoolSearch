@@ -5,7 +5,6 @@ import java.util.stream.Stream;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import com.aps.schoolsearch.model.categorizacao.ClassificacaoEnsino;
 import com.aps.schoolsearch.model.categorizacao.MetodoEnsino;
 
 @Converter(autoApply = true)

@@ -16,5 +16,8 @@ public enum NivelEnsino {
 	public String getNivel() {
 		return nivel;
 	}
-
+	@Override
+	public String toString() {
+		return nivel;
+	}
 }

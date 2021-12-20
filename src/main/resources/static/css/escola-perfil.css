@@ -1,0 +1,56 @@
+
+main .wrap{
+	width: 100%;
+}
+
+.container-carousel{
+	padding:0;
+}
+
+.escola-nome {
+	position:absolute;
+	top: 50%;
+	left: 50%;
+	
+	transform:translate(-50%, -50%);
+	z-index: 1;
+	background-color: rgba(0, 0, 0, 0.75);
+
+	background-blend-mode: darken;
+	
+	
+	color: transparent;
+	padding: 0.75em 1.5em;
+	text-align: center;
+}
+
+.nome{
+	color: rgba(255, 255, 255, 1);
+}
+.info-escola-wrapper{
+	width: 85%;
+	margin: 0 auto;
+}
+
+.background-change {
+	box-shadow: 0px 0px 25px black;
+	
+	background-color: #87DAD8;
+	padding-block: 2.5vh;
+	margin-block: 2.5vh;
+}
+.titulo { 
+	text-align: center;
+}
+
+@media (min-width: 768px){
+	main .wrap{
+		width: 75%;
+	}
+	.info-escola-wrapper{
+		width: 100%;
+	}
+	.container-carousel{
+		padding-inline:5vw;
+	}
+}

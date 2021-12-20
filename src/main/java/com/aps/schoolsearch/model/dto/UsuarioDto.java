@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
+import com.aps.schoolsearch.model.Escola;
 import com.aps.schoolsearch.validation.IdadeCorreta;
 
 import lombok.EqualsAndHashCode;
@@ -59,6 +60,8 @@ public class UsuarioDto {
 	
 	@NotNull
 	private String sexo;
+	
+	private EscolaDto escola;
 	
 	public String getNome() {
 		return nome;

@@ -13,7 +13,7 @@ import com.aps.schoolsearch.model.Escola;
 import com.aps.schoolsearch.model.Idioma;
 import com.aps.schoolsearch.model.dto.EscolaDto;
 import com.aps.schoolsearch.model.dto.EscolaPostDto;
-import com.aps.schoolsearch.repository.IdiomaRepository;
+import com.aps.schoolsearch.service.IdiomaService;
 
 @Component
 public class MapperEscolaDto {
@@ -21,11 +21,12 @@ public class MapperEscolaDto {
 	private MapperEnderecoDto mapeadorEndereco;
 	
 	@Autowired
-	private IdiomaRepository idiomaRepository;
+	private IdiomaService idiomaService;
 	
 	public EscolaDto toDto(Escola escola) {
 		EscolaDto escolaDto = new EscolaDto();
 		
+		escolaDto.setId(escola.getId());
 		escolaDto.setCnpj(escola.getCnpj());
 		escolaDto.setEmail(escola.getEmail());
 		escolaDto.setEndereco(mapeadorEndereco.toDto(escola.getEndereco()));
@@ -65,15 +66,10 @@ public class MapperEscolaDto {
 			Set<String> idiomasSet = Arrays.stream(idiomasString.split(",")).map(String::trim).collect(Collectors.toSet());
 			
 			Set<Idioma> idiomas = new HashSet<>();
+			idiomas.add(idiomaService.registrarIdioma("Português Brasileiro"));
 			for(String idioma: idiomasSet) {
-				Idioma cadastrado = idiomaRepository.findByLingua(idioma);
-				if(cadastrado != null) {
-					idiomas.add(cadastrado);
-				}else {
-					idiomaRepository.save(new Idioma(idioma));
-					Idioma cadastrar =idiomaRepository.findByLingua(idioma);
-					idiomas.add(cadastrar);
-				}
+				Idioma cadastrado = idiomaService.registrarIdioma(idioma);
+				idiomas.add(cadastrado);
 			}
 			escola.setLinguas(idiomas);
 		} else {

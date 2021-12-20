@@ -8,6 +8,7 @@ public enum MetodoEnsino {
 	PIKLER("Pikler"), 
 	TRADICIONAL("Tradicional");
 	
+
 	private String metodo;
 	
 	MetodoEnsino(String metodo) {
@@ -17,9 +18,10 @@ public enum MetodoEnsino {
 	public String getMetodo() {
 		return metodo;
 	}
-
-	public void setMetodo(String metodo) {
-		this.metodo = metodo;
+	
+	@Override
+	public String toString() {
+		return metodo;
 	}
 	
 }

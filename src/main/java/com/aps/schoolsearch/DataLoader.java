@@ -9,6 +9,7 @@ import com.aps.schoolsearch.model.Role;
 import com.aps.schoolsearch.repository.IdiomaRepository;
 import com.aps.schoolsearch.repository.RoleRepository;
 import com.aps.schoolsearch.repository.UsuarioRepository;
+import com.aps.schoolsearch.service.IdiomaService;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -22,6 +23,9 @@ public class DataLoader implements CommandLineRunner {
 	@Autowired
 	private IdiomaRepository idiomaRepository;
 	
+	@Autowired
+	private IdiomaService idiomaService;
+	
 	public void run(String... args) throws Exception {
 		// se não houver roles cadastradas
 		if(!roleRepository.findAll().iterator().hasNext()) {
@@ -29,7 +33,7 @@ public class DataLoader implements CommandLineRunner {
 			roleRepository.save(new Role("ADMIN"));
 		}
 		if(!idiomaRepository.findAll().iterator().hasNext()) {
-			idiomaRepository.save(new Idioma("Português Brasileiro"));
+			idiomaService.registrarIdioma("Português Brasileiro");
 		}
 	}
 

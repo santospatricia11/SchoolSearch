@@ -20,7 +20,8 @@ import com.aps.schoolsearch.model.categorizacao.NivelEnsino;
 
 public class EscolaDto {
 
-		
+	private Long id;
+	
 	@NotEmpty(message="O CNPJ não pode ficar vazio")
 	@NotNull
 	@Pattern(regexp="^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$", message="O cnpj deve seguir o padrão 00.000.000/0000-00")
@@ -53,8 +54,6 @@ public class EscolaDto {
 	@Enumerated(EnumType.STRING)
 	private ClassificacaoEnsino classificacaoEnsino;
 	
-	@ElementCollection(targetClass=NivelEnsino.class)
-	@Enumerated(EnumType.STRING)
 	@NotNull
 	@NotEmpty(message="Você deve escolher no mínimo 1 dos níveis de ensino.")
 	private Set<NivelEnsino> nivelEnsino;
@@ -144,7 +143,13 @@ public class EscolaDto {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 }

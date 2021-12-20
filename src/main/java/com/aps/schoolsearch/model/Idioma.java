@@ -26,7 +26,7 @@ public class Idioma implements Serializable {
 	@Column(name="idioma_id")
 	private Long id;
 	
-	@Column(name="lingua")
+	@Column(name="lingua", unique=true)
 	@NotNull
 	@NotEmpty
 	private String lingua;

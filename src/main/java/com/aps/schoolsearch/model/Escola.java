@@ -18,6 +18,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -82,22 +83,27 @@ public class Escola implements Serializable{
 	private ClassificacaoEnsino classificacaoEnsino;
 	
 	@ElementCollection(targetClass=NivelEnsino.class)
+	@CollectionTable(
+			name="nivel_ensino_escola", 
+			joinColumns = @JoinColumn(name="escola_id"))
+	@JoinTable(
+			name="nivel_ensino_escola", 
+			joinColumns = @JoinColumn(name="escola_id"))
 	@Enumerated(EnumType.STRING)
-	@CollectionTable(name="nivel_ensino_escola", joinColumns = @JoinColumn(name="cnpj_escola", referencedColumnName="cnpj"))
 	@Column(name="nivel_ensino")
-	@NotNull
-	@NotEmpty(message="Você deve escolher no mínimo 1 dos níveis de ensino.")
 	private Set<NivelEnsino> nivelEnsino;
 
 	@NotNull(message="Você deve escolher a classificação de ensino.")
 	private MetodoEnsino metodoEnsino;
 	
-	@ElementCollection
-	@CollectionTable(name="idiomas")
-	@Column(name="idioma")
+
 	@NotNull
-	@ManyToMany(cascade=CascadeType.PERSIST, mappedBy="escolas")
-	@JoinColumn(name="idioma_id")
+	@ManyToMany(cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinTable(
+			name="idiomas_escola",
+			joinColumns= @JoinColumn(name="escola_id"),
+			inverseJoinColumns= @JoinColumn(name="idioma_id")
+			)
 	private Set<Idioma> linguas;
 	
 	
@@ -151,7 +157,8 @@ public class Escola implements Serializable{
 	public void setClassificacaoEnsino(ClassificacaoEnsino classificacaoEnsino) {
 		this.classificacaoEnsino = classificacaoEnsino;
 	}
-
+	
+	
 	public Set<NivelEnsino> getNivelEnsino() {
 		return nivelEnsino;
 	}

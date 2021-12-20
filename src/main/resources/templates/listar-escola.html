@@ -85,6 +85,79 @@
 				  </div>
 				</div>
 			</div>
+			
+			<div class="container-fluid card card-body">
+				<div class="escola-wrapper" th:each="escola : ${escolas}">
+					<i class="fas fa-school school-image fa-4x"></i>
+					<div class="info-escola">
+						<div class="wrap-button">
+							<a th:href="@{/escola/{id}(id=${escola.id})}" class="more-info-button"><h5 class="titulo" th:text="${escola.nome}"></h5></a>
+					 		<button class="btn btn-primary btn-more-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-outras-infos" aria-expanded="false" aria-controls="collapseWidthExample">
+								Mais informações
+						  	</button>
+					 	</div>
+						<div >
+							
+						 	<div class="wrap-info wrap-info-endereco">
+						 		<h6 class="titulo">Endereço</h6 >
+						 		<table th:with="endereco=${escola.endereco}" class="info-endereco">
+						 			<thead>
+						 				<tr>
+						 					<th>Logradouro</th>
+						 					<th>Número</th>
+						 					<th>Bairro</th>
+						 					<th>Cidade</th>
+						 					<th>Estado</th>
+						 				</tr>
+						 			</thead>
+						 			<tbody>
+						 				<tr>
+						 					<td>[[${endereco.logradouro}]]</td>
+						 					<td>[[${endereco.numero}]]</td>
+						 					<td>[[${endereco.bairro}]]</td>
+						 					<td>[[${endereco.cidade}]]</td>
+						 					<td>[[${endereco.estado}]]</td>
+						 				</tr>
+						 			</tbody>
+						 		</table  >
+						 	</div>
+						 	<div class="collapse wrap-other-info" id="collapse-outras-infos">
+								<div class="wrapper-info wrap-enums">
+									<div class="wrap-info wrap-info-classificacao-ensino">
+										<h6 class="titulo">Classificação de Ensino: </h6 >
+										<p class="classificacao wrap-values" th:text="${escola.classificacaoEnsino.classificacao}"></p>
+									</div>
+									<div class="wrap-info wrap-info-nivel-ensino">
+										<h6 class="titulo">Nível de Ensino: </h6  >
+										<div class="niveis wrap-values">
+											<p th:each="nivel : ${escola.nivelEnsino}">[[${nivel}]]
+											</p >
+										</div>
+									</div >
+									<div class="wrap-info wrap-info-metodo-ensino">
+										<h6 class="titulo">Método de Ensino: </h6  >
+										<p class="metodo wrap-values"th:text="${escola.metodoEnsino.metodo}">
+									</div >
+								</div>
+								<div class="wrapper-info wrap-mensalidade-idiomas">
+									<div class="wrap-info wrap-info-mensalidade">
+										<h6 class="titulo">Mensalidade</h6>
+										<p class="mensalidade wrap-values" th:text="${escola.mensalidade}"></p >
+									</div>
+									<div class="wrap-info wrap-info-idiomas">
+										<h6 class="titulo">Idiomas</h6>
+										<div class="niveis wrap-values">
+											<p th:each="idioma : ${escola.linguas}">[[${idioma.lingua}]]
+											</p >
+										</div>
+									</div>
+									<div class="wrap-info more-info"><a th:href="@{/escola/{id}(id=${escola.id})}" class="btn btn-primary btn-more-info btn-collapsed">Visualizar Perfil da Escola</a></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 			
