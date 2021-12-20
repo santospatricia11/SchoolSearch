@@ -40,6 +40,21 @@
 	content: "!";
 }
 
+.wrap {
+	margin-block: 5%;
+	display: flex;
+	
+	justify-content: space-between;
+}
+
+.titulo{
+	color: var(--blue);
+}
+
+.cta {
+	height: fit-content;
+}
+
 @media(min-width: 576px){
 	.hero-title{
 		font-size: 2rem;
