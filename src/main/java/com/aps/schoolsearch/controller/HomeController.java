@@ -34,6 +34,11 @@ public class HomeController {
 	public String boleto(){
 		return "boleto";
 	}
+	
+	@RequestMapping("/cartao-credito")
+	public String cartao(){
+		return "cartao-credito";
+	}
 /*	
 	@RequestMapping("/listar-escola")
 	public String listarEscola(){

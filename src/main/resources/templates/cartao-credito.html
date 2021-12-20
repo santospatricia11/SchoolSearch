@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<div th:replace="/fragments/head.html :: heading"></div>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+
+<div th:insert="/fragments/header.html :: css"></div>
+<div th:replace="/fragments/footer.html :: css"></div>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+	integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+	integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+	integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="/css/cadastrar-usuario.css" />
+
+<title>Cartão</title>
+</head>
+
+<body>
+	<div th:replace="fragments/header.html :: navbar"></div>
+
+	<div class="wrap">
+		<div class="container ">
+			<div class="cadastro-form">
+				<div class="cadastro-wrapper">
+					<div class="cadastro-text">
+						<div class="text-wrapping">
+
+							<!-- aqui comeca div responsaveis-->
+						</div>
+						<center>
+							<h3>Pagamento com Cartão</h3>
+							<p></p>
+						</center>
+						<form>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-9">
+										<!-- Esquerdo -->
+										<div class="form-group">
+											<div class="form-group">
+												<!-- Numero do cartao -->
+												<div class="row">
+													<label for="formGroupExampleInput"
+														class="form-label  col-form-label col-form-label-sm">Número
+														do Cartão</label>
+													<div class="col-md-3">
+														<input type="text" class="form-control form-control-sm"
+															id="formGroupExampleInput" placeholder="">
+													</div>
+													<div class="col-md-3">
+														<input type="text" class="form-control form-control-sm"
+															id="formGroupExampleInput" placeholder="">
+													</div>
+													<div class="col-md-3">
+														<input type="text" class="form-control form-control-sm"
+															id="formGroupExampleInput" placeholder="">
+													</div>
+													<div class="col-md-3">
+														<input type="text" class="form-control form-control-sm"
+															id="formGroupExampleInput" placeholder="">
+													</div>
+
+												</div>
+												<!-- Numero Cartao -->
+											</div>
+											<div class="col"></div>
+											<div class="col-auto">
+												<label for="nome-cartao"
+													class="form-label  col-form-label col-form-label-sm">Nome
+													como está no cartão</label> <input type="text"
+													class="form-control form-control-sm"
+													id="formGroupExampleInput2" placeholder="">
+
+											</div>
+											<div class="col">
+												<div class="col">
+													<div class="form-group">
+														<label for="valor-plano"><h6>Valor da
+																transação</h6></label>
+													</div>
+												</div>
+												<div class="col">
+													<div>
+														<label for="valor-plano"><h5>
+																<p class="text-success">RS 00,00</p>
+															</h5></label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-auto">
+										<!-- Direito -->
+										<div class="form-group">
+											<div class="col">
+												<div class="col-auto">
+													<label for="formGroupExampleInput"
+														class="form-label col-form-label col-form-label-sm">Cód
+														de segurança</label> <input type="text"
+														class="form-control form-control-sm"
+														id="formGroupExampleInput" placeholder="">
+												</div>
+												<div class="form-group">
+													<label for="formGroupExampleInput"
+														class="form-label col-form-label col-form-label-sm">Validade</label>
+													<div class="col-auto">
+														<input type="text" class="form-control form-control-sm"
+															id="formGroupExampleInput" placeholder="MM">
+													</div>
+													<div class="col-auto">
+														<input type="text" class="form-control form-control-sm"
+															id="formGroupExampleInput" placeholder="AAAA">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									</div>
+									<div class="col">
+										<div class="d-grid gap-2 col-3 mx-auto">
+											<button type="submit" class="btn btn-primary btn-lg">Confirmar</button>
+										</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div th:replace="fragments/footer.html :: footer"></div>
+</body>
+
+</html>
